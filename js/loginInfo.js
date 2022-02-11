@@ -15,7 +15,7 @@ $.get("http://ip-api.com/json/", function(data) {
       </tr> \
       <tr> \
         <td><strong class="blue">Location: </strong></td> \
-        <td>'+ data.city + ',' + data.regionName + data.country + '</td> \
+        <td>'+ data.city + ', ' + data.regionName + ' ' + data.country + '</td> \
       </tr> \
       <tr> \
         <td><strong class="blue">ISP: </strong></td> \
