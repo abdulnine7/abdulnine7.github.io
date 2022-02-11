@@ -1,305 +1,40 @@
-<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.4.3/js/jquery.terminal.js"></script>
+  <script type="text/javascript" src="js/shell.js"></script>
+  <script type="text/javascript" src="js/cli.js"></script>
+</head>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Abdul Noushad Sheikh</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/animate.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-		/>
+<body>
 
-		<meta content="yes" name="apple-mobile-web-app-capable">
-    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
-    <link href="favicon.ico" rel="shortcut icon">
-    <meta content="https://avatars.githubusercontent.com/u/17446181" property="og:image">
-    <meta content="Abdul Noushad Sheikh" property="og:title">
-    <meta content="abdul.co.in" property="og:site_name">
-    <meta content="http://www.abdul.co.in/" property="og:url">
-    <meta content="Resilient, innovative, entrepreneurial, and a passionate student of life." property="og:description">
-    <meta content="Resilient, innovative, entrepreneurial, and a passionate student of life." name="description">
-    <meta content="Abdul Noushad Sheikh"name="author">
-    <meta content="Abdul Noushad Sheikh" name="copyright">
+<div class="terminal-window">
+  <header>
+    <div class="button red"></div>
+    <div class="button yellow"></div>
+    <div class="button green"></div>
+  </header>
+  <div id="terminal">
+    <p><strong class="green">\[._.]/</strong> - you're in abdul's cli! type `help` to get started.</p>
+    <div class="loginInfo"></div>
+      <p class="hidden">
+        <span class="prompt">
+          <span class="root">root</span>
+          <span class="tick">❯</span>
+        </span>
+        <span contenteditable="true" spellcheck="false" id="input" class="input"></span>
+      </p>
+  </div>
+</div>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-135127723-3"
-    ></script>
-    <script>
-      if (location.hostname != "localhost") {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
+<div class="footer">
+  <p> Made with ❤️ & ☕</p><br>
+  <p>Frontend can be found <a class="site-code" href="frontend/">here</a></p>
+</div>
 
-        gtag("config", "UA-135127723-3");
-      } else {
-        console.log("dev mode detected, don't track view");
-      }
-    </script>
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row text-center">
-        <img src="https://avatars.githubusercontent.com/u/17446181" width="200" class="profile-pic" />
-        <h1>Abdul Noushad Sheikh</h1>
-        <h3>Full Stack Developer</h3>
-        <!-- <h5 style="margin:10px">
-          Web Developer, Android Developer and Ubuntu Lover
-        </h5> -->
-        <div class="col-sm-8 col-sm-offset-2">
-          <p class="about-me">
-            Resilient, innovative, entrepreneurial, and a passionate student of
-            life, I build solutions to real-life problems.
-          </p>
-          <div class="row text-center" style="margin:20px;">
-              <a
-                class="btn btn-launch"
-                href="https://raw.githubusercontent.com/abdulnine7/abdulnine7.github.io/master/Resume_Abdul.pdf" download
-                >Download Resume</a
-              >
-            </div>
-        </div>
-      </div>
-
-      <div class="row row-grey">
-        <div class="col-sm-8 col-sm-offset-2">
-          <div class="row work-item-row">
-            <div class="col-lg-8">
-              <img
-                src="img/projectguruml.png"
-                class="img-responsive center-block"
-                style="margin-top: 20px"
-              />
-            </div>
-            <div class="col-lg-4">
-              <h2>
-                <a href="http://www.project-guru.ml/" target="blank"
-                  >Project-Guru.ml</a
-                >
-              </h2>
-              <p>
-                A web site I started in 3rd year of college to help students and
-                programmers from college to make their Web Development, Android
-                Development, Data Mining and Feature Extraction and IOT
-                Projects.
-              </p>
-              <h4>Idea</h4>
-              <p>
-                My idea of developing this platform was to connect with good
-                developers from college while also to help other non-tech
-                students for their tech projects and earn some money for my
-                contribution to their project.
-              </p>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-xs-12 tech-row">
-              <img
-                src="img/devicons/apache-original-wordmark.svg"
-                class="techlogo"
-              />
-              <img
-                src="img/devicons/amazonwebservices-original-wordmark.svg"
-                class="techlogo"
-              />
-              <img
-                src="img/devicons/bootstrap-plain-wordmark.svg"
-                class="techlogo"
-              />
-              <img src="img/devicons/linux-original.svg" class="techlogo" />
-              <img src="img/devicons/php-plain.svg" class="techlogo" />
-            </div>
-          </div>
-          <div class="row text-center" style="margin:20px;">
-            <a
-              class="btn btn-launch"
-              href="http://www.project-guru.ml/"
-              target="blank"
-              >Open Website</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="row row-white">
-        <div class="col-sm-8 col-sm-offset-2">
-          <div class="row work-item-row">
-            <div class="col-lg-8 col-lg-push-4">
-              <img
-                src="img/jobsexplorer.jpg"
-                class="img-responsive center-block"
-                style="margin-top: 20px"
-              />
-            </div>
-            <div class="col-lg-4 col-lg-pull-8">
-              <h2>
-                <a href="https://jobsexplorer.in/" target="blank"
-                  >JobsExplorer.in</a
-                >
-              </h2>
-              <p>
-                A simple web app built to quickly find jobs in India. Users
-                enter the search term and desired state or city, and are offered
-                job listings from 3 of the most popular job sites in India. I
-                built JobsExplorer to help people search their desired jobs with
-                ease and clarity.
-              </p>
-              <h4>Technology</h4>
-              <p>
-                JobsExplorer is uses Bootstrap for a mobile-first layout, with
-                jQuery for easy page manipulation. On the backend an
-                Express/Node.js app lives on a Amazon Web Server that acts as a
-                middleware to scrap / make Api calls to job sites and return the
-                information to the user.
-              </p>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-xs-12 tech-row">
-              <img
-                src="img/devicons/jquery-original-wordmark.svg"
-                class="techlogo"
-              />
-              <img
-                src="img/devicons/bootstrap-plain-wordmark.svg"
-                class="techlogo"
-              />
-              <img
-                src="img/devicons/nodejs-original-wordmark.svg"
-                class="techlogo"
-              />
-              <img src="img/devicons/express-original.svg" class="techlogo" />
-              <img src="img/devicons/nginx-original.svg" class="techlogo" />
-            </div>
-          </div>
-          <div class="row text-center" style="margin:20px;">
-            <a
-              class="btn btn-launch"
-              href="https://jobsexplorer.in/"
-              target="blank"
-              >Launch</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="row row-grey">
-        <div class="col-sm-8 col-sm-offset-2">
-          <div class="row work-item-row">
-            <div class="col-lg-8">
-              <img
-                src="img/unishare.in.jpg"
-                class="img-responsive center-block"
-              />
-            </div>
-            <div class="col-lg-4">
-              <h2>
-                <a href="https://unishare.in" target="blank">UNI Share.in</a>
-              </h2>
-              <p>
-                A Web Application to help students share their books, projects
-                and other academic related stuff with each others in a
-                University Campus. It's a University OLX.
-              </p>
-              <h4>Technology</h4>
-              <p>
-                UNI Share is build with Python Django, Amazon RDS and Amazon S3
-                for real-time handling university traffic to make share and
-                checkout listings for free. Also Uses Django-Rest Framework for
-                mobile app. A Nginx server hosted on AWS E2 acts as a
-                middle-man, handling backend logic and database and media
-                updates within Amazon RDS & Amazon S3.
-              </p>
-            </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-xs-12 tech-row">
-              <img src="img/devicons/django-original.svg" class="techlogo" />
-              <img
-                src="img/devicons/amazonwebservices-original-wordmark.svg"
-                class="techlogo"
-              />
-              <img src="img/devicons/rest.svg" class="techlogo" />
-              <img
-                src="img/devicons/android-plain-wordmark.svg"
-                class="techlogo"
-              />
-              <img src="img/devicons/nginx-original.svg" class="techlogo" />
-            </div>
-          </div>
-          <div class="row text-center" style="margin:20px;">
-            <a class="btn btn-launch" href="https://unishare.in" target="blank"
-              >Open App</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="row row-tools row-white">
-        <div class="col-sm-12 text-center">
-          <h3>Tools I Use</h3>
-          <img
-            src="img/devicons/visualstudio-plain-wordmark.svg"
-            class="techlogo tools"
-          />
-          <img
-            src="img/devicons/atom-original-wordmark.svg"
-            class="techlogo tools"
-          />
-          <img
-            src="img/devicons/git-original-wordmark.svg"
-            class="techlogo tools"
-          />
-          <img
-            src="img/devicons/jetbrains-original.svg"
-            class="techlogo tools"
-          />
-        </div>
-      </div>
-
-      <div class="row row-footer text-center">
-        <div class="col">
-          <div>
-            <h3 style="margin-bottom:15px">
-              I'm available for work, get in touch
-            </h3>
-            <a href="mailto:me@abdul.co.in" class="" target="_blank">
-              me@abdul.co.in
-            </a>
-            <br /><br />
-            <a class="footer-fa" href="https://www.instagram.com/abdul_codes/"
-              ><i class="fa fa-3x fa-instagram" style="color:#e95950"></i
-            ></a>
-            <a class="footer-fa" href="https://twitter.com/abdulnine7"
-              ><i class="fa fa-3x fa-twitter" style="color:#00acee"></i
-            ></a>
-            <a class="footer-fa" href="https://github.com/abdulnine7"
-              ><i class="fa fa-3x fa-github" style="color:#211F1F"></i
-            ></a>
-            <a class="footer-fa" href="https://www.linkedin.com/in/abdulnine7/"
-              ><i class="fa fa-3x fa-linkedin" style="color:#0e76a8"></i
-            ></a>
-          </div>
-          <br>
-        </div>
-      </div>
-    </div>
-
-    <!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- <script src="js/myScripts.js"></script> -->
-  </body>
-</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
+<script type="text/javascript" src="js/loginInfo.js"></script>
+</body>
