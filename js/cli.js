@@ -6,6 +6,7 @@ const errors = {
   fileNotFound: 'Error: file not found in current directory',
   fileNotSpecified: 'Error: you did not specify a file',
   invalidFile: 'Error: not a valid file',
+  noSudoAccess: 'Error: sudo not allowed'
 };
 
 const struct = {
@@ -42,6 +43,10 @@ commands.touch = () => errors.noWriteAccess;
 
 // Remove file from current directory.
 commands.rm = () => errors.noWriteAccess;
+
+// Sudo command show hackerman meme
+commands.sudo = () => errors.noSudoAccess;
+
 
 // View contents of specified directory.
 commands.ls = (directory) => {
