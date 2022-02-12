@@ -16,7 +16,7 @@ const struct = {
 
 const commands = {};
 let systemData = {};
-const rootPath = 'users/abdul/root';
+const rootPath = '/home/abdul';
 
 const getDirectory = () => localStorage.directory;
 const setDirectory = (dir) => {
@@ -45,7 +45,9 @@ commands.touch = () => errors.noWriteAccess;
 commands.rm = () => errors.noWriteAccess;
 
 // Sudo command show hackerman meme
-commands.sudo = () => errors.noSudoAccess;
+commands.sudo = () => {
+  return ' <img src="data/sudo.jpg" alt="Sudo not allowed" class="sudo" >'
+}
 
 
 // View contents of specified directory.

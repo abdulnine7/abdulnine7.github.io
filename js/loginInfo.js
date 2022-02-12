@@ -31,5 +31,4 @@ $.get("http://ip-api.com/json/", function(data) {
 
 });
 
-
-$('#input').click();
+$('.input').click();
