@@ -6,7 +6,7 @@ class Shell {
     this.setupListeners(term);
     this.term = term;
 
-    localStorage.directory = 'root';
+    localStorage.directory = 'home';
     localStorage.history = JSON.stringify('');
     localStorage.historyIndex = -1;
     localStorage.inHistory = false;
@@ -101,12 +101,13 @@ class Shell {
         } else if (cmd && cmd in this.commands) {
           this.runCommand(cmd, args);
           this.resetPrompt(term, prompt);
-          $('.root').last().html(localStorage.directory);
+          this.setPromptPrefix(localStorage.directory);
         } else {
           this.term.innerHTML += 'Error: command not recognized';
           this.resetPrompt(term, prompt);
         }
         evt.preventDefault();
+        $("#terminal").scrollTop(9999999999999999);
       }
     });
   }
@@ -121,7 +122,16 @@ class Shell {
     }
   }
 
+  setPromptPrefix(directory){
+    if(directory == "home"){
+      $('.dir').last().html("~");
+    } else if(directory == "skills"){
+      $('.dir').last().html("~/" + directory);
+    }
+  }
+
   resetPrompt(term, prompt) {
+    // console.log(prompt);
     const newPrompt = prompt.parentNode.cloneNode(true);
     prompt.setAttribute('contenteditable', false);
 
@@ -160,13 +170,18 @@ class Shell {
 
   clearConsole() {
     const getDirectory = () => localStorage.directory;
-    const dir = getDirectory();
+    var dir = "";
+    if(getDirectory() != "home") {
+      dir = "/" + getDirectory();
+    }
 
     $('#terminal').html(
       `<p class="hidden">
           <span class="prompt">
-            <span class="root">${dir}</span>
-            <span class="tick">$</span>
+            <strong class="home">abdul@notebook-HP</strong>
+            <strong class="white">:</strong>
+            <strong class="dir">~${dir}</strong>
+            <strong class="white">$</strong>
           </span>
           <span contenteditable="true" class="input"></span>
         </p>`,

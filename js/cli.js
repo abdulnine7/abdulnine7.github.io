@@ -10,13 +10,13 @@ const errors = {
 };
 
 const struct = {
-  root: ['about', 'resume', 'contact', 'projects'],
+  home: ['about', 'resume', 'contact', 'projects'],
   skills: ['proficient', 'familiar'],
 };
 
 const commands = {};
 let systemData = {};
-const rootPath = '/home/abdul';
+const homePath = '/home/abdul';
 
 const getDirectory = () => localStorage.directory;
 const setDirectory = (dir) => {
@@ -52,9 +52,9 @@ commands.sudo = () => {
 
 // View contents of specified directory.
 commands.ls = (directory) => {
-  console.log(systemData);
+  // console.log(systemData);
   if (directory === '..' || directory === '~') {
-    return systemData['root'];
+    return systemData['home'];
   }
 
   if (directory in struct) {
@@ -70,7 +70,7 @@ commands.help = () => systemData.help;
 // Display current path.
 commands.path = () => {
   const dir = getDirectory();
-  return dir === 'root' ? rootPath : `${rootPath}/${dir}`;
+  return dir === 'home' ? homePath : `${homePath}/${dir}`;
 };
 
 // See command history.
@@ -89,7 +89,7 @@ commands.cd = (newDirectory) => {
   if (dirs.includes(newDir) && currDir !== newDir) {
     setDirectory(newDir);
   } else if (newDir === '' || newDir === '~' || (newDir === '..' && dirs.includes(currDir))) {
-    setDirectory('root');
+    setDirectory('home');
   } else {
     return errors.invalidDirectory;
   }
@@ -121,7 +121,7 @@ commands.cat = (filename) => {
       const directories = filename.split('/');
       const directory = directories.slice(0, 1).join(',');
       const fileKey = directories.slice(1, directories.length).join(',').split('.')[0];
-      if (directory === 'root' || !struct.hasOwnProperty(directory))
+      if (directory === 'home' || !struct.hasOwnProperty(directory))
         return errors.noSuchFileOrDirectory;
 
       return isFileInSubdirectory(fileKey, directory)
@@ -149,7 +149,7 @@ $(() => {
   pages.push($.get('pages/help.html'));
   pages.push($.get('pages/proficient.html'));
   pages.push($.get('pages/resume.html'));
-  pages.push($.get('pages/root.html'));
+  pages.push($.get('pages/home.html'));
   pages.push($.get('pages/skills.html'));
   pages.push($.get('pages/projects.html'));
   $.when
@@ -162,7 +162,7 @@ $(() => {
         helpData,
         proficientData,
         resumeData,
-        rootData,
+        homeData,
         skillsData,
         projectsData,
       ) => {
@@ -172,7 +172,7 @@ $(() => {
         systemData['help'] = helpData[0];
         systemData['proficient'] = proficientData[0];
         systemData['resume'] = resumeData[0];
-        systemData['root'] = rootData[0];
+        systemData['home'] = homeData[0];
         systemData['skills'] = skillsData[0];
         systemData['projects'] = projectsData[0];
       },
