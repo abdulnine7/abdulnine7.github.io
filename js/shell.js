@@ -84,6 +84,11 @@ class Shell {
         // If input keys are pressed then resetHistoryIndex() is called.
         this.resetHistoryIndex();
       }
+      
+      // if (evt.keyCode == 0 || evt.keyCode == 229) { //for android chrome keycode fix
+      //   evt.keyCode = this.value.charCodeAt(this.value.length - 1);
+      //   alert(evt.keyCode);
+      // }
       if (evt.keyCode === 13) {
         const prompt = evt.target;
         const input = prompt.textContent.trim().split(' ');

@@ -4,7 +4,7 @@ body {
   background-color: #211E3A;
 }
 
-p, li, a, strong, td{
+p, strong {
   font-family: Ubuntu;
   font-weight: 700;
 }
@@ -70,7 +70,7 @@ td {
 
   #terminal {
     color: white;
-    font-family: @font-family;
+    font-family: Ubuntu, @font-family;
     font-size: 11pt;
     background: #30353a;
     padding: 10px;
@@ -80,6 +80,10 @@ td {
     top: 30px;
     bottom: 0;
     overflow: auto;
+
+    p, li {
+      font-weight: 400;
+    }
   }
 
   .contact {
@@ -126,7 +130,7 @@ td {
     color: #3bb662;
   }
 
-  .project-title {
+  .title-link {
     padding-bottom: 2px;
     color: #59d6ff;
     text-decoration: none;
