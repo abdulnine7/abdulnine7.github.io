@@ -10,19 +10,19 @@ $.get("http://ip-api.com/json/", function(data) {
     $('.loginInfo').append(' \
     <table> \
       <tr> \
-        <td><strong class="blue">Login IP:</strong> </td> \
+        <td><strong class="li-blue">Login IP:</strong> </td> \
         <td>'+ data.query +'</td> \
       </tr> \
       <tr> \
-        <td><strong class="blue">Location: </strong></td> \
+        <td><strong class="li-blue">Location: </strong></td> \
         <td>'+ data.city + ', ' + data.regionName + ' ' + data.country + '</td> \
       </tr> \
       <tr> \
-        <td><strong class="blue">ISP: </strong></td> \
+        <td><strong class="li-blue">ISP: </strong></td> \
         <td>' + data.isp + '</td> \
       </tr> \
       <tr> \
-        <td><strong class="blue">Date/Time: </strong></td> \
+        <td><strong class="li-blue">Date/Time: </strong></td> \
         <td>' + new Date() + '</td> \
       </tr> \
     </table> \
