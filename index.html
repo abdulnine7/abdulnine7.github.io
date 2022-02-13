@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abdul's CLI</title>
   <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
+  <link rel="stylesheet/less" type="text/css" href="styles/flip.less" />
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -12,6 +13,17 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
   <script type="text/javascript" src="js/shell.js"></script>
   <script type="text/javascript" src="js/cli.js"></script>
+
+  <script src="js/jquery.flip.js"></script>
+  <script>
+    $(function() {
+      console.log("Hi");
+        $("#card").flip({
+            trigger: 'manual',
+            speed: 300,
+        });
+    });
+  </script>
 
   <!-- Meta tags start-->
   <meta content="yes" name="apple-mobile-web-app-capable">
@@ -48,41 +60,55 @@
 
 <body>
 
-<div class="terminal-window">
-  <header>
-    <div class="button yellow">
-      <i class="fa-solid fa-minus white"></i>
+<div class="flip-box" id="card">
+
+  <div class="terminal-window front">
+    <header>
+      <div class="button yellow">
+        <i class="fa-solid fa-minus white"></i>
+      </div>
+      <div class="button green">
+        <i class="fa-regular fa-square white"></i>
+      </div>
+      <div class="button red">
+        <i class="fa-solid fa-circle-xmark insta"></i>
+      </div>
+    </header>
+    <div id="terminal">
+      <p><strong class="green">\[._.]/</strong> - you're in abdul's cli! type `help` to get started.</p>
+      <div class="loginInfo"></div>
+      <p class="hidden">
+        <span class="prompt">
+          <strong class="home">abdul@notebook-HP</strong>
+          <strong class="white">:</strong>
+          <strong class="dir">~</strong>
+          <strong class="white">$</strong>
+        </span>
+        <span contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" class="input"> </span>
+      </p>
     </div>
-    <div class="button green">
-      <i class="fa-regular fa-square white"></i>
-    </div>
-    <div class="button red">
-      <i class="fa-solid fa-circle-xmark insta"></i>
-    </div>
-  </header>
-  <div id="terminal">
-    <p><strong class="green">\[._.]/</strong> - you're in abdul's cli! type `help` to get started.</p>
-    <div class="loginInfo"></div>
-    <p class="hidden">
-      <span class="prompt">
-        <strong class="home">abdul@notebook-HP</strong>
-        <strong class="white">:</strong>
-        <strong class="dir">~</strong>
-        <strong class="white">$</strong>
-      </span>
-      <span contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" class="input"> </span>
-    </p>
   </div>
+
+  <div class="terminal-window back">
+    <header>
+      <div class="button yellow">
+        <i class="fa-solid fa-minus white"></i>
+      </div>
+      <div class="button green">
+        <i class="fa-regular fa-square white"></i>
+      </div>
+      <div class="button red">
+        <i class="fa-solid fa-circle-xmark insta"></i>
+      </div>
+    </header>
+
+    <div id="terminal">
+      <p><strong class="green">\[._.]/</strong> - Back flipped.</p>
+    </div>
+
+  </div>
+
 </div>
-
-<!-- <div class="pretty-window" hidden>
-  <header hidden>
-    <div class="button red"></div>
-    <div class="button yellow"></div>
-    <div class="button green"></div>
-  </header>
-
-</div> -->
 
 <div class="footer">
   <p> Made with ❤️ & ☕</p>
@@ -90,9 +116,9 @@
     <i class="devicon-linux-plain" style="font-size: 20;"></i>
   </p>
   <br>
-  <p>For pretty website <a class="site-code" href="frontend/">click here</a></p>
+  <p>For pretty website <a class="site-code flip-btn">click here</a></p>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.js"></script>
 <script type="text/javascript" src="js/loginInfo.js"></script>
+<script type="text/javascript" src="js/flip.js"></script>
 </body>

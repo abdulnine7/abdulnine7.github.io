@@ -26,12 +26,14 @@ const setDirectory = (dir) => {
 // Turn on fullscreen.
 const registerFullscreenToggle = () => {
   $('.button.green').click(() => {
-    $('.terminal-window').toggleClass('fullscreen');
+    $('.flip-box').removeClass('minimized');
+    $('.flip-box').toggleClass('fullscreen');
   });
 };
 const registerMinimizedToggle = () => {
   $('.button.yellow').click(() => {
-    $('.terminal-window').toggleClass('minimized');
+    $('.flip-box').removeClass('fullscreen');
+    $('.flip-box').toggleClass('minimized');
   });
 };
 

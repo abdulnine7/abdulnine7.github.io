@@ -32,3 +32,10 @@ $.get("http://ip-api.com/json/", function(data) {
 });
 
 $('.input').click();
+
+//Flip on click
+$('.flip-btn').click(function() {
+  $("#card").flip('toggle');
+});
+
+
