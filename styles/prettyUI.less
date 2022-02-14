@@ -10,6 +10,11 @@
   margin-left: 200px; 
   background-color: #0D0D0D;
   height: 100%;
+  display: block !important;
+  position: fixed;
+  overflow: auto;
+  width: -moz-available;
+  width: -webkit-fill-available;
 
   .profile-image {
     border-radius: 50%;
@@ -25,10 +30,22 @@
     margin: auto;
     display: block;
     text-align: center;
+
+    .name {
+      font-size: large;
+      color: #00b7ff;
+    }
+    .title {
+      font-size: medium;
+      color: bisque;
+    }
   }
 
   .about-ul {
-    padding-left: 20px;
+    padding-left: 25px;
+    padding-right: 15px;
+    position: relative;
+    color: #efefef;
   }
 
   .about-li {
@@ -43,15 +60,15 @@
     display: block;
     padding: 10px;
     text-align: center;
-    color: #cbcbcb;;
+    color: #d1d1d1;;
   }
 
   .edu-ul {
-    padding-left: 20px;
+    padding-left: 25px;
   }
 
   .edu-li {
-    padding-left: 10px;
+    padding-left: 5px;
     padding-bottom: 5px;
 
     .title {
@@ -106,6 +123,7 @@
   height: 90%;
   overflow-y: scroll;
   scrollbar-width: none;
+  position: relative;
 }
 
 
@@ -124,7 +142,8 @@
 
   .w3-opennav {
     display: block;
-    color: whitesmoke;
+    color: #e4e4e4;;
+    padding-left: 15px;
   }
 }
 
