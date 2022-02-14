@@ -1,0 +1,140 @@
+#leftcol {
+  width:200px;
+  background-color: #272727;
+  color: #d6d6d6;
+  font-family: Ubuntu;
+  font-size: 11pt;
+}
+
+#rightcol {
+  margin-left: 200px; 
+  background-color: #0D0D0D;
+  height: 100%;
+
+  .profile-image {
+    border-radius: 50%;
+    width: 150px;
+    height: auto;
+    margin-top: 20px;
+    margin: auto;
+    display: block;
+    padding: 10px;
+  }
+  
+  .self-name {
+    margin: auto;
+    display: block;
+    text-align: center;
+  }
+
+  .about-ul {
+    padding-left: 20px;
+  }
+
+  .about-li {
+    padding-left: 10px;
+    padding-bottom: 5px;
+    font-size: 11pt;
+  }
+
+  .edu-title {
+    font-size: x-large;
+    margin: auto;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    color: #cbcbcb;;
+  }
+
+  .edu-ul {
+    padding-left: 20px;
+  }
+
+  .edu-li {
+    padding-left: 10px;
+    padding-bottom: 5px;
+
+    .title {
+      font-size: large;
+      color: #efefef;
+    }
+    .year {
+      font-size: small;
+      color: #6d6d6d;
+    }
+    .course {
+      font-size: medium;
+      color: #afafaf;
+    }
+    .grade {
+      font-size: 14px;
+      color: #ccc;
+    }
+  }
+}
+
+.leftcolTab {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: #2F2F2F;
+    color: whitesmoke;
+  }
+
+  &.active {
+    background-color: #c24619;
+
+    &:hover {
+      background-color: #cc491a;
+    }
+  }
+
+  .icon {
+    width: 20px;
+    text-align: center;
+    margin-right: 5px;
+  }
+}
+
+.content {
+  color: whitesmoke;
+  height: 90%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+
+@media only screen and (max-width: 680px){
+  #rightcol {
+    margin-left: 0;
+  }
+
+  .w3-sidenav {
+    display: none !important;
+
+    &.active {
+      display: block !important;
+    }
+  }
+
+  .w3-opennav {
+    display: block;
+    color: whitesmoke;
+  }
+}
+
+@media only screen and (min-width: 680px){
+  .w3-opennav {
+    display: none !important;
+  }
+
+  .w3-sidenav {
+    display: block !important;
+  }
+}
+

@@ -3,8 +3,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abdul's CLI</title>
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
   <link rel="stylesheet/less" type="text/css" href="styles/flip.less" />
+  <link rel="stylesheet/less" type="text/css" href="styles/prettyUI.less" />
   <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -17,7 +19,7 @@
   <script src="js/jquery.flip.js"></script>
   <script>
     $(function() {
-      console.log("Hi");
+      // console.log("Hi");
         $("#card").flip({
             trigger: 'manual',
             speed: 300,
@@ -102,8 +104,42 @@
       </div>
     </header>
 
-    <div id="terminal">
+    <!-- <div id="terminal">
       <p><strong class="green">\[._.]/</strong> - Back flipped.</p>
+    </div> -->
+
+    <nav class="w3-sidenav w3-collapse " id="leftcol">
+      <div class="leftcolTab active">
+        <i class="fa-solid fa-user icon"></i>
+        <div class="name">About</div>
+      </div>
+      <div class="leftcolTab">
+        <i class="fa-solid fa-graduation-cap icon"></i>
+        <div class="name">Education</div>
+      </div>
+      <div class="leftcolTab">
+        <i class="fa-solid fa-laptop-code icon"></i>
+        <div class="name">Skills</div>
+      </div>	
+      <div class="leftcolTab">
+        <i class="fa-solid fa-building icon"></i>
+        <div class="name">Experience</div>
+      </div>
+      <div class="leftcolTab">
+        <i class="fa-solid fa-diagram-project icon"></i>
+        <div class="name">Projects</div>
+      </div>	
+      <div class="leftcolTab">
+        <i class="fa-solid fa-address-card icon"></i>
+        <div class="name">Resume</div>
+      </div>
+    </nav>
+    
+    <div class="w3-container" id="rightcol">
+      <span class="w3-opennav w3-xlarge w3-hide-large" onclick="w3_open()">&#9776;</span>
+      <div class="content">
+
+      </div>
     </div>
 
   </div>
@@ -120,5 +156,5 @@
 </div>
 
 <script type="text/javascript" src="js/loginInfo.js"></script>
-<script type="text/javascript" src="js/flip.js"></script>
+<script type="text/javascript" src="js/prettyUI.js"></script>
 </body>
