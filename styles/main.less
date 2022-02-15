@@ -4,6 +4,11 @@ body {
   background-color: #211E3A;
   margin: 10px;
   font-family: Ubuntu;
+  background-image: url("data/wall.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 p, strong {
@@ -166,10 +171,15 @@ td {
   line-height: 0.1px;
   color: white;
   font-family: @font-family;
+  user-select: none;
 
-  .site-code {
+  .flip-btn {
     font-weight: bold;
-    color: lightblue;
+    color: #F77737;
+  }
+
+  p {
+    font-weight: 500;
   }
 }
 

@@ -1,17 +1,18 @@
 #leftcol {
-  width:200px;
+  width:180px;
   background-color: #272727;
   color: #d6d6d6;
   font-family: Ubuntu;
   font-size: 11pt;
   float: left;
   height: inherit;
+  overflow: auto;
 }
 
 #rightcol {
-  margin-left: 200px; 
+  margin-left: 180px; 
   background-color: #0D0D0D;
-  height: 100%;
+  height: inherit;
   display: block !important;
   position: fixed;
   overflow: auto;
@@ -125,10 +126,12 @@
 
 .content {
   color: whitesmoke;
-  height: 100%;
+  // height: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
   position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 
@@ -149,7 +152,7 @@
     display: block;
     color: #e4e4e4;;
     padding-left: 15px;
-    font-size: 32px;
+    font-size: 30px;
     position: absolute;
     z-index: 10;
   }
