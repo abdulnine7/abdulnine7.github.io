@@ -14,6 +14,7 @@ $( document ).ready(function() {
 $('.leftcolTab').click(function() {
   $('.leftcolTab').removeClass('active');
   $(this).addClass('active');
+  // $('.w3-sidenav').removeClass('w3-animate-left');
   $('.w3-sidenav').removeClass('active'); // close for small screen
 
   var name = $(this)[0].children[1].innerHTML;

@@ -4,6 +4,8 @@
   color: #d6d6d6;
   font-family: Ubuntu;
   font-size: 11pt;
+  float: left;
+  height: inherit;
 }
 
 #rightcol {
@@ -15,6 +17,8 @@
   overflow: auto;
   width: -moz-available;
   width: -webkit-fill-available;
+  float: right;
+  z-index: -1;
 
   .profile-image {
     border-radius: 50%;
@@ -42,15 +46,16 @@
   }
 
   .about-ul {
-    padding-left: 25px;
-    padding-right: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
     position: relative;
     color: #efefef;
+    text-align: justify;
   }
 
   .about-li {
     padding-left: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 15px;
     font-size: 11pt;
   }
 
@@ -120,7 +125,7 @@
 
 .content {
   color: whitesmoke;
-  height: 90%;
+  height: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
   position: relative;
@@ -144,6 +149,9 @@
     display: block;
     color: #e4e4e4;;
     padding-left: 15px;
+    font-size: 32px;
+    position: absolute;
+    z-index: 10;
   }
 }
 
