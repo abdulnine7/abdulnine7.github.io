@@ -5,21 +5,29 @@
   font-family: Ubuntu;
   font-size: 11pt;
   float: left;
-  height: inherit;
+  height: initial;
   overflow: auto;
+  bottom: 0;
+  position: fixed;
+  z-index: -1;
+  top: 30px;
+  padding-bottom: 20px;
 }
 
 #rightcol {
   margin-left: 180px; 
   background-color: #0D0D0D;
-  height: inherit;
+  height: initial;
   display: block !important;
   position: fixed;
   overflow: auto;
   width: -moz-available;
   width: -webkit-fill-available;
   float: right;
-  z-index: -1;
+  z-index: -2;
+  bottom: 0;
+  top: 30px;
+  padding-bottom: 20px;
 
   .profile-image {
     border-radius: 50%;
@@ -140,15 +148,20 @@
     margin-left: 0;
   }
 
-  .w3-sidenav {
-    display: none !important;
+  #leftcol {
+    display: block;
+    width: 0;
+    -webkit-transition: width 0.4s ease-in-out;
+    -moz-transition: width 0.4s ease-in-out;
+    -o-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 
     &.active {
-      display: block !important;
+      width: 180px;
     }
   }
 
-  .w3-opennav {
+  .nav-opener {
     display: block;
     color: #e4e4e4;;
     padding-left: 15px;
@@ -159,12 +172,8 @@
 }
 
 @media only screen and (min-width: 680px){
-  .w3-opennav {
-    display: none !important;
-  }
-
-  .w3-sidenav {
-    display: block !important;
+  .nav-opener {
+    display: none;
   }
 }
 

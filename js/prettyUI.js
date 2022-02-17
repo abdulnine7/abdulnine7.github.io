@@ -1,8 +1,5 @@
-function w3_open() {
-  $('.w3-sidenav').addClass('active');;
-}
-function w3_close() {
-  $('.w3-sidenav').removeClass('active');
+function openSlider() {
+  $('#leftcol').addClass('active');;
 }
 
 $( document ).ready(function() {
@@ -14,8 +11,7 @@ $( document ).ready(function() {
 $('.leftcolTab').click(function() {
   $('.leftcolTab').removeClass('active');
   $(this).addClass('active');
-  // $('.w3-sidenav').removeClass('w3-animate-left');
-  $('.w3-sidenav').removeClass('active'); // close for small screen
+  $('#leftcol').removeClass('active'); // close for small screen
 
   var name = $(this)[0].children[1].innerHTML;
   console.log(name);
