@@ -68,11 +68,11 @@
     font-size: 11pt;
   }
 
-  .edu-title {
+  .head-title {
     font-size: x-large;
     margin: auto;
     display: block;
-    padding: 10px;
+    padding-top: 10px;
     text-align: center;
     color: #d1d1d1;;
   }
@@ -100,6 +100,21 @@
     .grade {
       font-size: 14px;
       color: #ccc;
+    }
+  }
+
+
+  .tech-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    font-size: 12pt;
+    padding-top: 20px;
+
+    .big {
+      font-size: 30pt;
+      padding-right: 5px;
+      vertical-align: super;
     }
   }
 }
@@ -170,6 +185,7 @@
     position: absolute;
     z-index: 10;
     user-select: none;
+    margin-top: 5px;
   }
 }
 
