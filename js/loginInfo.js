@@ -33,14 +33,4 @@ $.get("http://ip-api.com/json/", function(data) {
 
 $('.input').click();
 
-//Flip on click
-$('.flip-btn').click(function() {
-  $("#card").flip('toggle');
-  if($(".front").css('z-index') == 1){
-    $('.flip-text')[0].innerHTML = "CLI";
-  } else {
-    $('.flip-text')[0].innerHTML = "GUI";
-  }
-});
-
 
