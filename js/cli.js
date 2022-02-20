@@ -28,6 +28,7 @@ const registerFullscreenToggle = () => {
   $('.button.green').click(() => {
     $('.flip-box').removeClass('minimized');
     $('.flip-box').toggleClass('fullscreen');
+    $('.resume-frame').attr("src", $(".resume-frame").attr("src")); // reload resume if its open
   });
 };
 const registerMinimizedToggle = () => {
