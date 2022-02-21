@@ -17,6 +17,15 @@
 
   <script src="js/jquery.flip.js"></script>
   <script>
+    $(window).on('load',function() {
+      setTimeout(function() {
+        $(".loader").fadeOut(500,function() {
+            // fadeOut complete. Remove the loading div
+            $( ".loader" ).remove(); //makes page more lightweight 
+        });
+      }, 1000);
+    });
+
     $(function() {
       // console.log("Hi");
         $("#card").flip({
@@ -60,6 +69,10 @@
 </head>
 
 <body>
+  <div class="loader">
+    <img src="data/ubuntu.svg" alt="Ubuntu" class="ubuntu-logo">
+    <img src="data/throbber.svg" alt="" class="ubuntu-loading">
+  </div>
 
 <div class="flip-box" id="card">
 
