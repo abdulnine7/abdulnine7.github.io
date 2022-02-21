@@ -17,21 +17,21 @@
 
   <script src="js/jquery.flip.js"></script>
   <script>
-    $(window).on('load',function() {
-      setTimeout(function() {
-        $(".loader").fadeOut(500,function() {
-            // fadeOut complete. Remove the loading div
-            $( ".loader" ).remove(); //makes page more lightweight 
-        });
-      }, 1000);
-    });
-
     $(function() {
       // console.log("Hi");
         $("#card").flip({
             trigger: 'manual',
             speed: 300,
         });
+    });
+
+    $(window).on('load',function() {
+      setTimeout(function() {
+        $(".loader").fadeOut(500,function() {
+            // fadeOut complete. Remove the loading div
+            $( ".loader" ).remove(); //makes page more lightweight 
+        });
+      }, 500);
     });
   </script>
 
