@@ -13,8 +13,10 @@ function flipWindow() {
   $("#card").flip('toggle');
   if($(".front").css('z-index') == 1){
     $('.flip-text')[0].innerHTML = "CLI";
+    document.title = 'Abdul\s GUI';
   } else {
     $('.flip-text')[0].innerHTML = "GUI";
+    document.title = 'Abdul\'s CLI - Terminal';
   }
 }
 
