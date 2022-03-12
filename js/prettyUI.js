@@ -11,6 +11,8 @@ $( document ).ready(function() {
 //Flip on click
 function flipWindow() {
   $("#card").flip('toggle');
+  if($('.flip-img').hasClass('animate')) { $('.flip-img').removeClass('animate'); } 
+  
   if($(".front").css('z-index') == 1){
     $('.flip-text')[0].innerHTML = "CLI";
     document.title = 'Abdul\s GUI';
@@ -18,6 +20,8 @@ function flipWindow() {
     $('.flip-text')[0].innerHTML = "GUI";
     document.title = 'Abdul\'s CLI - Terminal';
   }
+
+  $('.flip-img').addClass('animate');
 }
 
 $('.leftcolTab').click(function() {

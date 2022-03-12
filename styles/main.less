@@ -215,9 +215,9 @@ td {
   right: 20px;
   z-index: 100;
   border-radius: 50%;
-  box-shadow: 2px 2px 3px #c24619d6;
+  box-shadow: inset 0 0 8px 2px #c24619d6;
   cursor:pointer;
-  border: 1px solid #c246198f;
+  user-select: none;
 
   .flip-img {
     height: 30px;
@@ -227,6 +227,14 @@ td {
     justify-content: center;
     align-items: center;
     color: #cccccd;
+    
+    &.animate {
+      animation: rotation 2s 2 linear; 
+      @keyframes rotation {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(359deg); }
+      }
+    }
   }
 }
 
