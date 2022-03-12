@@ -64,4 +64,10 @@ $('.leftcolTab').click(function() {
     });
   }
 
+  if(name === "Contact"){
+    $.get("pages/pretty_contact.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
 });
