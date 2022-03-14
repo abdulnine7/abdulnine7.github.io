@@ -11,18 +11,18 @@ $( document ).ready(function() {
 //Flip on click
 function flipWindow() {
   $("#card").flip('toggle');
-  if($('.flip-img').hasClass('animate')) { $('.flip-img').removeClass('animate'); } 
-  
-  // if($(".front").css('z-index') == 1){
-  //   $('.flip-text')[0].innerHTML = "CLI";
-  //   document.title = 'Abdul\s GUI';
-  // } else {
-  //   $('.flip-text')[0].innerHTML = "GUI";
-  //   document.title = 'Abdul\'s CLI - Terminal';
-  // }
-
   $('.flip-img').addClass('animate');
 }
+
+$("#card").on('flip:done', function(){
+  $('.flip-img').removeClass('animate');
+
+  if($("#card").data("flip-model").isFlipped){
+    document.title = 'Abdul\s GUI';
+  } else {
+    document.title = 'Abdul\'s CLI - Terminal';
+  }
+});
 
 $('.leftcolTab').click(function() {
   $('.leftcolTab').removeClass('active');
