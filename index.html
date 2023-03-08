@@ -31,6 +31,7 @@
             // fadeOut complete. Remove the loading div
             $( ".loader" ).remove(); //makes page more lightweight 
         });
+        flipWindow();
       }, 500);
     });
   </script>
@@ -79,6 +80,9 @@
   <div class="terminal-window front">
     <header>
       <div class="header-title">Abdul's CLI - Terminal</div>
+      <div class="button flip">
+        <i class="fa-solid fa-rotate gold" onclick="flipWindow()"></i>
+      </div>
       <div class="button yellow">
         <i class="fa-solid fa-minus white"></i>
       </div>
@@ -91,7 +95,7 @@
     </header>
     <div id="terminal">
       <p><strong class="green" style="line-height: 1.7;">
-        \[._.]/</strong> - you're in abdul's cli! type `help` to get started, or click <i class="fa-solid fa-repeat"></i> on the bottom right for graphical interface.
+        \[._.]/</strong> - you're in abdul's cli, type `help` to get started, or click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> on the top right for graphical interface.
       </p>
       <div class="loginInfo"></div>
       <p class="hidden">
@@ -109,6 +113,9 @@
   <div class="terminal-window back">
     <header>
       <div class="header-title">Abdul's GUI</div>
+      <div class="button flip">
+        <i class="fa-solid fa-rotate gold" onclick="flipWindow()"></i>
+      </div>
       <div class="button yellow">
         <i class="fa-solid fa-minus white"></i>
       </div>
@@ -153,6 +160,10 @@
         <i class="fa-solid fa-address-card icon"></i>
         <div class="name">Contact</div>
       </div>
+      <div class="leftcolTab">
+        <i class="fa-solid fa-rotate icon"></i>
+        <div class="name">CLI Terminal</div>
+      </div>
     </nav>
     
     <div class="" id="rightcol">
@@ -164,9 +175,9 @@
   </div>
 </div>
 
-<div class="fabFlip">
+<!-- <div class="fabFlip">
   <i class="fa-solid fa-repeat flip-img" onclick="flipWindow()"></i>
-</div>
+</div> -->
 
 <div class="footer">
   <p> Made with ❤️ & ☕</p>
@@ -179,7 +190,7 @@
     <strong class="flip-btn" onclick="flipWindow()">click here</strong>
   </p> -->
   <p class="copyright">
-    <strong>© Abdul Noushad Sheikh 2022</strong>
+    <strong>© Abdul Noushad Sheikh 2023</strong>
   </p>
 </div>
 

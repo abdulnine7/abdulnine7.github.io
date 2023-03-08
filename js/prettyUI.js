@@ -11,11 +11,11 @@ $( document ).ready(function() {
 //Flip on click
 function flipWindow() {
   $("#card").flip('toggle');
-  $('.flip-img').addClass('animate');
+  // $('.flip-img').addClass('animate');
 }
 
 $("#card").on('flip:done', function(){
-  $('.flip-img').removeClass('animate');
+  // $('.flip-img').removeClass('animate');
 
   if($("#card").data("flip-model").isFlipped){
     document.title = 'Abdul\s GUI';
@@ -72,6 +72,10 @@ $('.leftcolTab').click(function() {
     $.get("pages/pretty_contact.html", function(data) {
       $('.content')[0].innerHTML = data;
     });
+  }
+
+  if(name === "CLI Terminal"){
+    flipWindow();
   }
 
 });
