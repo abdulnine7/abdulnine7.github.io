@@ -43,7 +43,7 @@ commands.rm = () => errors.noWriteAccess;
 
 // Sudo command show hackerman meme
 commands.sudo = () => {
-  return ' <img src="data/sudo.jpg" alt="Sudo not allowed" class="sudo" >'
+  return ' <img src="assets/images/sudo.jpg" alt="Sudo not allowed" class="sudo" >'
 }
 
 commands.prime = () => {
@@ -253,51 +253,22 @@ commands.cat = (filename) => {
 };
 
 // Initialize cli.
-window.initCLI = () => {
+window.initCLI = async () => {
   const cmd = document.getElementById('terminal');
   if (!cmd) return;
 
-  $.ajaxSetup({ cache: false });
-  const pages = [];
-  pages.push($.get('pages/about.html'));
-  pages.push($.get('pages/contact.html'));
-  pages.push($.get('pages/familiar.html'));
-  pages.push($.get('pages/help.html'));
-  pages.push($.get('pages/proficient.html'));
-  pages.push($.get('pages/resume.html'));
-  pages.push($.get('pages/home.html'));
-  pages.push($.get('pages/skills.html'));
-  pages.push($.get('pages/projects.html'));
-
-  $.when
-    .apply($, pages)
-    .done(
-      (
-        aboutData,
-        contactData,
-        familiarData,
-        helpData,
-        proficientData,
-        resumeData,
-        homeData,
-        skillsData,
-        projectsData,
-      ) => {
-        systemData['about'] = aboutData[0];
-        systemData['contact'] = contactData[0];
-        systemData['familiar'] = familiarData[0];
-        systemData['help'] = helpData[0];
-        systemData['proficient'] = proficientData[0];
-        systemData['resume'] = resumeData[0];
-        systemData['home'] = homeData[0];
-        systemData['skills'] = skillsData[0];
-        systemData['projects'] = projectsData[0];
-      },
-    )
-    .fail(() => {
-      systemData['help'] = '<p>Failed to load CLI content. Refresh and try again.</p>';
-    })
-    .always(() => {
-      new Shell(cmd, commands);
-    });
+  try {
+    const data = window.profileReady ? await window.profileReady : null;
+    if (data && typeof window.buildCliData === 'function') {
+      systemData = window.buildCliData(data);
+      const prompt = document.querySelector('.prompt .home');
+      if (prompt) {
+        prompt.textContent = `${data.site.promptUser}@${data.site.promptHost}`;
+      }
+    }
+  } catch (err) {
+    systemData['help'] = '<p>Failed to load CLI content. Refresh and try again.</p>';
+  } finally {
+    new Shell(cmd, commands);
+  }
 };

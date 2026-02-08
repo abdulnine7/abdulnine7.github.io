@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: Ubuntu, sans-serif;
   min-height: 100vh;
-  background-image: url("../data/focal-fossa.jpg");
+  background-image: url("../assets/images/focal-fossa.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

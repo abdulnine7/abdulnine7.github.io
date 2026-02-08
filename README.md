@@ -1,3 +1,22 @@
-<h1 align="center">Hi 👋, I'm Abdul Sheikh</h1>
-<h3 align="center"> This is a git repository of my personal website <a href="https://dev0.us">dev0.us</a></h3>
-<h4 align="center"> Feel free to clone it and use.</h3>
+# Abdul's Terminal Portfolio
+
+A GNOME-style desktop with a CLI-first personal site. All content is data-driven via JSON.
+
+## Update Your Content
+
+Edit `data/profile.json` to update:
+- Name, bio, skills, projects, experience
+- Social links and email
+- Resume PDF path
+- Images and logos
+
+Put images and PDFs in `assets/` and reference them from the JSON.
+
+## Local Dev
+
+```bash
+cd /Users/asheikh9725/aiprojects/abdulnine7.github.io
+python3 -m http.server 8000
+```
+
+Open `http://localhost:8000`.

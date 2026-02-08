@@ -281,7 +281,7 @@
   height: 100%;
   width: 100%;
   border: 0;
-  background: url(../data/loading.svg);
+  background: url(../assets/images/loading.svg);
   background-repeat: no-repeat;
   background-position: center 20px;
 }
