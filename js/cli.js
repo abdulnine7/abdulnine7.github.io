@@ -30,21 +30,6 @@ const setDirectory = (dir) => {
   localStorage.directory = dir;
 };
 
-// Turn on fullscreen.
-const registerFullscreenToggle = () => {
-  $('.button.green').click(() => {
-    $('.flip-box').removeClass('minimized');
-    $('.flip-box').toggleClass('fullscreen');
-    $('.resume-frame').attr("src", $(".resume-frame").attr("src")); // reload resume if its open
-  });
-};
-const registerMinimizedToggle = () => {
-  $('.button.yellow').click(() => {
-    $('.flip-box').removeClass('fullscreen');
-    $('.flip-box').toggleClass('minimized');
-  });
-};
-
 // Create new directory in current directory.
 commands.mkdir = () => errors.noWriteAccess;
 
@@ -56,7 +41,7 @@ commands.rm = () => errors.noWriteAccess;
 
 // Sudo command show hackerman meme
 commands.sudo = () => {
-  return ' <img src="data/sudo.jpg" alt="Sudo not allowed" class="sudo" >'
+  return ' <img src="assets/images/sudo.jpg" alt="Sudo not allowed" class="sudo" >'
 }
 
 commands.prime = () => {
@@ -118,7 +103,7 @@ const commandHelp = {
   cd: 'cd DIRECTORY - move into DIRECTORY or cd to return to home',
   cat: 'cat FILENAME - display FILENAME in window',
   open: 'open SECTION - open GUI section (about, education, skills, experience, projects, resume, contact)',
-  gui: 'gui - flip to the graphical interface',
+  gui: 'gui - open the profile window',
   history: 'history - see your command history',
   login: 'login - fetch login IP/location (opt-in)',
   clear: 'clear - clear current window'
@@ -145,23 +130,23 @@ commands.history = () => {
   return `<p>${history.join('<br>')}</p>`;
 };
 
-// Flip to GUI.
+// Open GUI window.
 commands.gui = () => {
-  if (typeof flipWindow === 'function') {
-    flipWindow();
+  if (typeof window.showWindowById === 'function') {
+    window.showWindowById('gui');
     return null;
   }
   return '<p class="gray">GUI unavailable.</p>';
 };
 
-// Open GUI section and flip.
+// Open GUI section and bring window to front.
 commands.open = (section) => {
   const target = section ? section.trim().toLowerCase() : '';
   if (!target || !guiSections.includes(target)) {
     return `<p>Usage: open ${guiSections.join(' | ')}</p>`;
   }
-  if (typeof flipWindow === 'function') {
-    flipWindow();
+  if (typeof window.showWindowById === 'function') {
+    window.showWindowById('gui');
   }
   if (typeof showSection === 'function') {
     showSection(target);
@@ -266,52 +251,22 @@ commands.cat = (filename) => {
 };
 
 // Initialize cli.
-$(() => {
-  registerFullscreenToggle();
-  registerMinimizedToggle();
+window.initCLI = async () => {
   const cmd = document.getElementById('terminal');
+  if (!cmd) return;
 
-  $.ajaxSetup({ cache: false });
-  const pages = [];
-  pages.push($.get('pages/about.html'));
-  pages.push($.get('pages/contact.html'));
-  pages.push($.get('pages/familiar.html'));
-  pages.push($.get('pages/help.html'));
-  pages.push($.get('pages/proficient.html'));
-  pages.push($.get('pages/resume.html'));
-  pages.push($.get('pages/home.html'));
-  pages.push($.get('pages/skills.html'));
-  pages.push($.get('pages/projects.html'));
-
-  $.when
-    .apply($, pages)
-    .done(
-      (
-        aboutData,
-        contactData,
-        familiarData,
-        helpData,
-        proficientData,
-        resumeData,
-        homeData,
-        skillsData,
-        projectsData,
-      ) => {
-        systemData['about'] = aboutData[0];
-        systemData['contact'] = contactData[0];
-        systemData['familiar'] = familiarData[0];
-        systemData['help'] = helpData[0];
-        systemData['proficient'] = proficientData[0];
-        systemData['resume'] = resumeData[0];
-        systemData['home'] = homeData[0];
-        systemData['skills'] = skillsData[0];
-        systemData['projects'] = projectsData[0];
-      },
-    )
-    .fail(() => {
-      systemData['help'] = '<p>Failed to load CLI content. Refresh and try again.</p>';
-    })
-    .always(() => {
-      new Shell(cmd, commands);
-    });
-});
+  try {
+    const data = window.profileReady ? await window.profileReady : null;
+    if (data && typeof window.buildCliData === 'function') {
+      systemData = window.buildCliData(data);
+      const prompt = document.querySelector('.prompt .home');
+      if (prompt) {
+        prompt.textContent = `${data.site.promptUser}@${data.site.promptHost}`;
+      }
+    }
+  } catch (err) {
+    systemData['help'] = '<p>Failed to load CLI content. Refresh and try again.</p>';
+  } finally {
+    new Shell(cmd, commands);
+  }
+};

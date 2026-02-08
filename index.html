@@ -13,11 +13,11 @@
   <meta property="og:description" content="A Linux terminal-style personal website showcasing projects, skills, and experience.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://linuxy.us/">
-  <meta property="og:image" content="https://linuxy.us/data/profile.png">
+  <meta property="og:image" content="https://linuxy.us/assets/images/profile.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Abdul's CLI - Terminal Portfolio">
   <meta name="twitter:description" content="A Linux terminal-style personal website showcasing projects, skills, and experience.">
-  <meta name="twitter:image" content="https://linuxy.us/data/profile.png">
+  <meta name="twitter:image" content="https://linuxy.us/assets/images/profile.png">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://use.fontawesome.com 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com https://cdn.jsdelivr.net; connect-src 'self' https://ipapi.co; frame-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Abdul's CLI - Terminal</title>
   <link rel="canonical" href="https://linuxy.us/">
@@ -27,7 +27,6 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://use.fontawesome.com" crossorigin>
   <link rel="stylesheet" href="styles/main.css" />
-  <link rel="stylesheet" href="styles/flip.css" />
   <link rel="stylesheet" href="styles/prettyUI.css" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" />
@@ -37,17 +36,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
   <script type="text/javascript" src="js/shell.js" defer></script>
   <script type="text/javascript" src="js/loginInfo.js" defer></script>
+  <script type="text/javascript" src="js/render.js" defer></script>
   <script type="text/javascript" src="js/cli.js" defer></script>
-
-  <script src="js/jquery.flip.js" defer></script>
+  <script type="text/javascript" src="js/windowManager.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      if (window.jQuery) {
-        $("#card").flip({
-          trigger: 'manual',
-          speed: 900,
-        });
-      }
       setTimeout(function() {
         if (window.jQuery) {
           $(".loader").fadeOut(500,function() {
@@ -64,131 +57,35 @@
   <!-- Meta tags start-->
   <meta content="yes" name="apple-mobile-web-app-capable">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
-  <link href="favicon.ico" rel="shortcut icon">
+  <link rel="icon" href="assets/images/ubuntu-tile.svg" type="image/svg+xml">
   <!-- Meta tags end -->
 </head>
 
 <body>
   <div class="loader" role="status" aria-live="polite">
-    <img src="data/ubuntu.svg" alt="Ubuntu" class="ubuntu-logo">
-    <img src="data/throbber.svg" alt="" class="ubuntu-loading">
+    <img src="assets/images/ubuntu.svg" alt="Ubuntu" class="ubuntu-logo">
+    <img src="assets/images/throbber.svg" alt="" class="ubuntu-loading">
   </div>
 
-<main class="flip-box" id="card" role="main">
+<main class="desktop" id="desktop" role="main">
+  <aside class="dock" aria-label="App dock">
+    <button class="dock-item active" data-window="terminal" aria-label="Terminal">
+      <i class="fa-solid fa-terminal"></i>
+      <span>Terminal</span>
+    </button>
+    <button class="dock-item" data-window="gui" aria-label="Profile GUI">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </button>
+    <button class="dock-item" data-window="about-desktop" aria-label="About This Desktop">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>About</span>
+    </button>
+  </aside>
 
-  <div class="terminal-window front">
-    <header>
-      <div class="header-title">Abdul's CLI - Terminal</div>
-      <div class="button flip">
-        <i class="fa-solid fa-rotate gold" onclick="flipWindow()"></i>
-      </div>
-      <div class="button yellow">
-        <i class="fa-solid fa-minus white"></i>
-      </div>
-      <div class="button green">
-        <i class="fa-regular fa-square white"></i>
-      </div>
-      <div class="button red">
-        <i class="fa-solid fa-circle-xmark insta"></i>
-      </div>
-    </header>
-    <div id="terminal" role="region" aria-live="polite" aria-label="Terminal output">
-      <p><strong class="green" style="line-height: 1.7;">
-        \[._.]/</strong> - you're in abdul's cli. Try <span class="li-blue">help</span>, <span class="li-blue">about</span>, <span class="li-blue">projects</span>, or <span class="li-blue">gui</span>.
-        Click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> for the graphical interface.
-      </p>
-      <div class="loginInfo"></div>
-      <p class="hidden">
-        <span class="prompt">
-          <strong class="home">abdul@linuxy.us</strong>
-          <strong class="white">:</strong>
-          <strong class="dir">~</strong>
-          <strong class="white">$</strong>
-        </span>
-        <span contenteditable="true" role="textbox" aria-label="Terminal input" aria-multiline="false" spellcheck="false" autocomplete="off" autocorrect="off" class="input"> </span>
-      </p>
-    </div>
-  </div>
-
-  <div class="terminal-window back">
-    <header>
-      <div class="header-title">Abdul's GUI</div>
-      <div class="button flip">
-        <i class="fa-solid fa-rotate gold" onclick="flipWindow()"></i>
-      </div>
-      <div class="button yellow">
-        <i class="fa-solid fa-minus white"></i>
-      </div>
-      <div class="button green">
-        <i class="fa-regular fa-square white"></i>
-      </div>
-      <div class="button red">
-        <i class="fa-solid fa-circle-xmark insta"></i>
-      </div>
-    </header>
-
-    <!-- <div id="terminal">
-      <p><strong class="green">\[._.]/</strong> - Back flipped.</p>
-    </div> -->
-
-    <nav class=" " id="leftcol" aria-label="GUI sections">
-      <div class="leftcolTab active">
-        <i class="fa-solid fa-user icon"></i>
-        <div class="name">About</div>
-      </div>
-      <div class="leftcolTab">
-        <i class="fa-solid fa-graduation-cap icon"></i>
-        <div class="name">Education</div>
-      </div>
-      <div class="leftcolTab">
-        <i class="fa-solid fa-laptop-code icon"></i>
-        <div class="name">Skills</div>
-      </div>	
-      <div class="leftcolTab">
-        <i class="fa-solid fa-building icon"></i>
-        <div class="name">Experience</div>
-      </div>
-      <!-- <div class="leftcolTab">
-        <i class="fa-solid fa-diagram-project icon"></i>
-        <div class="name">Projects</div>
-      </div>	 -->
-      <div class="leftcolTab">
-        <i class="fa-solid fa-file-pdf icon"></i>
-        <div class="name">Resume</div>
-      </div>
-      <div class="leftcolTab">
-        <i class="fa-solid fa-address-card icon"></i>
-        <div class="name">Contact</div>
-      </div>
-    </nav>
-    
-    <div class="" id="rightcol">
-      <span class="nav-opener" role="button" tabindex="0" aria-label="Open navigation" onclick="openSlider()">&#9776;</span>
-      <div class="content">
-
-      </div>
-    </div>
-  </div>
+  <section class="window terminal-window" data-window-id="terminal" data-window-src="windows/terminal.html" style="left: 122px; top: 80px;"></section>
+  <section class="window gui-window" data-window-id="gui" data-window-src="windows/profile.html" style="left: 172px; top: 150px; width: 900px; height: 600px; display: none;"></section>
+  <section class="window about-window" data-window-id="about-desktop" data-window-src="windows/about-desktop.html" style="left: 232px; top: 220px; width: 560px; height: 620px; display: none;"></section>
 </main>
-
-<!-- <div class="fabFlip">
-  <i class="fa-solid fa-repeat flip-img" onclick="flipWindow()"></i>
-</div> -->
-
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-line">
-      <span>Made with Love, Coffee, and Codex</span>
-      <span class="dot">•</span>
-      <span>Inspired by Ubuntu</span>
-      <i class="devicon-linux-plain linux-icon"></i>
-    </div>
-    <div class="footer-line small">
-      <span>© Abdul Noushad Sheikh 2026</span>
-    </div>
-  </div>
-</footer>
-
-<script type="text/javascript" src="js/prettyUI.js" defer></script>
 </body>
 </html>

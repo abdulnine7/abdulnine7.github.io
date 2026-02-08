@@ -1,0 +1,158 @@
+{
+  "site": {
+    "title": "Abdul's CLI - Terminal",
+    "domain": "linuxy.us",
+    "promptUser": "abdul",
+    "promptHost": "linuxy.us"
+  },
+  "about": {
+    "name": "Abdul Noushad Sheikh",
+    "headline": "Welcome to my website!",
+    "profileImage": "assets/images/profile.png",
+    "bio": [
+      "Welcome to my little piece of the digital galaxy! At core, I'm a tenacious innovator and an unchained technologist. My mission? To forge meaningful solutions to tackle the real-world challenges, trying to contribute back to the open-source community and striving to bring change one line of code at a time.",
+      "This website is my creative outlet, an ideal embodiment of my love for backend development, built to simulate Ubuntu shell experience. This is a CLI-based portal welcoming you to a walk-through in my professional landscape and personal projects. This interface, however, shall not just be a bridge to my world but a reflecting pool of how I present the making of technology accessible and enjoyable.",
+      "Thank you for dropping by."
+    ]
+  },
+  "education": [
+    {
+      "school": "San Diego State University",
+      "period": "Aug 2022 - May 2024",
+      "degree": "Computer Science",
+      "grade": "GPA: 3.9/4"
+    },
+    {
+      "school": "Pune University - SPPU",
+      "period": "2015 - 2019",
+      "degree": "Computer Science & Engineering",
+      "grade": "GPA: 3.66/4"
+    }
+  ],
+  "skills": {
+    "summary": [
+      "I find my expertise in vast variety of programming languages and frameworks.",
+      "I also love working on and making use of, most of the cloud services that help me create programs and solution faster."
+    ],
+    "proficient": [
+      "JavaScript",
+      "Java",
+      "Python",
+      "HTML5/CSS3",
+      "Linux Shell",
+      "Docker",
+      "Git",
+      "Django",
+      "NodeJS",
+      "Azure",
+      "Amazon Web Services"
+    ],
+    "familiar": [
+      "Android development",
+      "AngularJS"
+    ],
+    "icons": {
+      "languages": [
+        "devicon-python-plain-wordmark colored",
+        "devicon-java-plain-wordmark colored",
+        "devicon-javascript-plain colored",
+        "devicon-bash-plain",
+        "devicon-django-line-wordmark",
+        "devicon-express-original colored",
+        "devicon-mysql-plain-wordmark",
+        "devicon-mongodb-plain-wordmark colored",
+        "devicon-spring-original-wordmark colored",
+        "devicon-ubuntu-plain-wordmark"
+      ],
+      "tools": [
+        "devicon-amazonwebservices-plain-wordmark colored",
+        "devicon-azure-plain colored",
+        "devicon-kubernetes-plain colored",
+        "devicon-apache-line-wordmark",
+        "devicon-azuredevops-plain colored",
+        "devicon-terraform-plain-wordmark",
+        "devicon-docker-plain-wordmark colored",
+        "devicon-jenkins-plain",
+        "devicon-nginx-plain-wordmark colored",
+        "devicon-vscode-plain colored",
+        "devicon-ubuntu-plain-wordmark colored",
+        "devicon-github-original-wordmark",
+        "devicon-jira-plain-wordmark colored"
+      ]
+    }
+  },
+  "experience": [
+    {
+      "company": "AWM Global Advisors",
+      "role": "Software Engineer Intern",
+      "period": "Aug 2023 - Present",
+      "location": "San Diego, California",
+      "logo": "assets/images/awm_logo.jpg",
+      "bullets": []
+    },
+    {
+      "company": "San Diego State University",
+      "role": "Teaching Associate (Java)",
+      "period": "Jan 2023 - Present",
+      "location": "San Diego, California",
+      "logo": "assets/images/sdsu_logo.jpg",
+      "bullets": []
+    },
+    {
+      "company": "Amdocs",
+      "role": "Software Engineer",
+      "period": "Sept 2021 - July 2022",
+      "location": "Pune, India",
+      "logo": "assets/images/amdocs.svg",
+      "bullets": []
+    },
+    {
+      "company": "Deloitte",
+      "role": "DC Analyst",
+      "period": "Jan 2020 - Sept 2021",
+      "location": "Mumbai, India",
+      "logo": "assets/images/deloitte.svg",
+      "bullets": []
+    }
+  ],
+  "projects": [
+    {
+      "name": "JobsExplorer.in",
+      "url": "https://jobsexplorer.in/",
+      "description": "Designed a simple web app built to quickly find jobs in India. Search keywords and location to find job listings from 3 of the most popular job sites in India. I built JobsExplorer to help people search their desired jobs with ease and clarity.",
+      "tech": "NodeJS, Amazon Web Services, JQuery, NGiNX"
+    },
+    {
+      "name": "UNI Share.in",
+      "url": "https://unishare.in/",
+      "description": "Created a web application to help students share their books, projects and other academic related stuff with each other in a University Campus. In short, it's a University OLX.",
+      "tech": "Django, Amazon Web Services, Python, NGiNX, RDBMS"
+    }
+  ],
+  "contact": {
+    "github": "https://github.com/abdulnine7",
+    "linkedin": "https://www.linkedin.com/in/abdulnine7",
+    "instagram": "https://www.instagram.com/abddulnine7/",
+    "instagramHandle": "abddulnine7",
+    "email": "bitwiseabdul@gmail.com",
+    "repo": "https://github.com/abdulnine7/abdulnine7.github.io"
+  },
+  "resume": {
+    "pdf": "assets/pdf/Abdul_Sheikh_Resume.pdf"
+  },
+  "aboutDesktop": {
+    "madeWith": "Made with Love, Coffee, and Codex (OpenAI)",
+    "inspiredBy": "Inspired by Ubuntu GNOME",
+    "domain": "linuxy.us",
+    "copyright": "© Abdul Noushad Sheikh 2026",
+    "osName": "Ubuntu Desktop Web",
+    "osVersion": "Designed by Abdul Noushad Sheikh",
+    "logo": "assets/images/ubuntu-tile.svg"
+  },
+  "assets": {
+    "background": "assets/images/focal-fossa.jpg",
+    "loaderLogo": "assets/images/ubuntu.svg",
+    "loaderSpinner": "assets/images/throbber.svg",
+    "sudo": "assets/images/sudo.jpg"
+  }
+}
