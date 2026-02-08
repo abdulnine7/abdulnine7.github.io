@@ -1,6 +1,6 @@
 body {
   margin: 10px;
-  font-family: Ubuntu;
+  font-family: Ubuntu, sans-serif;
   background-image: url("../data/focal-fossa.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -56,8 +56,8 @@ td {
 
 .terminal-window {
   text-align: left;
-  width: 680px;
-  height: 400px;
+  width: min(680px, 94vw);
+  height: min(420px, 70vh);
   border-radius: 10px;
   margin: auto;
   position: relative;
@@ -119,7 +119,7 @@ td {
 
 .terminal-window #terminal {
   color: white;
-  font-family: Ubuntu, Menlo, Monaco, "Consolas", "Courier New", "Courier";
+  font-family: "Ubuntu Mono", Menlo, Monaco, "Consolas", "Courier New", "Courier";
   font-size: 11pt;
   background: #300a24;
   padding: 10px;
@@ -129,6 +129,7 @@ td {
   top: 30px;
   bottom: 0;
   overflow: auto;
+  cursor: text;
 }
 
 .terminal-window #terminal p,
@@ -156,10 +157,23 @@ td {
 }
 
 .terminal-window .input {
-  outline-color: #30353a;
+  outline: none;
   border: none;
   display: inline-flex;
   resize: none;
+  font-family: "Ubuntu Mono", Menlo, Monaco, "Consolas", "Courier New", "Courier";
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.terminal-window .input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.terminal-window .input[contenteditable]:empty:before {
+  content: "\00a0";
 }
 
 .terminal-window .home {
@@ -175,11 +189,11 @@ td {
 }
 
 .terminal-window .blue {
-  color: #3030fc;
+  color: #2C6DB2;
 }
 
 .terminal-window .li-blue {
-  color: #59d6ff;
+  color: #2C6DB2;
 }
 
 .terminal-window .white {
@@ -191,7 +205,7 @@ td {
 }
 
 .terminal-window .dir {
-  color: #59d6ff;
+  color: #2C6DB2;
 }
 
 .terminal-window .green {
@@ -200,7 +214,7 @@ td {
 
 .terminal-window .title-link {
   padding-bottom: 2px;
-  color: #59d6ff;
+  color: #2C6DB2;
   text-decoration: none;
 }
 
@@ -237,29 +251,51 @@ td {
 }
 
 .footer {
-  position: absolute;
-  top: 80vh;
+  position: fixed;
   left: 0;
   right: 0;
-  text-align: center;
-  line-height: 0.1px;
-  color: white;
-  font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
-  user-select: none;
+  bottom: 18px;
+  display: flex;
+  justify-content: center;
   z-index: 2;
+  user-select: none;
 }
 
-.footer .flip-btn {
-  font-weight: bold;
-  color: #F77737;
+.footer-inner {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(13, 13, 13, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  color: #e0e8f0;
+  font-family: "Ubuntu Mono", Menlo, Monaco, "Consolas", "Courier New", "Courier";
+  text-align: center;
+  backdrop-filter: blur(8px);
 }
 
-.footer p {
-  font-weight: 500;
+.footer-line {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1.3;
 }
 
-.footer .copyright {
-  font-size: 8pt;
+.footer-line.small {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.footer .dot {
+  opacity: 0.6;
+}
+
+.footer .linux-icon {
+  font-size: 14px;
 }
 
 .terminal-data {
@@ -268,6 +304,7 @@ td {
 
 @media only screen and (max-width: 680px) {
   .footer {
-    bottom: 20px;
+    bottom: 12px;
+    padding: 0 12px;
   }
 }

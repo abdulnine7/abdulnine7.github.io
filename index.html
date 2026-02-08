@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="styles/flip.css" />
   <link rel="stylesheet" href="styles/prettyUI.css" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.4.3/js/jquery.terminal.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css"> 
@@ -22,7 +23,7 @@
     $(function() {
       $("#card").flip({
         trigger: 'manual',
-        speed: 2000,
+        speed: 900,
       });
     });
 
@@ -68,12 +69,13 @@
     </header>
     <div id="terminal">
       <p><strong class="green" style="line-height: 1.7;">
-        \[._.]/</strong> - you're in abdul's cli, type `help` to get started, or click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> on the top right for graphical interface.
+        \[._.]/</strong> - you're in abdul's cli. Try <span class="li-blue">help</span>, <span class="li-blue">about</span>, <span class="li-blue">projects</span>, or <span class="li-blue">gui</span>.
+        Click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> for the graphical interface.
       </p>
       <div class="loginInfo"></div>
       <p class="hidden">
         <span class="prompt">
-          <strong class="home">abdul@notebook-HP</strong>
+          <strong class="home">abdul@linuxy.us</strong>
           <strong class="white">:</strong>
           <strong class="dir">~</strong>
           <strong class="white">$</strong>
@@ -133,10 +135,6 @@
         <i class="fa-solid fa-address-card icon"></i>
         <div class="name">Contact</div>
       </div>
-      <div class="leftcolTab">
-        <i class="fa-solid fa-rotate icon"></i>
-        <div class="name">CLI Terminal</div>
-      </div>
     </nav>
     
     <div class="" id="rightcol">
@@ -152,20 +150,19 @@
   <i class="fa-solid fa-repeat flip-img" onclick="flipWindow()"></i>
 </div> -->
 
-<div class="footer">
-  <p> Made with ❤️ & ☕</p>
-  <p> Inspired by <strong>Ubuntu</strong> 
-    <i class="devicon-linux-plain"></i>
-  </p>
-  <!-- <p >
-    For 
-    <span class="flip-text">GUI</span> 
-    <strong class="flip-btn" onclick="flipWindow()">click here</strong>
-  </p> -->
-  <p class="copyright">
-    <strong>© Abdul Noushad Sheikh 2023</strong>
-  </p>
-</div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-line">
+      <span>Made with Love, Coffee, and Codex</span>
+      <span class="dot">•</span>
+      <span>Inspired by Ubuntu</span>
+      <i class="devicon-linux-plain linux-icon"></i>
+    </div>
+    <div class="footer-line small">
+      <span>© Abdul Noushad Sheikh 2026</span>
+    </div>
+  </div>
+</footer>
 
 <script type="text/javascript" src="js/prettyUI.js"></script>
 </body>

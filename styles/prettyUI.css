@@ -267,8 +267,13 @@
 .content {
   color: whitesmoke;
   position: relative;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 16px;
+  padding-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  line-height: 1.5;
+  max-width: 980px;
+  margin: 0 auto;
 }
 
 @media only screen and (max-width: 680px){

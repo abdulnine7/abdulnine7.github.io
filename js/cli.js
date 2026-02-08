@@ -10,13 +10,20 @@ const errors = {
 };
 
 const struct = {
-  home: ['about', 'resume', 'contact', 'projects'],
-  skills: ['proficient', 'familiar'],
+  home: {
+    dirs: ['skills'],
+    files: ['about', 'resume', 'contact', 'projects', 'help']
+  },
+  skills: {
+    dirs: [],
+    files: ['proficient', 'familiar']
+  }
 };
 
 const commands = {};
 let systemData = {};
 const homePath = '/home/abdul';
+const guiSections = ['about', 'education', 'skills', 'experience', 'projects', 'resume', 'contact'];
 
 const getDirectory = () => localStorage.directory;
 const setDirectory = (dir) => {
@@ -82,20 +89,48 @@ commands.prime = () => {
 
 // View contents of specified directory.
 commands.ls = (directory) => {
-  // console.log(systemData);
+  const currDir = getDirectory();
+
   if (directory === '..' || directory === '~') {
-    return systemData['home'];
+    const home = struct.home;
+    const dirs = home.dirs.map((d) => `<span class="li-blue">${d}/</span>`);
+    const files = home.files.map((f) => `${f}.txt`);
+    return [...dirs, ...files].join('  ');
   }
 
-  if (directory in struct) {
-    return systemData[directory];
+  if (directory && struct[directory]) {
+    const target = struct[directory];
+    const dirs = target.dirs.map((d) => `<span class="li-blue">${d}/</span>`);
+    const files = target.files.map((f) => `${f}.txt`);
+    return [...dirs, ...files].join('  ');
   }
 
-  return systemData[getDirectory()];
+  const target = struct[currDir];
+  const dirs = target.dirs.map((d) => `<span class="li-blue">${d}/</span>`);
+  const files = target.files.map((f) => `${f}.txt`);
+  return [...dirs, ...files].join('  ');
+};
+
+const commandHelp = {
+  help: 'help [command] - show available commands or details about one command',
+  path: 'path - display current directory',
+  ls: 'ls - show files in current directory',
+  cd: 'cd DIRECTORY - move into DIRECTORY or cd to return to home',
+  cat: 'cat FILENAME - display FILENAME in window',
+  open: 'open SECTION - open GUI section (about, education, skills, experience, projects, resume, contact)',
+  gui: 'gui - flip to the graphical interface',
+  history: 'history - see your command history',
+  login: 'login - fetch login IP/location (opt-in)',
+  clear: 'clear - clear current window'
 };
 
 // View list of possible commands.
-commands.help = () => systemData.help || '<p>Loading content... try again.</p>';
+commands.help = (cmd) => {
+  if (cmd && commandHelp[cmd]) {
+    return `<p>${commandHelp[cmd]}</p>`;
+  }
+  return systemData.help || '<p>Loading content... try again.</p>';
+};
 
 // Display current path.
 commands.path = () => {
@@ -110,6 +145,31 @@ commands.history = () => {
   return `<p>${history.join('<br>')}</p>`;
 };
 
+// Flip to GUI.
+commands.gui = () => {
+  if (typeof flipWindow === 'function') {
+    flipWindow();
+    return null;
+  }
+  return '<p class="gray">GUI unavailable.</p>';
+};
+
+// Open GUI section and flip.
+commands.open = (section) => {
+  const target = section ? section.trim().toLowerCase() : '';
+  if (!target || !guiSections.includes(target)) {
+    return `<p>Usage: open ${guiSections.join(' | ')}</p>`;
+  }
+  if (typeof flipWindow === 'function') {
+    flipWindow();
+  }
+  if (typeof showSection === 'function') {
+    showSection(target);
+    return null;
+  }
+  return '<p class="gray">GUI section unavailable.</p>';
+};
+
 // Fetch login info on-demand.
 commands.login = () => {
   const block = $('<div class="loginInfo"></div>');
@@ -121,59 +181,88 @@ commands.login = () => {
   return '<p class="gray">Login info unavailable.</p>';
 };
 
+window.getCompletions = function(input, directory) {
+  const raw = input || '';
+  const hasTrailingSpace = /\s$/.test(raw);
+  const trimmed = raw.replace(/\s+$/,'');
+  const parts = trimmed.split(/\s+/).filter(Boolean);
+  if (parts.length === 0) {
+    return { matches: [], isArg: false };
+  }
+
+  const cmd = parts[0].toLowerCase();
+  const isArg = parts.length > 1 || hasTrailingSpace;
+  if (!isArg) {
+    const prefix = parts[0].toLowerCase();
+    const matches = Object.keys(commandHelp).filter((c) => c.startsWith(prefix));
+    return { matches, isArg: false };
+  }
+
+  const prefix = hasTrailingSpace ? '' : parts[parts.length - 1].toLowerCase();
+  let pool = [];
+  if (cmd === 'cd') {
+    const curr = struct[localStorage.directory] || struct.home;
+    pool = curr.dirs.concat(['..', '~']);
+  } else if (cmd === 'cat') {
+    const curr = struct[localStorage.directory] || struct.home;
+    pool = curr.files.map((f) => `${f}.txt`);
+  } else if (cmd === 'open') {
+    pool = guiSections;
+  }
+
+  const matches = pool.filter((item) => item.toLowerCase().startsWith(prefix));
+  return { matches, isArg: true };
+};
+
 // Move into specified directory.
 commands.cd = (newDirectory) => {
   const currDir = getDirectory();
-  const dirs = Object.keys(struct);
   const newDir = newDirectory ? newDirectory.trim() : '';
 
-  if (dirs.includes(newDir) && currDir !== newDir) {
-    setDirectory(newDir);
-  } else if (newDir === '' || newDir === '~' || (newDir === '..' && dirs.includes(currDir))) {
+  if (newDir === '' || newDir === '~') {
     setDirectory('home');
-  } else {
-    return errors.invalidDirectory;
+    return null;
   }
-  return null;
+
+  if (newDir === '..') {
+    if (currDir !== 'home') {
+      setDirectory('home');
+    }
+    return null;
+  }
+
+  if (struct[currDir] && struct[currDir].dirs.includes(newDir)) {
+    setDirectory(newDir);
+    return null;
+  }
+
+  return errors.invalidDirectory;
 };
 
 // Display contents of specified file.
 commands.cat = (filename) => {
   if (!filename) return errors.fileNotSpecified;
 
-  const isADirectory = (filename) => struct.hasOwnProperty(filename);
-  const hasValidFileExtension = (filename, extension) => filename.includes(extension);
-  const isFileInDirectory = (filename) => (filename.split('/').length === 1 ? false : true);
-  const isFileInSubdirectory = (filename, directory) => struct[directory].includes(filename);
+  const currDir = getDirectory();
+  const clean = filename.trim();
+  const hasValidFileExtension = (name, extension) => name.endsWith(extension);
 
-  if (isADirectory(filename)) return errors.invalidFile;
+  if (!hasValidFileExtension(clean, '.txt')) return errors.invalidFile;
 
-  if (!isFileInDirectory(filename)) {
-    const fileKey = filename.split('.')[0];
-    const isValidFile = (filename) => systemData.hasOwnProperty(filename);
+  const parts = clean.split('/');
+  let dir = currDir;
+  let fileKey = clean.replace('.txt', '');
 
-    if (isValidFile(fileKey) && hasValidFileExtension(filename, '.txt')) {
-      return systemData[fileKey];
-    }
+  if (parts.length === 2) {
+    dir = parts[0];
+    fileKey = parts[1].replace('.txt', '');
   }
 
-  if (isFileInDirectory(filename)) {
-    if (hasValidFileExtension(filename, '.txt')) {
-      const directories = filename.split('/');
-      const directory = directories.slice(0, 1).join(',');
-      const fileKey = directories.slice(1, directories.length).join(',').split('.')[0];
-      if (directory === 'home' || !struct.hasOwnProperty(directory))
-        return errors.noSuchFileOrDirectory;
-
-      return isFileInSubdirectory(fileKey, directory)
-        ? systemData[fileKey]
-        : errors.noSuchFileOrDirectory;
-    }
-
+  if (!struct[dir] || !struct[dir].files.includes(fileKey)) {
     return errors.noSuchFileOrDirectory;
   }
 
-  return errors.fileNotFound;
+  return systemData[fileKey] || errors.fileNotFound;
 };
 
 // Initialize cli.

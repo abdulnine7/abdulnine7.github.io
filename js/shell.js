@@ -5,6 +5,7 @@ class Shell {
     this.commands = commands;
     this.setupListeners(term);
     this.term = term;
+    this.lastSuggestions = '';
 
     localStorage.directory = 'home';
     localStorage.history = JSON.stringify('');
@@ -17,6 +18,89 @@ class Shell {
   setupListeners(term) {
     $('#terminal').mouseup(() => $('.input').last().focus());
 
+    const focusEnd = (el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
+
+    const commonPrefix = (items) => {
+      if (!items || items.length === 0) return '';
+      let prefix = items[0];
+      for (let i = 1; i < items.length; i += 1) {
+        while (items[i].indexOf(prefix) !== 0) {
+          prefix = prefix.slice(0, -1);
+          if (!prefix) return '';
+        }
+      }
+      return prefix;
+    };
+
+    const applyCompletion = (inputEl, result, current) => {
+      const matches = result && result.matches ? result.matches : [];
+      if (matches.length === 0) return;
+
+      const hasTrailingSpace = /\s$/.test(current);
+      const trimmed = current.replace(/\s+$/, '');
+      const parts = trimmed.split(/\s+/).filter(Boolean);
+      if (parts.length === 0) return;
+
+      if (matches.length === 1) {
+        if (!result.isArg) {
+          parts[0] = matches[0];
+        } else if (hasTrailingSpace) {
+          parts.push(matches[0]);
+        } else {
+          parts[parts.length - 1] = matches[0];
+        }
+        $(inputEl).text(`${parts.join(' ')}`);
+        focusEnd(inputEl);
+      } else {
+        const prefix = commonPrefix(matches);
+        const currentToken = hasTrailingSpace ? '' : parts[parts.length - 1];
+        if (prefix && prefix.length > currentToken.length) {
+          if (!result.isArg) {
+            parts[0] = prefix;
+          } else if (hasTrailingSpace) {
+            parts.push(prefix);
+          } else {
+            parts[parts.length - 1] = prefix;
+          }
+          $(inputEl).text(`${parts.join(' ')}`);
+          focusEnd(inputEl);
+          return;
+        }
+        const key = matches.join('|');
+        if (this.lastSuggestions !== key) {
+          this.term.insertAdjacentHTML('beforeend', `<p>${matches.join('   ')}</p>`);
+          this.lastSuggestions = key;
+        }
+        $(inputEl).focus();
+      }
+    };
+
+    document.addEventListener(
+      'keydown',
+      (evt) => {
+        const isTab = evt.key === 'Tab' || evt.keyCode === 9;
+        if (!isTab) return;
+        const target = evt.target;
+        const inputEl = target && target.closest ? target.closest('.input') : null;
+        if (!inputEl) return;
+        evt.preventDefault();
+
+        const current = inputEl.textContent;
+        if (typeof window.getCompletions === 'function') {
+          const result = window.getCompletions(current, localStorage.directory);
+          applyCompletion(inputEl, result, current);
+        }
+      },
+      true
+    );
+
     term.addEventListener('keyup', (evt) => {
       const keyUp = 38;
       const keyDown = 40;
@@ -27,34 +111,29 @@ class Shell {
         history = history ? Object.values(JSON.parse(history)) : [];
 
         if (key === keyUp) {
-          if (localStorage.historyIndex >= 0) {
+          if (history.length > 0) {
             if (localStorage.inHistory == 'false') {
               localStorage.inHistory = true;
-            }
-            // Prevent repetition of last command while traversing history.
-            if (localStorage.historyIndex == history.length - 1 && history.length !== 1) {
+              localStorage.historyIndex = history.length - 1;
+            } else if (localStorage.historyIndex > 0) {
               localStorage.historyIndex -= 1;
             }
-            $('.input')
-              .last()
-              .html(`${history[localStorage.historyIndex]}<span class="end"><span>`);
-            if (localStorage.historyIndex != 0) localStorage.historyIndex -= 1;
+            const inputEl = $('.input').last();
+            inputEl.text(history[localStorage.historyIndex]);
+            focusEnd(inputEl[0]);
           }
         } else if (key === keyDown) {
-          if (localStorage.inHistory == 'true' && localStorage.historyIndex < history.length) {
-            let ret;
-
-            if (localStorage.historyIndex > 0) {
-              ret = `${history[localStorage.historyIndex]}<span class="end"><span>`;
-              if (localStorage.historyIndex != history.length - 1) {
-                localStorage.historyIndex = Number(localStorage.historyIndex) + 1;
-              }
-              // Prevent repetition of first command while traversing history.
-            } else if (localStorage.historyIndex == 0 && history.length > 1) {
-              ret = `${history[1]}<span class="end"><span>`;
-              localStorage.historyIndex = history.length !== 2 ? 2 : 1;
+          if (localStorage.inHistory == 'true') {
+            if (localStorage.historyIndex < history.length - 1) {
+              localStorage.historyIndex += 1;
+              const inputEl = $('.input').last();
+              inputEl.text(history[localStorage.historyIndex]);
+              focusEnd(inputEl[0]);
+            } else {
+              localStorage.inHistory = false;
+              localStorage.historyIndex = history.length - 1;
+              $('.input').last().html('<span class="end"><span>');
             }
-            $('.input').last().html(ret);
           }
         }
         evt.preventDefault();
@@ -71,6 +150,12 @@ class Shell {
 
       if (evt.keyCode === 9) {
         evt.preventDefault();
+        const prompt = evt.target;
+        const current = prompt.textContent;
+        if (typeof window.getCompletions === 'function') {
+          const result = window.getCompletions(current, localStorage.directory);
+          applyCompletion(prompt, result, current);
+        }
       } else if (evt.keyCode === 27) {
         $('.terminal-window').toggleClass('fullscreen');
       } else if (evt.keyCode === 8 || evt.keyCode === 46) {
@@ -95,7 +180,10 @@ class Shell {
         const cmd = input[0].toLowerCase();
         const args = input[1];
 
-        if (cmd === 'clear') {
+        if (!cmd) {
+          this.resetPrompt(term, prompt);
+          this.setPromptPrefix(localStorage.directory);
+        } else if (cmd === 'clear') {
           this.updateHistory(cmd);
           this.clearConsole();
         } else if (cmd && cmd in this.commands) {
@@ -103,6 +191,7 @@ class Shell {
           this.resetPrompt(term, prompt);
           this.setPromptPrefix(localStorage.directory);
         } else {
+          this.updateHistory(cmd + (args ? ` ${args}` : ''));
           this.term.innerHTML += 'Error: command not recognized';
           this.resetPrompt(term, prompt);
         }
@@ -178,7 +267,7 @@ class Shell {
     $('#terminal').html(
       `<p class="hidden">
           <span class="prompt">
-            <strong class="home">abdul@notebook-HP</strong>
+            <strong class="home">abdul@linuxy.us</strong>
             <strong class="white">:</strong>
             <strong class="dir">~${dir}</strong>
             <strong class="white">$</strong>

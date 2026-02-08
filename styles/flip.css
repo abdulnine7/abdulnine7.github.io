@@ -24,8 +24,8 @@
 @media only screen and (max-width: 680px){
   .flip-box {
     width: 95%;
-    height: 60vh;
-    top: 10vh;
+    height: 70vh;
+    top: 8vh;
   }
 
   .minimized {
