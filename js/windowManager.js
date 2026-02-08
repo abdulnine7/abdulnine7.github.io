@@ -18,15 +18,77 @@
   };
 
   const showWindow = (win) => {
+    const id = win.dataset.windowId;
+    const dockItem = document.querySelector(`.dock-item[data-window="${id}"]`);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const shouldAnimate = !reduceMotion && dockItem;
     win.classList.remove('hidden');
     win.classList.remove('minimized');
+    win.classList.remove('minimizing');
+    win.style.opacity = '';
+    win.style.transform = '';
+    win.style.transition = '';
     win.style.display = 'block';
     bringToFront(win);
+    if (shouldAnimate) {
+      const winRect = win.getBoundingClientRect();
+      const dockRect = dockItem.getBoundingClientRect();
+      const targetX = dockRect.left + dockRect.width / 2;
+      const targetY = dockRect.top + dockRect.height / 2;
+      const startX = winRect.left + winRect.width / 2;
+      const startY = winRect.top + winRect.height / 2;
+      const dx = targetX - startX;
+      const dy = targetY - startY;
+      win.style.transition = 'transform 0.22s ease, opacity 0.22s ease';
+      win.style.transform = `translate(${dx}px, ${dy}px) scale(0.2)`;
+      win.style.opacity = '0.1';
+      requestAnimationFrame(() => {
+        win.style.transform = '';
+        win.style.opacity = '';
+      });
+    }
   };
 
   const hideWindow = (win) => {
     win.classList.add('hidden');
     win.style.display = 'none';
+  };
+
+  const animateMinimize = (win) => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const id = win.dataset.windowId;
+    const dockItem = document.querySelector(`.dock-item[data-window="${id}"]`);
+    if (reduceMotion || !dockItem) {
+      hideWindow(win);
+      setDockActive(id, false);
+      return;
+    }
+
+    const winRect = win.getBoundingClientRect();
+    const dockRect = dockItem.getBoundingClientRect();
+    const targetX = dockRect.left + dockRect.width / 2;
+    const targetY = dockRect.top + dockRect.height / 2;
+    const startX = winRect.left + winRect.width / 2;
+    const startY = winRect.top + winRect.height / 2;
+    const dx = targetX - startX;
+    const dy = targetY - startY;
+
+    win.classList.add('minimizing');
+    win.style.transition = 'transform 0.22s ease, opacity 0.22s ease';
+    win.style.transform = `translate(${dx}px, ${dy}px) scale(0.2)`;
+    win.style.opacity = '0.1';
+
+    const onDone = () => {
+      win.removeEventListener('transitionend', onDone);
+      win.style.transition = '';
+      win.style.transform = '';
+      win.style.opacity = '';
+      win.classList.remove('minimizing');
+      hideWindow(win);
+      setDockActive(id, false);
+    };
+
+    win.addEventListener('transitionend', onDone);
   };
 
   const setDockActive = (id, active) => {
@@ -118,8 +180,7 @@
       showWindow(win);
       setDockActive(id, true);
     } else {
-      hideWindow(win);
-      setDockActive(id, false);
+      animateMinimize(win);
     }
   };
 
@@ -130,12 +191,17 @@
     if (!win) return;
     const id = win.dataset.windowId;
     if (btn.classList.contains('minimize')) {
-      hideWindow(win);
-      setDockActive(id, false);
+      animateMinimize(win);
     } else if (btn.classList.contains('maximize')) {
       toggleMaximize(win);
       setDockActive(id, true);
     } else if (btn.classList.contains('close')) {
+      if (id === 'terminal' && typeof window.resetTerminal === 'function') {
+        window.resetTerminal();
+      }
+      if (id === 'gui' && typeof window.showSection === 'function') {
+        window.showSection('about');
+      }
       hideWindow(win);
       setDockActive(id, false);
     }

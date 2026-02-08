@@ -278,6 +278,7 @@
       show(label.textContent.trim().toLowerCase());
     });
 
+    window.showSection = show;
     show('about');
     renderAboutDesktop(data);
   };

@@ -254,6 +254,9 @@ commands.cat = (filename) => {
 window.initCLI = async () => {
   const cmd = document.getElementById('terminal');
   if (!cmd) return;
+  if (!cmd.dataset.initialHtml) {
+    cmd.dataset.initialHtml = cmd.innerHTML;
+  }
 
   try {
     const data = window.profileReady ? await window.profileReady : null;
@@ -269,4 +272,19 @@ window.initCLI = async () => {
   } finally {
     new Shell(cmd, commands);
   }
+};
+
+window.resetTerminal = () => {
+  const cmd = document.getElementById('terminal');
+  if (!cmd) return;
+  const initial = cmd.dataset.initialHtml;
+  if (initial) {
+    cmd.innerHTML = initial;
+  }
+  localStorage.directory = 'home';
+  localStorage.history = JSON.stringify('');
+  localStorage.historyIndex = -1;
+  localStorage.inHistory = false;
+  const input = cmd.querySelector('.input');
+  if (input) input.focus();
 };
