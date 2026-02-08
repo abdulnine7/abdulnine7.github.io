@@ -8,6 +8,75 @@ $( document ).ready(function() {
   });
 });
 
+function loadSection(name) {
+  const key = String(name || '').toLowerCase();
+
+  const setActive = (label) => {
+    $('.leftcolTab').removeClass('active');
+    $('.leftcolTab').each(function() {
+      const text = $(this).find('.name').text().trim().toLowerCase();
+      if (text === label) {
+        $(this).addClass('active');
+      }
+    });
+  };
+
+  if (key === "about") {
+    setActive("about");
+    return $.get("pages/pretty_about.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
+  if (key === "education") {
+    setActive("education");
+    return $.get("pages/pretty_edu.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+  
+  if (key === "skills") {
+    setActive("skills");
+    return $.get("pages/pretty_skills.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
+  if (key === "experience") {
+    setActive("experience");
+    return $.get("pages/pretty_exp.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
+  if (key === "projects") {
+    setActive("projects");
+    return $.get("pages/pretty_projects.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
+  if (key === "resume") {
+    setActive("resume");
+    return $.get("pages/pretty_resume.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
+  if (key === "contact") {
+    setActive("contact");
+    return $.get("pages/pretty_contact.html", function(data) {
+      $('.content')[0].innerHTML = data;
+    });
+  }
+
+  return null;
+}
+
+window.showSection = function(name) {
+  return loadSection(name);
+};
+
 //Flip on click
 function flipWindow() {
   $("#card").flip('toggle');
@@ -32,47 +101,7 @@ $('.leftcolTab').click(function() {
   var name = $(this)[0].children[1].innerHTML;
   console.log(name);
 
-  if(name === "About"){
-    $.get("pages/pretty_about.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
-
-  if(name === "Education"){
-    $.get("pages/pretty_edu.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
-  
-  if(name === "Skills"){
-    $.get("pages/pretty_skills.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
-
-  if(name === "Experience"){
-    $.get("pages/pretty_exp.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
-
-  if(name === "Projects"){
-    $.get("pages/pretty_projects.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
-
-  if(name === "Resume"){
-    $.get("pages/pretty_resume.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
-
-  if(name === "Contact"){
-    $.get("pages/pretty_contact.html", function(data) {
-      $('.content')[0].innerHTML = data;
-    });
-  }
+  loadSection(name);
 
   if(name === "CLI Terminal"){
     flipWindow();

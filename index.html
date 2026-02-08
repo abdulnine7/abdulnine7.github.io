@@ -1,37 +1,37 @@
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abdul's CLI - Terminal</title>
-  <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
-  <link rel="stylesheet/less" type="text/css" href="styles/flip.less" />
-  <link rel="stylesheet/less" type="text/css" href="styles/prettyUI.less" />
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/flip.css" />
+  <link rel="stylesheet" href="styles/prettyUI.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.4.3/js/jquery.terminal.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css"> 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
   <script type="text/javascript" src="js/shell.js"></script>
+  <script type="text/javascript" src="js/loginInfo.js"></script>
   <script type="text/javascript" src="js/cli.js"></script>
 
   <script src="js/jquery.flip.js"></script>
   <script>
     $(function() {
-      // console.log("Hi");
-        $("#card").flip({
-            trigger: 'manual',
-            speed: 2000,
-        });
+      $("#card").flip({
+        trigger: 'manual',
+        speed: 900,
+      });
     });
 
     $(window).on('load',function() {
       setTimeout(function() {
         $(".loader").fadeOut(500,function() {
-            // fadeOut complete. Remove the loading div
-            $( ".loader" ).remove(); //makes page more lightweight 
+          $(".loader").remove();
         });
-        
       }, 500);
     });
   </script>
@@ -40,33 +40,7 @@
   <meta content="yes" name="apple-mobile-web-app-capable">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <link href="favicon.ico" rel="shortcut icon">
-  <!-- <meta content="https://avatars.githubusercontent.com/u/17446181" property="og:image">
-  <meta content="Abdul Noushad Sheikh" property="og:title">
-  <meta content="abdul.co.in" property="og:site_name">
-  <meta content="http://abdul.co.in/" property="og:url">
-  <meta content="Abdul's Ubuntu Website with CLI and GUI" property="og:description" >
-  <meta content="Abdul's Ubuntu Website with CLI and GUI">
-  <meta content="Abdul Noushad Sheikh"name="author">
-  <meta content="Abdul Noushad Sheikh" name="copyright"> -->
   <!-- Meta tags end -->
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135127723-3"></script>
-  <script>
-    if (location.hostname != "localhost") {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-135127723-3");
-    } else {
-      console.log("dev mode detected, don't track view");
-    }
-  </script> -->
-  <!-- Google Analytics end -->
-
 </head>
 
 <body>
@@ -95,12 +69,13 @@
     </header>
     <div id="terminal">
       <p><strong class="green" style="line-height: 1.7;">
-        \[._.]/</strong> - you're in abdul's cli, type `help` to get started, or click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> on the top right for graphical interface.
+        \[._.]/</strong> - you're in abdul's cli. Try <span class="li-blue">help</span>, <span class="li-blue">about</span>, <span class="li-blue">projects</span>, or <span class="li-blue">gui</span>.
+        Click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> for the graphical interface.
       </p>
       <div class="loginInfo"></div>
       <p class="hidden">
         <span class="prompt">
-          <strong class="home">abdul@notebook-HP</strong>
+          <strong class="home">abdul@linuxy.us</strong>
           <strong class="white">:</strong>
           <strong class="dir">~</strong>
           <strong class="white">$</strong>
@@ -160,10 +135,6 @@
         <i class="fa-solid fa-address-card icon"></i>
         <div class="name">Contact</div>
       </div>
-      <div class="leftcolTab">
-        <i class="fa-solid fa-rotate icon"></i>
-        <div class="name">CLI Terminal</div>
-      </div>
     </nav>
     
     <div class="" id="rightcol">
@@ -179,21 +150,20 @@
   <i class="fa-solid fa-repeat flip-img" onclick="flipWindow()"></i>
 </div> -->
 
-<div class="footer">
-  <p> Made with ❤️ & ☕</p>
-  <p> Inspired by <strong>Ubuntu</strong> 
-    <i class="devicon-linux-plain"></i>
-  </p>
-  <!-- <p >
-    For 
-    <span class="flip-text">GUI</span> 
-    <strong class="flip-btn" onclick="flipWindow()">click here</strong>
-  </p> -->
-  <p class="copyright">
-    <strong>© Abdul Noushad Sheikh 2023</strong>
-  </p>
-</div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-line">
+      <span>Made with Love, Coffee, and Codex</span>
+      <span class="dot">•</span>
+      <span>Inspired by Ubuntu</span>
+      <i class="devicon-linux-plain linux-icon"></i>
+    </div>
+    <div class="footer-line small">
+      <span>© Abdul Noushad Sheikh 2026</span>
+    </div>
+  </div>
+</footer>
 
-<script type="text/javascript" src="js/loginInfo.js"></script>
 <script type="text/javascript" src="js/prettyUI.js"></script>
 </body>
+</html>

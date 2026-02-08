@@ -1,36 +1,35 @@
-$.get("http://ip-api.com/json/", function(data) {
-  // console.log(data);
+function fetchLoginInfo(targetSelector) {
+  const target = targetSelector ? $(targetSelector) : $('.loginInfo').last();
+  if (!target.length) {
+    return;
+  }
 
-  $(document).ready(function() {
-    // $('.loginInfo').append('<p><strong class="blue">Login IP:</strong> '+ data.query +' <br>' + '<strong class="blue">Location: </strong> '+ data.city + ',' + data.regionName +
-    // ' ' + data.country + '<br> <strong class="blue">ISP: </strong> ' + data.isp + '<br>' + 
-    // '<strong class="blue">Date/Time: </strong> ' + new Date() + '</p> ');
+  target.html('<p class="gray">Fetching login info...</p>');
 
-
-    $('.loginInfo').append(' \
+  $.get('https://ipapi.co/json/', function(data) {
+    target.html(
+      ' \
     <table> \
       <tr> \
         <td><strong class="li-blue">Login IP:</strong> </td> \
-        <td>'+ data.query +'</td> \
+        <td>' + data.ip + '</td> \
       </tr> \
       <tr> \
         <td><strong class="li-blue">Location: </strong></td> \
-        <td>'+ data.city + ', ' + data.regionName + ' ' + data.country + '</td> \
+        <td>' + data.city + ', ' + data.region + ' ' + data.country_name + '</td> \
       </tr> \
       <tr> \
-        <td><strong class="li-blue">ISP: </strong></td> \
-        <td>' + data.isp + '</td> \
+        <td><strong class="li-blue">Org: </strong></td> \
+        <td>' + (data.org || 'N/A') + '</td> \
       </tr> \
       <tr> \
         <td><strong class="li-blue">Date/Time: </strong></td> \
         <td>' + new Date() + '</td> \
       </tr> \
     </table> \
-    ');
+    '
+    );
+  }).fail(function() {
+    target.html('<p class="gray">Unable to fetch login info.</p>');
   });
-
-});
-
-$('.input').click();
-
-
+}
