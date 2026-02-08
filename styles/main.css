@@ -15,6 +15,9 @@ html, body {
   overflow: hidden;
 }
 
+body {
+  overscroll-behavior: none;
+}
 ::-webkit-scrollbar {
   width: 0px;
 }
@@ -210,6 +213,38 @@ html, body {
   display: none;
 }
 
+.alert-window {
+  width: 420px;
+  height: 240px;
+  background: #151515;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%);
+}
+
+.alert-window .window-header {
+  cursor: default;
+}
+
+.alert-body {
+  padding: 20px 24px 24px;
+  color: #e9eef4;
+  font-family: Ubuntu, sans-serif;
+}
+
+.alert-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.alert-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  color: #c7d0db;
+}
+
 .terminal-window {
   text-align: left;
 }
@@ -331,6 +366,101 @@ html, body {
     overflow: hidden;
   }
 
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    background-attachment: scroll;
+    min-height: 100dvh;
+  }
+
+  .dock {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    top: auto;
+    height: 56px;
+    width: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
+    border-radius: 18px;
+    align-items: center;
+    padding: 8px 12px;
+  }
+
+  .dock-item {
+    font-size: 9px;
+    padding: 6px 8px;
+    justify-content: center;
+    transform: scale(1);
+    width: 64px;
+    height: 48px;
+  }
+
+  .dock-item i {
+    font-size: 15px;
+  }
+
+  .dock-item.active,
+  .dock-item:hover {
+    background: rgba(44, 109, 178, 0.25);
+    color: #fff;
+    transform: scale(1);
+  }
+
+  .window {
+    position: fixed;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 76px !important;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important;
+  }
+
+  .window .settings-window,
+  .window .main-content,
+  .window .content-body {
+    height: 100%;
+  }
+
+  .alert-window {
+    width: 88% !important;
+    height: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    top: 50% !important;
+    bottom: auto !important;
+    border-radius: 16px !important;
+    transform: translate(-50%, -50%);
+  }
+
+  .window-header {
+    height: 48px;
+    cursor: default;
+  }
+
+  .window-controls {
+    gap: 10px;
+  }
+
+  .win-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    line-height: 28px;
+  }
+
+  .terminal-window #terminal {
+    font-size: 12.5pt;
+    top: 48px;
+  }
+
+  .resize-handle {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

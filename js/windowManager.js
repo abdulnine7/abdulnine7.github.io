@@ -10,6 +10,7 @@
   let startHeight = 0;
   let zIndex = 100;
   const MAX_WINDOW_Z = 9000;
+  const isMobileLayout = () => window.matchMedia('(max-width: 900px)').matches;
 
   const bringToFront = (win) => {
     zIndex = zIndex >= MAX_WINDOW_Z ? 100 : zIndex + 1;
@@ -72,6 +73,7 @@
   };
 
   const startDrag = (evt) => {
+    if (isMobileLayout()) return;
     const header = evt.target.closest('.window-header');
     if (!header) return;
     const win = header.closest('.window');
@@ -89,6 +91,7 @@
   };
 
   const startResize = (evt) => {
+    if (isMobileLayout()) return;
     const handle = evt.target.closest('.resize-handle');
     if (!handle) return;
     const win = handle.closest('.window');
@@ -111,8 +114,13 @@
     const id = item.dataset.window;
     const win = document.querySelector(`.window[data-window-id="${id}"]`);
     if (!win) return;
-    showWindow(win);
-    setDockActive(id, true);
+    if (win.classList.contains('hidden') || win.style.display === 'none') {
+      showWindow(win);
+      setDockActive(id, true);
+    } else {
+      hideWindow(win);
+      setDockActive(id, false);
+    }
   };
 
   const onControlClick = (evt) => {
@@ -167,6 +175,19 @@
     }
     if (window.profileReady && typeof window.renderAboutDesktop === 'function') {
       window.profileReady.then((data) => window.renderAboutDesktop(data));
+    }
+
+    if (isMobileLayout()) {
+      const terminalWin = document.querySelector('.window[data-window-id="terminal"]');
+      if (terminalWin) {
+        hideWindow(terminalWin);
+        setDockActive('terminal', false);
+      }
+      const alertWin = document.querySelector('.window[data-window-id="alert"]');
+      if (alertWin) {
+        showWindow(alertWin);
+        bringToFront(alertWin);
+      }
     }
   };
 
