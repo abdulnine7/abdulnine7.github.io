@@ -30,20 +30,7 @@ const setDirectory = (dir) => {
   localStorage.directory = dir;
 };
 
-// Turn on fullscreen.
-const registerFullscreenToggle = () => {
-  $('.button.green').click(() => {
-    $('.flip-box').removeClass('minimized');
-    $('.flip-box').toggleClass('fullscreen');
-    $('.resume-frame').attr("src", $(".resume-frame").attr("src")); // reload resume if its open
-  });
-};
-const registerMinimizedToggle = () => {
-  $('.button.yellow').click(() => {
-    $('.flip-box').removeClass('fullscreen');
-    $('.flip-box').toggleClass('minimized');
-  });
-};
+// legacy flip handlers removed
 
 // Create new directory in current directory.
 commands.mkdir = () => errors.noWriteAccess;
@@ -118,7 +105,7 @@ const commandHelp = {
   cd: 'cd DIRECTORY - move into DIRECTORY or cd to return to home',
   cat: 'cat FILENAME - display FILENAME in window',
   open: 'open SECTION - open GUI section (about, education, skills, experience, projects, resume, contact)',
-  gui: 'gui - flip to the graphical interface',
+  gui: 'gui - open the profile window',
   history: 'history - see your command history',
   login: 'login - fetch login IP/location (opt-in)',
   clear: 'clear - clear current window'
@@ -266,10 +253,9 @@ commands.cat = (filename) => {
 };
 
 // Initialize cli.
-$(() => {
-  registerFullscreenToggle();
-  registerMinimizedToggle();
+window.initCLI = () => {
   const cmd = document.getElementById('terminal');
+  if (!cmd) return;
 
   $.ajaxSetup({ cache: false });
   const pages = [];
@@ -314,4 +300,4 @@ $(() => {
     .always(() => {
       new Shell(cmd, commands);
     });
-});
+};

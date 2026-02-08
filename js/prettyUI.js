@@ -2,18 +2,27 @@ function openSlider() {
   $('#leftcol').addClass('active');;
 }
 
-$( document ).ready(function() {
+const initGUI = () => {
   $.get("pages/pretty_about.html", function(data) {
     $('.content')[0].innerHTML = data;
   });
-});
 
-$(document).on('keydown', '.nav-opener', function(evt) {
-  if (evt.key === 'Enter' || evt.key === ' ') {
-    evt.preventDefault();
-    openSlider();
-  }
-});
+  $(document).on('keydown', '.nav-opener', function(evt) {
+    if (evt.key === 'Enter' || evt.key === ' ') {
+      evt.preventDefault();
+      openSlider();
+    }
+  });
+
+  $('.leftcolTab').off('click').on('click', function() {
+    $('.leftcolTab').removeClass('active');
+    $(this).addClass('active');
+    $('#leftcol').removeClass('active'); // close for small screen
+
+    var name = $(this)[0].children[1].innerHTML;
+    loadSection(name);
+  });
+};
 
 function loadSection(name) {
   const key = String(name || '').toLowerCase();
@@ -84,34 +93,6 @@ window.showSection = function(name) {
   return loadSection(name);
 };
 
-//Flip on click
-function flipWindow() {
-  $("#card").flip('toggle');
-  // $('.flip-img').addClass('animate');
-}
+window.initGUI = initGUI;
 
-$("#card").on('flip:done', function(){
-  // $('.flip-img').removeClass('animate');
-
-  if($("#card").data("flip-model").isFlipped){
-    document.title = 'Abdul\s GUI';
-  } else {
-    document.title = 'Abdul\'s CLI - Terminal';
-  }
-});
-
-$('.leftcolTab').click(function() {
-  $('.leftcolTab').removeClass('active');
-  $(this).addClass('active');
-  $('#leftcol').removeClass('active'); // close for small screen
-
-  var name = $(this)[0].children[1].innerHTML;
-  console.log(name);
-
-  loadSection(name);
-
-  if(name === "CLI Terminal"){
-    flipWindow();
-  }
-
-});
+// init via window.initGUI after window content loads

@@ -135,11 +135,34 @@
     if (win) bringToFront(win);
   };
 
+  const loadWindowContent = async () => {
+    const windows = document.querySelectorAll('.window[data-window-src]');
+    for (const win of windows) {
+      const src = win.getAttribute('data-window-src');
+      if (!src) continue;
+      try {
+        const res = await fetch(src, { cache: 'no-store' });
+        const html = await res.text();
+        win.innerHTML = html;
+      } catch (err) {
+        win.innerHTML = '<div style="padding:16px;color:#fff;">Failed to load window.</div>';
+      }
+    }
+
+    if (typeof window.initCLI === 'function') {
+      window.initCLI();
+    }
+    if (typeof window.initGUI === 'function') {
+      window.initGUI();
+    }
+  };
+
   document.addEventListener('mousedown', startDrag);
   document.addEventListener('mousedown', startResize);
   document.addEventListener('mousedown', onWindowFocus);
   document.addEventListener('click', onControlClick);
   document.addEventListener('click', onDockClick);
+  document.addEventListener('DOMContentLoaded', loadWindowContent);
 
   window.showWindowById = function(id) {
     const win = document.querySelector(`.window[data-window-id="${id}"]`);
