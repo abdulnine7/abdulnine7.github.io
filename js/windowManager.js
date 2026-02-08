@@ -42,8 +42,12 @@
     const dx = evt.clientX - startX;
     const dy = evt.clientY - startY;
     if (activeWindow.dataset.dragging === 'true') {
-      activeWindow.style.left = `${startLeft + dx}px`;
-      activeWindow.style.top = `${startTop + dy}px`;
+      const maxX = window.innerWidth - activeWindow.offsetWidth;
+      const maxY = window.innerHeight - activeWindow.offsetHeight;
+      const nextLeft = Math.max(0, Math.min(maxX, startLeft + dx));
+      const nextTop = Math.max(0, Math.min(maxY, startTop + dy));
+      activeWindow.style.left = `${nextLeft}px`;
+      activeWindow.style.top = `${nextTop}px`;
       return;
     }
     if (activeWindow.dataset.resizing === 'true') {
