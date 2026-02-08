@@ -4,34 +4,59 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Abdul's Linux-inspired terminal portfolio. Explore projects, skills, and experience through a CLI-first interface.">
+  <meta name="author" content="Abdul Noushad Sheikh">
+  <meta name="keywords" content="Abdul Sheikh, terminal portfolio, linux terminal website, backend developer, projects, skills">
+  <meta name="robots" content="index, follow">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:title" content="Abdul's CLI - Terminal Portfolio">
+  <meta property="og:description" content="A Linux terminal-style personal website showcasing projects, skills, and experience.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://linuxy.us/">
+  <meta property="og:image" content="https://linuxy.us/data/profile.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abdul's CLI - Terminal Portfolio">
+  <meta name="twitter:description" content="A Linux terminal-style personal website showcasing projects, skills, and experience.">
+  <meta name="twitter:image" content="https://linuxy.us/data/profile.png">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com https://use.fontawesome.com https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdn.jsdelivr.net https://use.fontawesome.com 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com https://cdn.jsdelivr.net; connect-src 'self' https://ipapi.co; frame-src 'self'; base-uri 'self'; form-action 'self'">
   <title>Abdul's CLI - Terminal</title>
+  <link rel="canonical" href="https://linuxy.us/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://use.fontawesome.com" crossorigin>
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="styles/flip.css" />
   <link rel="stylesheet" href="styles/prettyUI.css" />
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu" />
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" />
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.4.3/js/jquery.terminal.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu+Mono&display=swap" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" defer></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.4.3/js/jquery.terminal.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css"> 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
-  <script type="text/javascript" src="js/shell.js"></script>
-  <script type="text/javascript" src="js/loginInfo.js"></script>
-  <script type="text/javascript" src="js/cli.js"></script>
+  <script type="text/javascript" src="js/shell.js" defer></script>
+  <script type="text/javascript" src="js/loginInfo.js" defer></script>
+  <script type="text/javascript" src="js/cli.js" defer></script>
 
-  <script src="js/jquery.flip.js"></script>
+  <script src="js/jquery.flip.js" defer></script>
   <script>
-    $(function() {
-      $("#card").flip({
-        trigger: 'manual',
-        speed: 900,
-      });
-    });
-
-    $(window).on('load',function() {
-      setTimeout(function() {
-        $(".loader").fadeOut(500,function() {
-          $(".loader").remove();
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.jQuery) {
+        $("#card").flip({
+          trigger: 'manual',
+          speed: 900,
         });
+      }
+      setTimeout(function() {
+        if (window.jQuery) {
+          $(".loader").fadeOut(500,function() {
+            $(".loader").remove();
+          });
+        } else {
+          var loader = document.querySelector('.loader');
+          if (loader) loader.remove();
+        }
       }, 500);
     });
   </script>
@@ -44,12 +69,12 @@
 </head>
 
 <body>
-  <div class="loader">
+  <div class="loader" role="status" aria-live="polite">
     <img src="data/ubuntu.svg" alt="Ubuntu" class="ubuntu-logo">
     <img src="data/throbber.svg" alt="" class="ubuntu-loading">
   </div>
 
-<div class="flip-box" id="card">
+<main class="flip-box" id="card" role="main">
 
   <div class="terminal-window front">
     <header>
@@ -67,7 +92,7 @@
         <i class="fa-solid fa-circle-xmark insta"></i>
       </div>
     </header>
-    <div id="terminal">
+    <div id="terminal" role="region" aria-live="polite" aria-label="Terminal output">
       <p><strong class="green" style="line-height: 1.7;">
         \[._.]/</strong> - you're in abdul's cli. Try <span class="li-blue">help</span>, <span class="li-blue">about</span>, <span class="li-blue">projects</span>, or <span class="li-blue">gui</span>.
         Click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> for the graphical interface.
@@ -80,7 +105,7 @@
           <strong class="dir">~</strong>
           <strong class="white">$</strong>
         </span>
-        <span contenteditable="true" spellcheck="false" autocomplete="off" autocorrect="off" class="input"> </span>
+        <span contenteditable="true" role="textbox" aria-label="Terminal input" aria-multiline="false" spellcheck="false" autocomplete="off" autocorrect="off" class="input"> </span>
       </p>
     </div>
   </div>
@@ -106,7 +131,7 @@
       <p><strong class="green">\[._.]/</strong> - Back flipped.</p>
     </div> -->
 
-    <nav class=" " id="leftcol">
+    <nav class=" " id="leftcol" aria-label="GUI sections">
       <div class="leftcolTab active">
         <i class="fa-solid fa-user icon"></i>
         <div class="name">About</div>
@@ -138,13 +163,13 @@
     </nav>
     
     <div class="" id="rightcol">
-      <span class="nav-opener" onclick="openSlider()">&#9776;</span>
+      <span class="nav-opener" role="button" tabindex="0" aria-label="Open navigation" onclick="openSlider()">&#9776;</span>
       <div class="content">
 
       </div>
     </div>
   </div>
-</div>
+</main>
 
 <!-- <div class="fabFlip">
   <i class="fa-solid fa-repeat flip-img" onclick="flipWindow()"></i>
@@ -164,6 +189,6 @@
   </div>
 </footer>
 
-<script type="text/javascript" src="js/prettyUI.js"></script>
+<script type="text/javascript" src="js/prettyUI.js" defer></script>
 </body>
 </html>

@@ -1,11 +1,18 @@
 body {
   margin: 10px;
   font-family: Ubuntu, sans-serif;
+  min-height: 100vh;
   background-image: url("../data/focal-fossa.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+  background-color: #0D0D0D;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -303,8 +310,24 @@ td {
 }
 
 @media only screen and (max-width: 680px) {
+  body {
+    background-attachment: scroll;
+    min-height: 100vh;
+  }
+
+  html, body {
+    overflow: hidden;
+  }
+
   .footer {
     bottom: 12px;
     padding: 0 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }
