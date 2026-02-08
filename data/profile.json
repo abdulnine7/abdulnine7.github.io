@@ -141,10 +141,13 @@
     "pdf": "assets/pdf/Abdul_Sheikh_Resume.pdf"
   },
   "aboutDesktop": {
-    "madeWith": "Made with Love, Coffee, and Codex",
+    "madeWith": "Made with Love, Coffee, and Codex (OpenAI)",
     "inspiredBy": "Inspired by Ubuntu GNOME",
     "domain": "linuxy.us",
-    "copyright": "© Abdul Noushad Sheikh 2026"
+    "copyright": "© Abdul Noushad Sheikh 2026",
+    "osName": "Ubuntu Desktop Web",
+    "osVersion": "Designed by Abdul Noushad Sheikh",
+    "logo": "assets/images/ubuntu-tile.svg"
   },
   "assets": {
     "background": "assets/images/focal-fossa.jpg",

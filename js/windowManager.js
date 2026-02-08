@@ -107,13 +107,8 @@
     const id = item.dataset.window;
     const win = document.querySelector(`.window[data-window-id="${id}"]`);
     if (!win) return;
-    if (win.classList.contains('hidden')) {
-      showWindow(win);
-      setDockActive(id, true);
-    } else {
-      hideWindow(win);
-      setDockActive(id, false);
-    }
+    showWindow(win);
+    setDockActive(id, true);
   };
 
   const onControlClick = (evt) => {

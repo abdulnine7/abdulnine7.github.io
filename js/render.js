@@ -1,187 +1,194 @@
 (function() {
-  const sectionHeader = (title) => {
-    return `
-      <div>
-        <strong class="head-title">${title}</strong>
-      </div>
-      <svg height="30" class="svg-line" width="100%">
-        <line stroke="white" x1="35%" y1="10" y2="10" x2="65%"></line>
-        <circle fill="white" cx="35%" cy="10" r="3"></circle>
-        <circle fill="white" cx="65%" cy="10" r="3"></circle>
-      </svg>
-    `;
-  };
-
   const renderAbout = (data) => {
-    const bio = data.about.bio.map((p) => `<p class="about-para">${p}</p>`).join('');
+    const bio = data.about.bio.map((p) => `<p class="row-subtitle">${p}</p>`).join('');
     return `
-      <div>
-        <img class="profile-image" src="${data.about.profileImage}" alt="Abdul Logo" loading="lazy" decoding="async">
-        <div class="self-name">
-          Hi, my name is <strong class="name">${data.about.name}</strong>,<br>
-          ${data.about.headline}
+      <div class="settings-hero">
+        <img class="profile-image" src="${data.about.profileImage}" alt="${data.about.name}" loading="lazy" decoding="async">
+        <div>
+          <div class="hero-name">${data.about.name}</div>
+          <div class="hero-subtitle">${data.about.headline}</div>
+          <div class="pill">${data.site.domain}</div>
         </div>
-        ${sectionHeader('About')}
-        ${bio}
+      </div>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Role</span>
+            <span class="row-subtitle">Backend developer and open-source contributor</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Email</span>
+            <span class="row-subtitle">${data.contact.email}</span>
+          </div>
+          <a class="btn" href="mailto:${data.contact.email}">Message</a>
+        </div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Bio</span>
+            ${bio}
+          </div>
+        </div>
       </div>
     `;
   };
 
   const renderEducation = (data) => {
-    const items = data.education.map((item) => {
-      return `
-        <li class="edu-li">
-          <div class="title"><strong>${item.school}</strong></div>
-          <div class="year"><strong>${item.period}</strong></div>
-          <div class="course"><strong>${item.degree}</strong></div>
-          <div class="grade"><strong>${item.grade}</strong></div>
-        </li>
-        <br><br>
-      `;
-    }).join('');
-    return `
-      <div>
-        ${sectionHeader('Education')}
-        <ul class="edu-ul">${items}</ul>
+    const rows = data.education.map((item) => `
+      <div class="settings-row">
+        <div class="label-group">
+          <span class="row-title">${item.school}</span>
+          <span class="row-subtitle">${item.degree} • ${item.period} • ${item.grade}</span>
+        </div>
       </div>
-    `;
+    `).join('');
+    return `<div class="settings-group">${rows}</div>`;
   };
 
   const renderSkills = (data) => {
-    const summary = data.skills.summary.map((s) => `<li class="about-li">${s}</li>`).join('');
-    const icons = (list) => list.map((cls) => `<i class="big ${cls}"></i>`).join('');
+    const proficient = data.skills.proficient.map((s) => `<span class="tag">${s}</span>`).join('');
+    const familiar = data.skills.familiar.map((s) => `<span class="tag">${s}</span>`).join('');
+    const summary = data.skills.summary.map((s) => `<span class="row-subtitle">${s}</span>`).join('<br>');
     return `
-      <div>
-        ${sectionHeader('Skills')}
-        <ul class="about-ul">
-          ${summary}
-          <li class="about-li">Some of the tech stack that I have frequently used are,<br><br><br><br>
-            <div class="tech-container">
-              <div class="tech-lang">
-                <strong>Languages & Frameworks:</strong><br><br>
-                ${icons(data.skills.icons.languages)}
-              </div>
-              <br><br>
-              <div class="tech-framework">
-                <strong>Tools:</strong><br><br>
-                ${icons(data.skills.icons.tools)}
-              </div>
-            </div>
-          </li>
-        </ul>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Summary</span>
+            ${summary}
+          </div>
+        </div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Proficient</span>
+            <div class="tag-list">${proficient}</div>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Familiar</span>
+            <div class="tag-list">${familiar}</div>
+          </div>
+        </div>
       </div>
     `;
   };
 
   const renderExperience = (data) => {
-    const items = data.experience.map((item) => {
-      const bullets = item.bullets && item.bullets.length
-        ? `<ul class="exp-desc-ul">${item.bullets.map((b) => `<li>${b}</li>`).join('')}</ul>`
-        : '';
-      return `
-        <div class="exp-item">
-          <table class="exp-title-table">
-            <tbody>
-              <tr>
-                <td rowspan="2" class="logo">
-                  <img src="${item.logo}" alt="${item.company} logo" loading="lazy" decoding="async">
-                </td>
-                <td class="title"><strong>${item.company}</strong></td>
-                <td class="time"><strong>${item.period}</strong></td>
-              </tr>
-              <tr>
-                <td class="desig"><strong>${item.role}</strong></td>
-                <td class="location"><strong>${item.location}</strong></td>
-              </tr>
-            </tbody>
-          </table>
-          ${bullets}
+    const rows = data.experience.map((item) => `
+      <div class="settings-row">
+        <div class="label-group">
+          <span class="row-title">${item.company} — ${item.role}</span>
+          <span class="row-subtitle">${item.period} • ${item.location}</span>
         </div>
-        <br>
-      `;
-    }).join('');
-    return `
-      <div>
-        ${sectionHeader('Experience')}
-        <div class="exp-section">${items}</div>
       </div>
-    `;
+    `).join('');
+    return `<div class="settings-group">${rows}</div>`;
   };
 
   const renderProjects = (data) => {
-    const items = data.projects.map((p) => {
-      return `
-        <div class="project-item">
-          <strong><a class="title-link" target="_blank" rel="noopener noreferrer" href="${p.url}">${p.name}</a></strong>
-          <p>${p.description}</p>
-          <p><strong>Tech:</strong> ${p.tech}</p>
-          <br>
+    const rows = data.projects.map((p) => `
+      <div class="settings-row">
+        <div class="label-group">
+          <span class="row-title">${p.name}</span>
+          <span class="row-subtitle">${p.description}</span>
+          <span class="row-subtitle">Tech: ${p.tech}</span>
         </div>
-      `;
-    }).join('');
-    return `
-      <div>
-        ${sectionHeader('Projects')}
-        <div class="project-list">${items}</div>
+        <a class="btn" target="_blank" rel="noopener noreferrer" href="${p.url}">Open</a>
       </div>
-    `;
+    `).join('');
+    return `<div class="settings-group">${rows}</div>`;
   };
 
   const renderResume = (data) => {
     return `
-      <div>
-        ${sectionHeader('Resume')}
-        <iframe class="resume-frame" src="${data.resume.pdf}" title="Resume"></iframe>
-        <p class="helptext" style="margin-top: 20px;">If you cannot view the pdf above click <a href="${data.resume.pdf}" style="display: inline;" class="title-link" target="_blank" rel="noopener noreferrer">here</a> to download the file.</p>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Resume PDF</span>
+            <span class="row-subtitle">Download or view the latest resume</span>
+          </div>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="${data.resume.pdf}">Open</a>
+        </div>
       </div>
     `;
   };
 
   const renderContact = (data) => {
     return `
-      <div>
-        ${sectionHeader('Contact')}
-        <table class="contact-tbl">
-          <tbody>
-            <tr>
-              <td><i class="devicon-github-original"></i>&nbsp&nbsp</td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.contact.github}">GitHub</a></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.contact.github}">abdulnine7</a></td>
-            </tr>
-            <tr>
-              <td><i class="devicon-linkedin-plain colored"></i></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.contact.linkedin}">LinkedIn</a></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.contact.linkedin}">abdulnine7</a></td>
-            </tr>
-            <tr>
-              <td><i class="fa-solid fa-hashtag insta"></i></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.contact.instagram}">Instagram</a></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.contact.instagram}">${data.contact.instagramHandle}</a></td>
-            </tr>
-            <tr>
-              <td><i class="fa-solid fa-at green"></i></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="mailto:${data.contact.email}">Email</a></td>
-              <td><a class="title-link" target="_blank" rel="noopener noreferrer" href="mailto:${data.contact.email}">${data.contact.email}</a></td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="helptext" style="margin-top: 40px;">You can find the code for this website <a href="${data.contact.repo}" style="display: inline;" class="title-link" target="_blank" rel="noopener noreferrer">here</a>.</p>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">GitHub</span>
+            <span class="row-subtitle">${data.contact.github}</span>
+          </div>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="${data.contact.github}">Open</a>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">LinkedIn</span>
+            <span class="row-subtitle">${data.contact.linkedin}</span>
+          </div>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="${data.contact.linkedin}">Open</a>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Instagram</span>
+            <span class="row-subtitle">${data.contact.instagram}</span>
+          </div>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="${data.contact.instagram}">Open</a>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Email</span>
+            <span class="row-subtitle">${data.contact.email}</span>
+          </div>
+          <a class="btn" href="mailto:${data.contact.email}">Message</a>
+        </div>
       </div>
     `;
   };
 
   const renderAboutDesktop = (data) => {
-    const target = document.getElementById('about-desktop-content');
+    const target = document.querySelector('#about-desktop-content .content-body');
     if (!target) return;
     target.innerHTML = `
-      <div class="about-panel">
-        <div class="about-panel-title">About This Desktop</div>
-        <div class="about-panel-body">
-          <div class="about-badge">${data.aboutDesktop.madeWith}</div>
-          <div class="about-badge">${data.aboutDesktop.inspiredBy}</div>
-          <div class="about-badge">Domain: ${data.aboutDesktop.domain}</div>
+      <div class="about-hero">
+        <img class="about-logo" src="${data.aboutDesktop.logo}" alt="Ubuntu Logo" loading="lazy" decoding="async">
+        <div class="about-os-title">${data.aboutDesktop.osName}</div>
+        <div class="about-os-version">${data.aboutDesktop.osVersion}</div>
+      </div>
+      <div class="settings-group">
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Desktop</span>
+            <span class="row-subtitle">${data.aboutDesktop.inspiredBy}</span>
+          </div>
+          <span class="pill">GNOME</span>
         </div>
-        <div class="about-panel-footer">${data.aboutDesktop.copyright}</div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Made With</span>
+            <span class="row-subtitle">${data.aboutDesktop.madeWith}</span>
+          </div>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Domain</span>
+            <span class="row-subtitle">${data.aboutDesktop.domain}</span>
+          </div>
+          <a class="btn" target="_blank" rel="noopener noreferrer" href="https://${data.aboutDesktop.domain}">Visit</a>
+        </div>
+        <div class="settings-row">
+          <div class="label-group">
+            <span class="row-title">Copyright</span>
+            <span class="row-subtitle">${data.aboutDesktop.copyright}</span>
+          </div>
+        </div>
       </div>
     `;
   };
@@ -235,6 +242,7 @@
 
   const initGUI = async () => {
     const container = document.querySelector('#rightcol .content');
+    const header = document.querySelector('.section-title');
     if (!container) return;
     let data;
     try {
@@ -258,6 +266,7 @@
     const show = (name) => {
       const key = String(name || '').toLowerCase();
       container.innerHTML = renderSection(key, data);
+      if (header) header.textContent = key.charAt(0).toUpperCase() + key.slice(1);
       activate(key);
     };
 

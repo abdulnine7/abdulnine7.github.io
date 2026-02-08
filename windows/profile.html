@@ -1,5 +1,5 @@
 <header class="window-header">
-  <div class="window-title">Profile</div>
+  <div class="window-title">Profile Settings</div>
   <div class="window-controls" aria-label="Window controls">
     <button class="win-btn minimize" aria-label="Minimize">–</button>
     <button class="win-btn maximize" aria-label="Maximize">□</button>
@@ -7,33 +7,44 @@
   </div>
 </header>
 <div class="resize-handle" aria-hidden="true"></div>
-<nav class="window-sidebar" id="leftcol" aria-label="GUI sections">
-  <div class="leftcolTab active">
-    <i class="fa-solid fa-user icon"></i>
-    <div class="name">About</div>
-  </div>
-  <div class="leftcolTab">
-    <i class="fa-solid fa-graduation-cap icon"></i>
-    <div class="name">Education</div>
-  </div>
-  <div class="leftcolTab">
-    <i class="fa-solid fa-laptop-code icon"></i>
-    <div class="name">Skills</div>
-  </div>
-  <div class="leftcolTab">
-    <i class="fa-solid fa-building icon"></i>
-    <div class="name">Experience</div>
-  </div>
-  <div class="leftcolTab">
-    <i class="fa-solid fa-file-pdf icon"></i>
-    <div class="name">Resume</div>
-  </div>
-  <div class="leftcolTab">
-    <i class="fa-solid fa-address-card icon"></i>
-    <div class="name">Contact</div>
-  </div>
-</nav>
-<div class="window-content" id="rightcol">
-  <span class="nav-opener" role="button" tabindex="0" aria-label="Open navigation" onclick="openSlider()">&#9776;</span>
-  <div class="content"></div>
+<div class="settings-window">
+  <aside class="sidebar" id="leftcol" aria-label="Profile sections">
+    <div class="sidebar-header">Settings</div>
+    <div class="leftcolTab nav-item active">
+      <i class="fa-solid fa-user icon"></i>
+      <div class="name">About</div>
+    </div>
+    <div class="leftcolTab nav-item">
+      <i class="fa-solid fa-graduation-cap icon"></i>
+      <div class="name">Education</div>
+    </div>
+    <div class="leftcolTab nav-item">
+      <i class="fa-solid fa-laptop-code icon"></i>
+      <div class="name">Skills</div>
+    </div>
+    <div class="leftcolTab nav-item">
+      <i class="fa-solid fa-building icon"></i>
+      <div class="name">Experience</div>
+    </div>
+    <div class="leftcolTab nav-item">
+      <i class="fa-solid fa-diagram-project icon"></i>
+      <div class="name">Projects</div>
+    </div>
+    <div class="leftcolTab nav-item">
+      <i class="fa-solid fa-file-pdf icon"></i>
+      <div class="name">Resume</div>
+    </div>
+    <div class="leftcolTab nav-item">
+      <i class="fa-solid fa-address-card icon"></i>
+      <div class="name">Contact</div>
+    </div>
+  </aside>
+  <section class="main-content" id="rightcol">
+    <div class="header-bar">
+      <span class="section-title">About</span>
+    </div>
+    <div class="content-body">
+      <div class="content"></div>
+    </div>
+  </section>
 </div>
