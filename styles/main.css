@@ -86,7 +86,7 @@ html, body {
   background: rgba(17, 17, 17, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-  z-index: 50;
+  z-index: 10000;
 }
 
 .dock-item {
@@ -101,6 +101,9 @@ html, body {
   cursor: pointer;
   padding: 8px 4px;
   border-radius: 12px;
+  transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease;
+  transform-origin: center;
+  transform: scale(var(--dock-scale, 1));
 }
 
 .dock-item i {
@@ -112,6 +115,7 @@ html, body {
   background: rgba(44, 109, 178, 0.25);
   color: #fff;
 }
+
 
 .window {
   position: absolute;
@@ -198,6 +202,8 @@ html, body {
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  z-index: 11000 !important;
+  border-radius: 0 !important;
 }
 
 .window.minimized .resize-handle {

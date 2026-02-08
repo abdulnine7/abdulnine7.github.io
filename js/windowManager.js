@@ -9,9 +9,10 @@
   let startWidth = 0;
   let startHeight = 0;
   let zIndex = 100;
+  const MAX_WINDOW_Z = 9000;
 
   const bringToFront = (win) => {
-    zIndex += 1;
+    zIndex = zIndex >= MAX_WINDOW_Z ? 100 : zIndex + 1;
     win.style.zIndex = zIndex;
   };
 
@@ -52,8 +53,10 @@
       return;
     }
     if (activeWindow.dataset.resizing === 'true') {
-      const newWidth = Math.max(MIN_WIDTH, startWidth + dx);
-      const newHeight = Math.max(MIN_HEIGHT, startHeight + dy);
+      const maxWidth = Math.max(MIN_WIDTH, window.innerWidth - startLeft);
+      const maxHeight = Math.max(MIN_HEIGHT, window.innerHeight - startTop);
+      const newWidth = Math.min(maxWidth, Math.max(MIN_WIDTH, startWidth + dx));
+      const newHeight = Math.min(maxHeight, Math.max(MIN_HEIGHT, startHeight + dy));
       activeWindow.style.width = `${newWidth}px`;
       activeWindow.style.height = `${newHeight}px`;
     }
@@ -167,15 +170,48 @@
     }
   };
 
+  const initDockHover = () => {
+    const dock = document.querySelector('.dock');
+    if (!dock) return;
+    const items = Array.from(dock.querySelectorAll('.dock-item'));
+    const maxScale = 1.2;
+    const minScale = 0.9;
+    const radius = 120;
+    const clearStates = () => {
+      items.forEach((item) => {
+        item.style.setProperty('--dock-scale', 1);
+      });
+    };
+
+    dock.addEventListener('mousemove', (evt) => {
+      const dockRect = dock.getBoundingClientRect();
+      const y = evt.clientY - dockRect.top;
+      items.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.top - dockRect.top + rect.height / 2;
+        const distance = Math.abs(itemCenter - y);
+        const influence = Math.max(0, 1 - distance / radius);
+        const scale = minScale + (maxScale - minScale) * influence;
+        item.style.setProperty('--dock-scale', scale.toFixed(3));
+      });
+    });
+
+    dock.addEventListener('mouseleave', clearStates);
+  };
+
   document.addEventListener('mousedown', startDrag);
   document.addEventListener('mousedown', startResize);
   document.addEventListener('mousedown', onWindowFocus);
   document.addEventListener('click', onControlClick);
   document.addEventListener('click', onDockClick);
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadWindowContent);
+    document.addEventListener('DOMContentLoaded', () => {
+      loadWindowContent();
+      initDockHover();
+    });
   } else {
     loadWindowContent();
+    initDockHover();
   }
 
   window.showWindowById = function(id) {
