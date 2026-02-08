@@ -1,0 +1,21 @@
+<header class="window-header">
+  <div class="window-title">Notepad</div>
+  <div class="window-controls" aria-label="Window controls">
+    <button class="win-btn minimize" aria-label="Minimize">–</button>
+    <button class="win-btn maximize" aria-label="Maximize">□</button>
+    <button class="win-btn close" aria-label="Close">×</button>
+  </div>
+</header>
+<div class="resize-handle" aria-hidden="true"></div>
+<div class="notepad-body">
+  <div class="notepad-toolbar">
+    <button class="notepad-btn" data-action="clear">Clear</button>
+    <button class="notepad-btn" data-action="download">Download</button>
+    <span class="notepad-wordcount" id="notepad-wordcount">0 words</span>
+    <span class="notepad-status" id="notepad-status">Saved</span>
+  </div>
+  <div class="notepad-editor-wrap">
+    <pre class="notepad-lines" id="notepad-lines">1</pre>
+    <textarea class="notepad-editor" id="notepad-editor" spellcheck="false" placeholder="Write notes here..."></textarea>
+  </div>
+</div>
