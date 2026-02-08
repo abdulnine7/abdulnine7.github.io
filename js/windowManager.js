@@ -207,6 +207,17 @@
     }
   };
 
+  const onOpenWindowClick = (evt) => {
+    const trigger = evt.target.closest('[data-open-window]');
+    if (!trigger) return;
+    const id = trigger.getAttribute('data-open-window');
+    if (!id) return;
+    const win = document.querySelector(`.window[data-window-id="${id}"]`);
+    if (!win) return;
+    showWindow(win);
+    setDockActive(id, true);
+  };
+
   const onWindowFocus = (evt) => {
     const win = evt.target.closest('.window');
     if (win) bringToFront(win);
@@ -255,6 +266,71 @@
         bringToFront(alertWin);
       }
     }
+
+    const notepad = document.getElementById('notepad-editor');
+    if (notepad) {
+      const status = document.getElementById('notepad-status');
+      const wordCount = document.getElementById('notepad-wordcount');
+      const lineNumbers = document.getElementById('notepad-lines');
+      const storageKey = 'notepad.content';
+      const updateStatus = (text) => {
+        if (status) status.textContent = text;
+      };
+      const updateWordCount = () => {
+        if (!wordCount) return;
+        const text = notepad.value.trim();
+        const count = text ? text.split(/\s+/).length : 0;
+        wordCount.textContent = `${count} word${count === 1 ? '' : 's'}`;
+      };
+
+      const updateLineNumbers = () => {
+        if (!lineNumbers) return;
+        const lines = notepad.value.split('\n').length || 1;
+        lineNumbers.textContent = Array.from({ length: lines }, (_, i) => i + 1).join('\n');
+      };
+
+      const save = () => {
+        localStorage.setItem(storageKey, notepad.value);
+        updateStatus('Saved');
+      };
+      const debouncedSave = (() => {
+        let timer;
+        return () => {
+          updateStatus('Saving...');
+          clearTimeout(timer);
+          timer = setTimeout(save, 500);
+        };
+      })();
+
+      notepad.value = localStorage.getItem(storageKey) || '';
+      updateStatus('Saved');
+      updateWordCount();
+      updateLineNumbers();
+
+      notepad.addEventListener('input', debouncedSave);
+      notepad.addEventListener('input', updateWordCount);
+      notepad.addEventListener('input', updateLineNumbers);
+      notepad.addEventListener('scroll', () => {
+        if (lineNumbers) lineNumbers.scrollTop = notepad.scrollTop;
+      });
+      document.addEventListener('click', (evt) => {
+        const btn = evt.target.closest('.notepad-btn');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        if (action === 'clear') {
+          notepad.value = '';
+          save();
+        } else if (action === 'download') {
+          const blob = new Blob([notepad.value], { type: 'text/plain' });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'notes.txt';
+          link.click();
+          URL.revokeObjectURL(url);
+        }
+      });
+    }
   };
 
   const initDockHover = () => {
@@ -291,6 +367,7 @@
   document.addEventListener('mousedown', onWindowFocus);
   document.addEventListener('click', onControlClick);
   document.addEventListener('click', onDockClick);
+  document.addEventListener('click', onOpenWindowClick);
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       loadWindowContent();

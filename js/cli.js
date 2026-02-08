@@ -22,6 +22,7 @@ const struct = {
 
 const commands = {};
 let systemData = {};
+const themes = ['default', 'amber', 'green', 'mono'];
 const homePath = '/home/abdul';
 const guiSections = ['about', 'education', 'skills', 'experience', 'projects', 'resume', 'contact'];
 
@@ -98,10 +99,13 @@ commands.ls = (directory) => {
 
 const commandHelp = {
   help: 'help [command] - show available commands or details about one command',
+  whoami: 'whoami - display a quick profile summary',
+  stats: 'stats - show highlights (projects, experience, top skills)',
   path: 'path - display current directory',
   ls: 'ls - show files in current directory',
   cd: 'cd DIRECTORY - move into DIRECTORY or cd to return to home',
   cat: 'cat FILENAME - display FILENAME in window',
+  theme: 'theme NAME - set terminal theme (default|amber|green|mono)',
   open: 'open SECTION - open GUI section (about, education, skills, experience, projects, resume, contact)',
   gui: 'gui - open the profile window',
   history: 'history - see your command history',
@@ -126,8 +130,13 @@ commands.path = () => {
 // See command history.
 commands.history = () => {
   let history = localStorage.history;
-  history = history ? Object.values(JSON.parse(history)) : [];
-  return `<p>${history.join('<br>')}</p>`;
+  history = history ? JSON.parse(history) : [];
+  if (!history.length) return '<p class="gray">No history yet.</p>';
+  const lines = history.map((item) => {
+    if (typeof item === 'string') return item;
+    return `[${item.time}] ${item.cmd}`;
+  });
+  return `<p>${lines.join('<br>')}</p>`;
 };
 
 // Open GUI window.
@@ -166,6 +175,45 @@ commands.login = () => {
   return '<p class="gray">Login info unavailable.</p>';
 };
 
+const getProfileData = () => window.profileData || {};
+
+const applyTheme = (theme) => {
+  const next = themes.includes(theme) ? theme : 'default';
+  document.body.classList.remove('theme-amber', 'theme-green', 'theme-mono');
+  if (next !== 'default') {
+    document.body.classList.add(`theme-${next}`);
+  }
+  localStorage.theme = next;
+  return next;
+};
+
+commands.whoami = () => {
+  const data = getProfileData();
+  if (!data.about) return '<p class="gray">Profile not loaded yet.</p>';
+  return `<p><strong>${data.about.name}</strong> — ${data.about.headline}</p>`;
+};
+
+commands.stats = () => {
+  const data = getProfileData();
+  if (!data.about) return '<p class="gray">Profile not loaded yet.</p>';
+  const topSkills = (data.skills && data.skills.proficient) ? data.skills.proficient.slice(0, 5).join(', ') : 'N/A';
+  return `
+    <p><strong>Projects:</strong> ${data.projects ? data.projects.length : 0}</p>
+    <p><strong>Experience entries:</strong> ${data.experience ? data.experience.length : 0}</p>
+    <p><strong>Education entries:</strong> ${data.education ? data.education.length : 0}</p>
+    <p><strong>Top skills:</strong> ${topSkills}</p>
+    <p><strong>Domain:</strong> ${data.site ? data.site.domain : ''}</p>
+  `;
+};
+
+commands.theme = (arg) => {
+  if (!arg) {
+    return `<p>Usage: theme ${themes.join(' | ')}</p>`;
+  }
+  const next = applyTheme(arg);
+  return `<p>Theme set to <strong>${next}</strong>.</p>`;
+};
+
 window.getCompletions = function(input, directory) {
   const raw = input || '';
   const hasTrailingSpace = /\s$/.test(raw);
@@ -191,6 +239,8 @@ window.getCompletions = function(input, directory) {
   } else if (cmd === 'cat') {
     const curr = struct[localStorage.directory] || struct.home;
     pool = curr.files.map((f) => `${f}.txt`);
+  } else if (cmd === 'theme') {
+    pool = themes;
   } else if (cmd === 'open') {
     pool = guiSections;
   }
@@ -256,6 +306,9 @@ window.initCLI = async () => {
   if (!cmd) return;
   if (!cmd.dataset.initialHtml) {
     cmd.dataset.initialHtml = cmd.innerHTML;
+  }
+  if (localStorage.theme) {
+    applyTheme(localStorage.theme);
   }
 
   try {

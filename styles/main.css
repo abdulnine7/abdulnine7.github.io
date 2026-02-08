@@ -202,6 +202,7 @@ html, body {
               linear-gradient(135deg, transparent 60%, rgba(255, 255, 255, 0.25) 60%, rgba(255, 255, 255, 0.25) 70%, transparent 70%),
               linear-gradient(135deg, transparent 75%, rgba(255, 255, 255, 0.18) 75%, rgba(255, 255, 255, 0.18) 85%, transparent 85%);
   opacity: 0.7;
+  z-index: 3;
 }
 
 .window.fullscreen {
@@ -266,6 +267,70 @@ html, body {
   bottom: 0;
   overflow: auto;
   cursor: text;
+  transition: opacity 0.12s ease;
+  z-index: 1;
+}
+
+.terminal-window #terminal * {
+  font-family: "Ubuntu Mono", Menlo, Monaco, "Consolas", "Courier New", "Courier";
+}
+
+.terminal-window #terminal.clearing {
+  opacity: 0;
+}
+
+body.theme-amber .terminal-window #terminal {
+  background: #2b1905;
+  color: #f7e7b3;
+}
+
+body.theme-amber .terminal-window .white,
+body.theme-amber .terminal-window .title-link {
+  color: #f7e7b3;
+}
+
+body.theme-amber .terminal-window .li-blue,
+body.theme-amber .terminal-window .dir {
+  color: #f2b36d;
+}
+
+body.theme-amber .terminal-window .home,
+body.theme-amber .terminal-window .green {
+  color: #f6d28b;
+}
+
+body.theme-green .terminal-window #terminal {
+  background: #07190d;
+  color: #d7fbd5;
+}
+
+body.theme-green .terminal-window .white,
+body.theme-green .terminal-window .title-link {
+  color: #d7fbd5;
+}
+
+body.theme-green .terminal-window .li-blue,
+body.theme-green .terminal-window .dir {
+  color: #7bd88f;
+}
+
+body.theme-green .terminal-window .home,
+body.theme-green .terminal-window .green {
+  color: #9ef0a9;
+}
+
+body.theme-mono .terminal-window #terminal {
+  background: #111111;
+  color: #e5e5e5;
+}
+
+body.theme-mono .terminal-window .white,
+body.theme-mono .terminal-window .title-link,
+body.theme-mono .terminal-window .li-blue,
+body.theme-mono .terminal-window .dir,
+body.theme-mono .terminal-window .home,
+body.theme-mono .terminal-window .green {
+  color: #e5e5e5;
 }
 
 .terminal-window #terminal p,
@@ -352,6 +417,128 @@ html, body {
   padding-bottom: 2px;
   color: #2C6DB2;
   text-decoration: none;
+}
+
+.terminal-window button.title-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.resume-body {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #0f0f0f;
+}
+
+.resume-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #0f0f0f;
+}
+
+.resume-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #0f0f0f;
+  color: #e0e8f0;
+}
+
+.resume-fallback a {
+  color: #2C6DB2;
+}
+
+.notepad-body {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0f0f0f;
+}
+
+.notepad-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notepad-btn {
+  background: #2a2a2a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e8f0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.notepad-btn:hover {
+  background: #333333;
+}
+
+.notepad-status {
+  margin-left: auto;
+  color: #98a4b3;
+  font-size: 11px;
+}
+
+.notepad-wordcount {
+  color: #98a4b3;
+  font-size: 11px;
+}
+
+.notepad-editor {
+  flex: 1;
+  background: #111111;
+  color: #e0e8f0;
+  border: none;
+  padding: 14px;
+  font-family: "Ubuntu Mono", Menlo, Monaco, "Consolas", "Courier New", "Courier";
+  font-size: 12.5pt;
+  resize: none;
+  outline: none;
+}
+
+.notepad-editor-wrap {
+  position: relative;
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.notepad-lines {
+  width: 32px;
+  margin: 0;
+  padding: 14px 8px 14px 12px;
+  background: #141414;
+  color: #7f8a97;
+  font-family: "Ubuntu Mono", Menlo, Monaco, "Consolas", "Courier New", "Courier";
+  font-size: 12.5pt;
+  line-height: 1.5;
+  text-align: right;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+  overflow: hidden;
+}
+
+.notepad-editor {
+  padding: 14px 16px;
+  line-height: 1.5;
 }
 
 .command_input {

@@ -112,7 +112,7 @@
             <span class="row-title">Resume PDF</span>
             <span class="row-subtitle">Download or view the latest resume</span>
           </div>
-          <a class="btn" target="_blank" rel="noopener noreferrer" href="${data.resume.pdf}">Open</a>
+          <button class="btn" data-open-window="resume">Open</button>
         </div>
       </div>
     `;
@@ -210,6 +210,8 @@
     const lines = (arr) => arr.map((s) => `<p>${s}</p>`).join('');
     return {
       about: lines(data.about.bio),
+      education: data.education.map((e) => `<p><strong>${e.school}</strong> (${e.period})<br>${e.degree} — ${e.grade}</p>`).join(''),
+      experience: data.experience.map((e) => `<p><strong>${e.company}</strong> — ${e.role}<br>${e.location} (${e.period})</p>`).join(''),
       contact: `
         <p>Email: ${data.contact.email}</p>
         <p>GitHub: ${data.contact.github}</p>
@@ -217,17 +219,20 @@
         <p>Instagram: ${data.contact.instagram}</p>
       `,
       projects: data.projects.map((p) => `<p><strong>${p.name}</strong> - ${p.url}<br>${p.description}<br><strong>Tech:</strong> ${p.tech}</p>`).join(''),
-      resume: `<p><a class="title-link" target="_blank" rel="noopener noreferrer" href="${data.resume.pdf}">Download Resume</a></p>`,
+      resume: `<p><button class="title-link" data-open-window="resume">Open Resume Viewer</button></p>`,
       skills: lines(data.skills.summary),
       proficient: `<ul>${data.skills.proficient.map((s) => `<li>${s}</li>`).join('')}</ul>`,
       familiar: `<ul>${data.skills.familiar.map((s) => `<li>${s}</li>`).join('')}</ul>`,
       help: `
         <div>
           <ul>
+            <li><strong>whoami</strong> - display a quick profile summary</li>
+            <li><strong>stats</strong> - show highlights (projects, experience, top skills)</li>
             <li><strong>path</strong> - display current directory</li>
             <li><strong>cat FILENAME</strong> - display FILENAME in window</li>
             <li><strong>cd DIRECTORY</strong> - move into DIRECTORY or just cd to return to home</li>
             <li><strong>ls</strong> - show files in current directory</li>
+            <li><strong>theme NAME</strong> - set terminal theme (default|amber|green|mono)</li>
             <li><strong>open SECTION</strong> - open GUI section (about, education, skills, experience, projects, resume, contact)</li>
             <li><strong>gui</strong> - open the profile window</li>
             <li><strong>help COMMAND</strong> - get help for a command</li>

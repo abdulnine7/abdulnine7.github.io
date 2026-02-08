@@ -8,7 +8,7 @@ class Shell {
     this.lastSuggestions = '';
 
     localStorage.directory = 'home';
-    localStorage.history = JSON.stringify('');
+    localStorage.history = JSON.stringify([]);
     localStorage.historyIndex = -1;
     localStorage.inHistory = false;
 
@@ -108,30 +108,31 @@ class Shell {
 
       if ([keyUp, keyDown].includes(key)) {
         let history = localStorage.history;
-        history = history ? Object.values(JSON.parse(history)) : [];
+        history = history ? JSON.parse(history) : [];
+        const historyItems = history.map((item) => (typeof item === 'string' ? item : item.cmd));
 
         if (key === keyUp) {
-          if (history.length > 0) {
+          if (historyItems.length > 0) {
             if (localStorage.inHistory == 'false') {
               localStorage.inHistory = true;
-              localStorage.historyIndex = history.length - 1;
+              localStorage.historyIndex = historyItems.length - 1;
             } else if (localStorage.historyIndex > 0) {
               localStorage.historyIndex -= 1;
             }
             const inputEl = $('.input').last();
-            inputEl.text(history[localStorage.historyIndex]);
+            inputEl.text(historyItems[localStorage.historyIndex]);
             focusEnd(inputEl[0]);
           }
         } else if (key === keyDown) {
           if (localStorage.inHistory == 'true') {
-            if (localStorage.historyIndex < history.length - 1) {
+            if (localStorage.historyIndex < historyItems.length - 1) {
               localStorage.historyIndex += 1;
               const inputEl = $('.input').last();
-              inputEl.text(history[localStorage.historyIndex]);
+              inputEl.text(historyItems[localStorage.historyIndex]);
               focusEnd(inputEl[0]);
             } else {
               localStorage.inHistory = false;
-              localStorage.historyIndex = history.length - 1;
+              localStorage.historyIndex = historyItems.length - 1;
               $('.input').last().html('<span class="end"><span>');
             }
           }
@@ -178,7 +179,7 @@ class Shell {
         const prompt = evt.target;
         const input = prompt.textContent.trim().split(' ');
         const cmd = input[0].toLowerCase();
-        const args = input[1];
+        const args = input.slice(1).join(' ');
 
         if (!cmd) {
           this.resetPrompt(term, prompt);
@@ -192,7 +193,7 @@ class Shell {
           this.setPromptPrefix(localStorage.directory);
         } else {
           this.updateHistory(cmd + (args ? ` ${args}` : ''));
-          this.term.innerHTML += 'Error: command not recognized';
+          this.term.innerHTML += 'Error: command not recognized. Try <span class="li-blue">help</span> or <span class="li-blue">gui</span>.';
           this.resetPrompt(term, prompt);
         }
         evt.preventDefault();
@@ -236,23 +237,26 @@ class Shell {
   resetHistoryIndex() {
     let history = localStorage.history;
 
-    history = history ? Object.values(JSON.parse(history)) : [];
+    history = history ? JSON.parse(history) : [];
+    const historyItems = history.map((item) => (typeof item === 'string' ? item : item.cmd));
     if (localStorage.goingThroughHistory == true) {
       localStorage.goingThroughHistory = false;
     }
 
-    if (history.length == 0) {
+    if (historyItems.length == 0) {
       localStorage.historyIndex = -1;
     } else {
-      localStorage.historyIndex = history.length - 1 > 0 ? history.length - 1 : 0;
+      localStorage.historyIndex = historyItems.length - 1 > 0 ? historyItems.length - 1 : 0;
     }
   }
 
   updateHistory(command) {
     let history = localStorage.history;
-    history = history ? Object.values(JSON.parse(history)) : [];
-
-    history.push(command);
+    history = history ? JSON.parse(history) : [];
+    history.push({
+      cmd: command,
+      time: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+    });
     localStorage.history = JSON.stringify(history);
     localStorage.historyIndex = history.length - 1;
   }
@@ -264,18 +268,22 @@ class Shell {
       dir = "/" + getDirectory();
     }
 
-    $('#terminal').html(
-      `<p class="hidden">
-          <span class="prompt">
-            <strong class="home">abdul@linuxy.us</strong>
-            <strong class="white">:</strong>
-            <strong class="dir">~${dir}</strong>
-            <strong class="white">$</strong>
-          </span>
-          <span contenteditable="true" class="input"></span>
-        </p>`,
-    );
-
-    $('.input').focus();
+    const term = $('#terminal');
+    term.addClass('clearing');
+    setTimeout(() => {
+      term.html(
+        `<p class="hidden">
+            <span class="prompt">
+              <strong class="home">abdul@linuxy.us</strong>
+              <strong class="white">:</strong>
+              <strong class="dir">~${dir}</strong>
+              <strong class="white">$</strong>
+            </span>
+            <span contenteditable="true" class="input"></span>
+          </p>`,
+      );
+      term.removeClass('clearing');
+      $('.input').focus();
+    }, 120);
   }
 }
