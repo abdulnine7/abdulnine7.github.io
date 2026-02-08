@@ -173,7 +173,18 @@
   const renderAboutDesktop = (data) => {
     const target = document.getElementById('about-desktop-content');
     if (!target) return;
-    target.innerHTML = `\n      <div class=\"about-panel\">\n        <div class=\"about-panel-title\">About This Desktop</div>\n        <div class=\"about-panel-body\">\n          <div class=\"about-badge\">${data.aboutDesktop.madeWith}</div>\n          <div class=\"about-badge\">${data.aboutDesktop.inspiredBy}</div>\n          <div class=\"about-badge\">Domain: ${data.aboutDesktop.domain}</div>\n        </div>\n        <div class=\"about-panel-footer\">${data.aboutDesktop.copyright}</div>\n      </div>\n    `;\n  };
+    target.innerHTML = `
+      <div class="about-panel">
+        <div class="about-panel-title">About This Desktop</div>
+        <div class="about-panel-body">
+          <div class="about-badge">${data.aboutDesktop.madeWith}</div>
+          <div class="about-badge">${data.aboutDesktop.inspiredBy}</div>
+          <div class="about-badge">Domain: ${data.aboutDesktop.domain}</div>
+        </div>
+        <div class="about-panel-footer">${data.aboutDesktop.copyright}</div>
+      </div>
+    `;
+  };
 
   const renderSection = (section, data) => {
     switch (section) {
@@ -223,9 +234,16 @@
   };
 
   const initGUI = async () => {
-    const data = await window.profileReady;
     const container = document.querySelector('#rightcol .content');
     if (!container) return;
+    let data;
+    try {
+      data = await window.profileReady;
+    } catch (err) {
+      container.innerHTML = '<p style="color:#fff;padding:12px;">Failed to load profile data.</p>';
+      return;
+    }
+
     const activate = (name) => {
       const tabs = document.querySelectorAll('.leftcolTab');
       tabs.forEach((tab) => tab.classList.remove('active'));
@@ -264,5 +282,6 @@
 
   window.renderSection = renderSection;
   window.buildCliData = buildCliData;
+  window.renderAboutDesktop = renderAboutDesktop;
   window.initGUI = initGUI;
 })();

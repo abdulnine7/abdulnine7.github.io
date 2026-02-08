@@ -145,19 +145,28 @@
       const src = win.getAttribute('data-window-src');
       if (!src) continue;
       try {
+        win.innerHTML = '<div style="padding:12px;color:#fff;">Loading…</div>';
         const res = await fetch(src, { cache: 'no-store' });
+        if (!res.ok) {
+          throw new Error(`Failed to load ${src} (${res.status})`);
+        }
         const html = await res.text();
         win.innerHTML = html;
+        const id = win.getAttribute('data-window-id');
+        if (id === 'gui' && typeof window.initGUI === 'function') {
+          window.initGUI();
+        }
       } catch (err) {
-        win.innerHTML = '<div style="padding:16px;color:#fff;">Failed to load window.</div>';
+        console.error(err);
+        win.innerHTML = `<div style="padding:16px;color:#fff;">Failed to load window: ${src}</div>`;
       }
     }
 
     if (typeof window.initCLI === 'function') {
       window.initCLI();
     }
-    if (typeof window.initGUI === 'function') {
-      window.initGUI();
+    if (window.profileReady && typeof window.renderAboutDesktop === 'function') {
+      window.profileReady.then((data) => window.renderAboutDesktop(data));
     }
   };
 
@@ -166,7 +175,11 @@
   document.addEventListener('mousedown', onWindowFocus);
   document.addEventListener('click', onControlClick);
   document.addEventListener('click', onDockClick);
-  document.addEventListener('DOMContentLoaded', loadWindowContent);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadWindowContent);
+  } else {
+    loadWindowContent();
+  }
 
   window.showWindowById = function(id) {
     const win = document.querySelector(`.window[data-window-id="${id}"]`);
