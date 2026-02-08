@@ -8,6 +8,13 @@ $( document ).ready(function() {
   });
 });
 
+$(document).on('keydown', '.nav-opener', function(evt) {
+  if (evt.key === 'Enter' || evt.key === ' ') {
+    evt.preventDefault();
+    openSlider();
+  }
+});
+
 function loadSection(name) {
   const key = String(name || '').toLowerCase();
 
