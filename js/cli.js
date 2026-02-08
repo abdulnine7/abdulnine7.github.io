@@ -95,7 +95,7 @@ commands.ls = (directory) => {
 };
 
 // View list of possible commands.
-commands.help = () => systemData.help;
+commands.help = () => systemData.help || '<p>Loading content... try again.</p>';
 
 // Display current path.
 commands.path = () => {
@@ -108,6 +108,17 @@ commands.history = () => {
   let history = localStorage.history;
   history = history ? Object.values(JSON.parse(history)) : [];
   return `<p>${history.join('<br>')}</p>`;
+};
+
+// Fetch login info on-demand.
+commands.login = () => {
+  const block = $('<div class="loginInfo"></div>');
+  $('#terminal').append(block);
+  if (typeof fetchLoginInfo === 'function') {
+    fetchLoginInfo(block);
+    return null;
+  }
+  return '<p class="gray">Login info unavailable.</p>';
 };
 
 // Move into specified directory.
@@ -182,6 +193,7 @@ $(() => {
   pages.push($.get('pages/home.html'));
   pages.push($.get('pages/skills.html'));
   pages.push($.get('pages/projects.html'));
+
   $.when
     .apply($, pages)
     .done(
@@ -206,7 +218,11 @@ $(() => {
         systemData['skills'] = skillsData[0];
         systemData['projects'] = projectsData[0];
       },
-    );
-
-  const terminal = new Shell(cmd, commands);
+    )
+    .fail(() => {
+      systemData['help'] = '<p>Failed to load CLI content. Refresh and try again.</p>';
+    })
+    .always(() => {
+      new Shell(cmd, commands);
+    });
 });

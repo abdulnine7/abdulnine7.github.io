@@ -1,0 +1,43 @@
+.flip-box {
+  width: 110vh;
+  height: 65vh;
+  margin: auto;
+  top: 10vh;
+  max-width: 100%;
+  perspective: 1200px !important;
+}
+
+.minimized {
+  height: 30px;
+  top: 65vh;
+  width: 250px;
+}
+
+.fullscreen {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+@media only screen and (max-width: 680px){
+  .flip-box {
+    width: 95%;
+    height: 60vh;
+    top: 10vh;
+  }
+
+  .minimized {
+    height: 30px;
+    top: 65vh;
+    width: 250px;
+  }
+  
+  .fullscreen {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+}

@@ -1,37 +1,36 @@
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abdul's CLI - Terminal</title>
-  <link rel="stylesheet/less" type="text/css" href="styles/main.less" />
-  <link rel="stylesheet/less" type="text/css" href="styles/flip.less" />
-  <link rel="stylesheet/less" type="text/css" href="styles/prettyUI.less" />
-  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu" />
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.js"></script>
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/flip.css" />
+  <link rel="stylesheet" href="styles/prettyUI.css" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu" />
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/1.4.3/js/jquery.terminal.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css"> 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
   <script type="text/javascript" src="js/shell.js"></script>
+  <script type="text/javascript" src="js/loginInfo.js"></script>
   <script type="text/javascript" src="js/cli.js"></script>
 
   <script src="js/jquery.flip.js"></script>
   <script>
     $(function() {
-      // console.log("Hi");
-        $("#card").flip({
-            trigger: 'manual',
-            speed: 2000,
-        });
+      $("#card").flip({
+        trigger: 'manual',
+        speed: 2000,
+      });
     });
 
     $(window).on('load',function() {
       setTimeout(function() {
         $(".loader").fadeOut(500,function() {
-            // fadeOut complete. Remove the loading div
-            $( ".loader" ).remove(); //makes page more lightweight 
+          $(".loader").remove();
         });
-        
       }, 500);
     });
   </script>
@@ -40,33 +39,7 @@
   <meta content="yes" name="apple-mobile-web-app-capable">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <link href="favicon.ico" rel="shortcut icon">
-  <!-- <meta content="https://avatars.githubusercontent.com/u/17446181" property="og:image">
-  <meta content="Abdul Noushad Sheikh" property="og:title">
-  <meta content="abdul.co.in" property="og:site_name">
-  <meta content="http://abdul.co.in/" property="og:url">
-  <meta content="Abdul's Ubuntu Website with CLI and GUI" property="og:description" >
-  <meta content="Abdul's Ubuntu Website with CLI and GUI">
-  <meta content="Abdul Noushad Sheikh"name="author">
-  <meta content="Abdul Noushad Sheikh" name="copyright"> -->
   <!-- Meta tags end -->
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135127723-3"></script>
-  <script>
-    if (location.hostname != "localhost") {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-135127723-3");
-    } else {
-      console.log("dev mode detected, don't track view");
-    }
-  </script> -->
-  <!-- Google Analytics end -->
-
 </head>
 
 <body>
@@ -194,6 +167,6 @@
   </p>
 </div>
 
-<script type="text/javascript" src="js/loginInfo.js"></script>
 <script type="text/javascript" src="js/prettyUI.js"></script>
 </body>
+</html>
