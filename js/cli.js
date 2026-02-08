@@ -270,7 +270,16 @@ window.initCLI = async () => {
   } catch (err) {
     systemData['help'] = '<p>Failed to load CLI content. Refresh and try again.</p>';
   } finally {
-    new Shell(cmd, commands);
+    const shell = new Shell(cmd, commands);
+    window.shellInstance = shell;
+    const introPromise = typeof window.typeTerminalIntro === 'function'
+      ? window.typeTerminalIntro()
+      : Promise.resolve();
+    introPromise.then(() => {
+      if (typeof window.typeCommand === 'function') {
+        window.typeCommand('login');
+      }
+    });
   }
 };
 
@@ -287,4 +296,61 @@ window.resetTerminal = () => {
   localStorage.inHistory = false;
   const input = cmd.querySelector('.input');
   if (input) input.focus();
+  if (typeof window.typeTerminalIntro === 'function') {
+    window.typeTerminalIntro(true).then(() => {
+      if (typeof window.typeCommand === 'function') {
+        window.typeCommand('login');
+      }
+    });
+  }
+};
+
+window.typeTerminalIntro = (force = false) => {
+  const intro = document.getElementById('terminal-intro');
+  if (!intro) return Promise.resolve();
+  if (intro.dataset.typed === 'true' && !force) return;
+  const text = intro.dataset.text || '';
+  intro.textContent = '';
+  intro.dataset.typed = 'false';
+  let i = 0;
+  return new Promise((resolve) => {
+    const step = () => {
+      if (i >= text.length) {
+        intro.dataset.typed = 'true';
+        resolve();
+        return;
+      }
+      intro.textContent += text[i];
+      i += 1;
+      const base = 40;
+      setTimeout(step, base);
+    };
+    step();
+  });
+};
+
+window.typeCommand = (command) => {
+  const term = document.getElementById('terminal');
+  const shell = window.shellInstance;
+  if (!term || !shell) return;
+  const inputEl = term.querySelector('.input:last-of-type');
+  if (!inputEl) return;
+  const text = String(command || '').trim();
+  if (!text) return;
+  inputEl.textContent = '';
+  let i = 0;
+  const step = () => {
+    if (i >= text.length) {
+      shell.runCommand(text, null);
+      shell.resetPrompt(term, inputEl);
+      shell.setPromptPrefix(localStorage.directory);
+      return;
+    }
+    inputEl.textContent += text[i];
+    i += 1;
+    const base = 65;
+    const jitter = Math.floor(Math.random() * 35);
+    setTimeout(step, base + jitter);
+  };
+  step();
 };
