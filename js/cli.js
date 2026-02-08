@@ -30,8 +30,6 @@ const setDirectory = (dir) => {
   localStorage.directory = dir;
 };
 
-// legacy flip handlers removed
-
 // Create new directory in current directory.
 commands.mkdir = () => errors.noWriteAccess;
 

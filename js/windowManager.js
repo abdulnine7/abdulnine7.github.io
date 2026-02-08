@@ -42,6 +42,7 @@
     const dx = evt.clientX - startX;
     const dy = evt.clientY - startY;
     if (activeWindow.dataset.dragging === 'true') {
+      // Keep the window within the viewport while dragging.
       const maxX = window.innerWidth - activeWindow.offsetWidth;
       const maxY = window.innerHeight - activeWindow.offsetHeight;
       const nextLeft = Math.max(0, Math.min(maxX, startLeft + dx));
@@ -140,6 +141,7 @@
       const src = win.getAttribute('data-window-src');
       if (!src) continue;
       try {
+        // Load window HTML fragments and run the correct init hook.
         win.innerHTML = '<div style="padding:12px;color:#fff;">Loading…</div>';
         const res = await fetch(src, { cache: 'no-store' });
         if (!res.ok) {
