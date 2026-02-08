@@ -38,16 +38,9 @@
   <script type="text/javascript" src="js/shell.js" defer></script>
   <script type="text/javascript" src="js/loginInfo.js" defer></script>
   <script type="text/javascript" src="js/cli.js" defer></script>
-
-  <script src="js/jquery.flip.js" defer></script>
+  <script type="text/javascript" src="js/windowManager.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      if (window.jQuery) {
-        $("#card").flip({
-          trigger: 'manual',
-          speed: 900,
-        });
-      }
       setTimeout(function() {
         if (window.jQuery) {
           $(".loader").fadeOut(500,function() {
@@ -74,28 +67,36 @@
     <img src="data/throbber.svg" alt="" class="ubuntu-loading">
   </div>
 
-<main class="flip-box" id="card" role="main">
+<main class="desktop" id="desktop" role="main">
+  <aside class="dock" aria-label="App dock">
+    <button class="dock-item active" data-window="terminal" aria-label="Terminal">
+      <i class="fa-solid fa-terminal"></i>
+      <span>Terminal</span>
+    </button>
+    <button class="dock-item" data-window="gui" aria-label="Profile GUI">
+      <i class="fa-solid fa-user"></i>
+      <span>Profile</span>
+    </button>
+    <button class="dock-item" data-window="about-desktop" aria-label="About This Desktop">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>About</span>
+    </button>
+  </aside>
 
-  <div class="terminal-window front">
-    <header>
-      <div class="header-title">Abdul's CLI - Terminal</div>
-      <div class="button flip">
-        <i class="fa-solid fa-rotate gold" onclick="flipWindow()"></i>
-      </div>
-      <div class="button yellow">
-        <i class="fa-solid fa-minus white"></i>
-      </div>
-      <div class="button green">
-        <i class="fa-regular fa-square white"></i>
-      </div>
-      <div class="button red">
-        <i class="fa-solid fa-circle-xmark insta"></i>
+  <section class="window terminal-window" data-window-id="terminal" style="left: 220px; top: 80px;">
+    <header class="window-header">
+      <div class="window-title">Terminal</div>
+      <div class="window-controls" aria-label="Window controls">
+        <button class="win-btn minimize" aria-label="Minimize">–</button>
+        <button class="win-btn maximize" aria-label="Maximize">□</button>
+        <button class="win-btn close" aria-label="Close">×</button>
       </div>
     </header>
+    <div class="resize-handle" aria-hidden="true"></div>
     <div id="terminal" role="region" aria-live="polite" aria-label="Terminal output">
       <p><strong class="green" style="line-height: 1.7;">
         \[._.]/</strong> - you're in abdul's cli. Try <span class="li-blue">help</span>, <span class="li-blue">about</span>, <span class="li-blue">projects</span>, or <span class="li-blue">gui</span>.
-        Click <i class="fa-solid fa-rotate gold" style="padding: 4px;"></i> for the graphical interface.
+        Type <span class="li-blue">gui</span> to open the profile window.
       </p>
       <div class="loginInfo"></div>
       <p class="hidden">
@@ -108,30 +109,24 @@
         <span contenteditable="true" role="textbox" aria-label="Terminal input" aria-multiline="false" spellcheck="false" autocomplete="off" autocorrect="off" class="input"> </span>
       </p>
     </div>
-  </div>
+  </section>
 
-  <div class="terminal-window back">
-    <header>
-      <div class="header-title">Abdul's GUI</div>
-      <div class="button flip">
-        <i class="fa-solid fa-rotate gold" onclick="flipWindow()"></i>
-      </div>
-      <div class="button yellow">
-        <i class="fa-solid fa-minus white"></i>
-      </div>
-      <div class="button green">
-        <i class="fa-regular fa-square white"></i>
-      </div>
-      <div class="button red">
-        <i class="fa-solid fa-circle-xmark insta"></i>
+  <section class="window gui-window" data-window-id="gui" style="left: 320px; top: 140px; display: none;">
+    <header class="window-header">
+      <div class="window-title">Profile</div>
+      <div class="window-controls" aria-label="Window controls">
+        <button class="win-btn minimize" aria-label="Minimize">–</button>
+        <button class="win-btn maximize" aria-label="Maximize">□</button>
+        <button class="win-btn close" aria-label="Close">×</button>
       </div>
     </header>
+    <div class="resize-handle" aria-hidden="true"></div>
 
     <!-- <div id="terminal">
       <p><strong class="green">\[._.]/</strong> - Back flipped.</p>
     </div> -->
 
-    <nav class=" " id="leftcol" aria-label="GUI sections">
+    <nav class="window-sidebar" id="leftcol" aria-label="GUI sections">
       <div class="leftcolTab active">
         <i class="fa-solid fa-user icon"></i>
         <div class="name">About</div>
@@ -162,32 +157,41 @@
       </div>
     </nav>
     
-    <div class="" id="rightcol">
+    <div class="window-content" id="rightcol">
       <span class="nav-opener" role="button" tabindex="0" aria-label="Open navigation" onclick="openSlider()">&#9776;</span>
-      <div class="content">
+      <div class="content"></div>
+    </div>
+  </section>
 
+  <section class="window about-window" data-window-id="about-desktop" style="left: 260px; top: 120px; width: 520px; height: 360px; display: none;">
+    <header class="window-header">
+      <div class="window-title">About This Desktop</div>
+      <div class="window-controls" aria-label="Window controls">
+        <button class="win-btn minimize" aria-label="Minimize">–</button>
+        <button class="win-btn maximize" aria-label="Maximize">□</button>
+        <button class="win-btn close" aria-label="Close">×</button>
+      </div>
+    </header>
+    <div class="resize-handle" aria-hidden="true"></div>
+    <div class="window-content about-content">
+      <div class="about-panel">
+        <div class="about-panel-title">About This Desktop</div>
+        <div class="about-panel-body">
+          <div class="about-badge">Made with Love, Coffee, and Codex</div>
+          <div class="about-badge">Inspired by Ubuntu GNOME</div>
+          <div class="about-badge">Domain: linuxy.us</div>
+        </div>
+        <div class="about-panel-footer">© Abdul Noushad Sheikh 2026</div>
       </div>
     </div>
-  </div>
+  </section>
 </main>
 
 <!-- <div class="fabFlip">
   <i class="fa-solid fa-repeat flip-img" onclick="flipWindow()"></i>
 </div> -->
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-line">
-      <span>Made with Love, Coffee, and Codex</span>
-      <span class="dot">•</span>
-      <span>Inspired by Ubuntu</span>
-      <i class="devicon-linux-plain linux-icon"></i>
-    </div>
-    <div class="footer-line small">
-      <span>© Abdul Noushad Sheikh 2026</span>
-    </div>
-  </div>
-</footer>
+<!-- footer moved into About panel -->
 
 <script type="text/javascript" src="js/prettyUI.js" defer></script>
 </body>

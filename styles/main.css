@@ -61,67 +61,151 @@ td {
   vertical-align: top;
 }
 
-.terminal-window {
-  text-align: left;
-  width: min(680px, 94vw);
-  height: min(420px, 70vh);
-  border-radius: 10px;
-  margin: auto;
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.desktop {
   position: relative;
-  display: block;
-  transition: all 0.5s ease;
-  background-color: #0D0D0D;
+  width: 100%;
+  height: 100%;
 }
 
-.terminal-window header {
-  background: #2C2C2C;
-  height: 30px;
-  border-radius: 8px 8px 0 0;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-align: right;
+.dock {
+  position: fixed;
+  left: 16px;
+  top: 80px;
+  bottom: 80px;
+  width: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 12px 8px;
+  border-radius: 18px;
+  background: rgba(17, 17, 17, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  z-index: 50;
 }
 
-.terminal-window header .button {
+.dock-item {
+  background: transparent;
+  border: none;
+  color: #e0e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  font-size: 10px;
+  cursor: pointer;
+  padding: 8px 4px;
+  border-radius: 12px;
+}
+
+.dock-item i {
+  font-size: 18px;
+}
+
+.dock-item.active,
+.dock-item:hover {
+  background: rgba(44, 109, 178, 0.25);
+  color: #fff;
+}
+
+.window {
+  position: absolute;
+  width: 680px;
+  height: 420px;
+  min-width: 320px;
+  min-height: 240px;
+  border-radius: 12px;
+  background: #0D0D0D;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.window.hidden {
+  display: none;
+}
+
+.window-header {
+  height: 36px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  cursor: move;
+  user-select: none;
+}
+
+.window-title {
+  font-size: 12px;
+  color: #f1f1f1;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.win-btn {
   width: 18px;
   height: 18px;
-  margin: 5px 4px 0 0;
-  display: inline-block;
-  border-radius: 20px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: #2c2c2c;
+  color: #ddd;
+  font-size: 12px;
+  line-height: 18px;
   text-align: center;
-  vertical-align: middle;
+  padding: 0;
 }
 
-.terminal-window header .button.flip {
-  cursor: pointer;
-  padding-top: 3px;
-  font-size: 10pt;
+.win-btn.minimize {
+  background: #f1c40f;
+  color: #1b1b1b;
 }
 
-.terminal-window header .button.green {
-  cursor: pointer;
-  padding-top: 5px;
-  font-size: 8pt;
+.win-btn.maximize {
+  background: #2ecc71;
+  color: #0d0d0d;
 }
 
-.terminal-window header .button.yellow {
-  cursor: pointer;
-  padding-top: 5px;
-  font-size: 8pt;
+.win-btn.close {
+  background: #e74c3c;
+  color: #0d0d0d;
 }
 
-.terminal-window header .button.red {
-  cursor: pointer;
-  margin-top: 5px;
-  font-size: 12pt;
+.resize-handle {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 16px;
+  height: 16px;
+  cursor: se-resize;
+  background: linear-gradient(135deg, transparent 45%, rgba(255, 255, 255, 0.35) 45%, rgba(255, 255, 255, 0.35) 55%, transparent 55%),
+              linear-gradient(135deg, transparent 60%, rgba(255, 255, 255, 0.25) 60%, rgba(255, 255, 255, 0.25) 70%, transparent 70%),
+              linear-gradient(135deg, transparent 75%, rgba(255, 255, 255, 0.18) 75%, rgba(255, 255, 255, 0.18) 85%, transparent 85%);
+  opacity: 0.7;
 }
 
-.terminal-window .header-title {
-  margin-top: 8px;
+.window.fullscreen {
+  top: 0 !important;
+  left: 0 !important;
+  width: calc(100% - 32px) !important;
+  height: calc(100% - 32px) !important;
+}
+
+.window.minimized .resize-handle {
+  display: none;
+}
+
+.terminal-window {
   text-align: left;
-  font-size: 10pt;
-  color: white;
-  float: left;
 }
 
 .terminal-window #terminal {
@@ -133,7 +217,7 @@ td {
   box-sizing: border-box;
   position: absolute;
   width: 100%;
-  top: 30px;
+  top: 36px;
   bottom: 0;
   overflow: auto;
   cursor: text;
@@ -266,6 +350,7 @@ td {
   justify-content: center;
   z-index: 2;
   user-select: none;
+  pointer-events: none;
 }
 
 .footer-inner {

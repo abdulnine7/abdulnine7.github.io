@@ -145,23 +145,23 @@ commands.history = () => {
   return `<p>${history.join('<br>')}</p>`;
 };
 
-// Flip to GUI.
+// Open GUI window.
 commands.gui = () => {
-  if (typeof flipWindow === 'function') {
-    flipWindow();
+  if (typeof window.showWindowById === 'function') {
+    window.showWindowById('gui');
     return null;
   }
   return '<p class="gray">GUI unavailable.</p>';
 };
 
-// Open GUI section and flip.
+// Open GUI section and bring window to front.
 commands.open = (section) => {
   const target = section ? section.trim().toLowerCase() : '';
   if (!target || !guiSections.includes(target)) {
     return `<p>Usage: open ${guiSections.join(' | ')}</p>`;
   }
-  if (typeof flipWindow === 'function') {
-    flipWindow();
+  if (typeof window.showWindowById === 'function') {
+    window.showWindowById('gui');
   }
   if (typeof showSection === 'function') {
     showSection(target);
