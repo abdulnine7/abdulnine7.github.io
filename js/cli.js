@@ -102,6 +102,7 @@ const commandHelp = {
   whoami: 'whoami - display a quick profile summary',
   stats: 'stats - show highlights (projects, experience, top skills)',
   path: 'path - display current directory',
+  pwd: 'pwd - display current directory',
   ls: 'ls - show files in current directory',
   cd: 'cd DIRECTORY - move into DIRECTORY or cd to return to home',
   cat: 'cat FILENAME - display FILENAME in window',
@@ -126,6 +127,8 @@ commands.path = () => {
   const dir = getDirectory();
   return dir === 'home' ? homePath : `${homePath}/${dir}`;
 };
+
+commands.pwd = () => commands.path();
 
 // See command history.
 commands.history = () => {

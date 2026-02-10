@@ -229,6 +229,7 @@
             <li><strong>whoami</strong> - display a quick profile summary</li>
             <li><strong>stats</strong> - show highlights (projects, experience, top skills)</li>
             <li><strong>path</strong> - display current directory</li>
+            <li><strong>pwd</strong> - display current directory</li>
             <li><strong>cat FILENAME</strong> - display FILENAME in window</li>
             <li><strong>cd DIRECTORY</strong> - move into DIRECTORY or just cd to return to home</li>
             <li><strong>ls</strong> - show files in current directory</li>

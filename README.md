@@ -111,6 +111,7 @@ Implemented user-facing commands:
 - `whoami`
 - `stats`
 - `path`
+- `pwd`
 - `ls`
 - `cd <directory>`
 - `cat <file>.txt`
