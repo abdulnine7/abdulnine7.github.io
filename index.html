@@ -3,41 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>user@ubuntu-server: ~</title>
+<title>Ubuntu Desktop</title>
 <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div id="terminal-wrapper">
-  <div id="title-bar">
-    <div class="title-buttons">
-      <span class="title-btn btn-close"></span>
-      <span class="title-btn btn-min"></span>
-      <span class="title-btn btn-max"></span>
+<div id="ubuntu-desktop">
+
+  <!-- GNOME Top Panel -->
+  <div id="top-panel">
+    <div id="activities-btn">Activities</div>
+    <div id="panel-clock"></div>
+    <div id="system-tray">
+      <svg class="tray-icon" viewBox="0 0 24 24" fill="currentColor" title="Wi-Fi"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+      <svg class="tray-icon" viewBox="0 0 24 24" fill="currentColor" title="Volume"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      <svg class="tray-icon" viewBox="0 0 24 24" fill="currentColor" title="Battery"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+      <span id="tray-power-icon" title="Power">
+        <svg class="tray-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z"/></svg>
+      </span>
     </div>
-    <div id="title-text">user@ubuntu-server: ~</div>
   </div>
-  <div id="terminal" tabindex="0">
-    <div id="output"></div>
-    <div id="input-line">
-      <span id="prompt"></span>
-      <div id="input-container">
-        <input id="input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-        <div id="cursor-overlay"><span id="cursor-text"></span><span id="fake-cursor"></span></div>
+
+  <!-- Left Dock -->
+  <div id="dock">
+    <div class="dock-icon" data-app="files" title="Files">
+      <svg viewBox="0 0 24 24" fill="#5B9BD5"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+    </div>
+    <div class="dock-icon" data-app="firefox" title="Firefox">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FF6611"/><circle cx="12" cy="12" r="6" fill="#FFBD4F"/><circle cx="12" cy="12" r="3" fill="#FF6611"/></svg>
+    </div>
+    <div class="dock-icon active" data-app="terminal" title="Terminal">
+      <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="18" rx="2" fill="#300A24"/><path d="M6 8l4 4-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="16" x2="18" y2="16" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+    </div>
+    <div class="dock-icon" data-app="text-editor" title="Text Editor">
+      <svg viewBox="0 0 24 24" fill="#4A90D9"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+    </div>
+    <div class="dock-icon" data-app="settings" title="Settings">
+      <svg viewBox="0 0 24 24" fill="#888"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94L14.4 2.81c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41L9.25 5.35c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+    </div>
+    <div class="dock-separator"></div>
+    <div class="dock-icon" data-app="trash" title="Trash">
+      <svg viewBox="0 0 24 24" fill="#888"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+    </div>
+  </div>
+
+  <!-- Desktop Area -->
+  <div id="desktop-area">
+
+    <!-- Right-click context menu -->
+    <div id="desktop-context-menu" class="context-menu hidden">
+      <div class="context-item" data-action="new-terminal">Open Terminal</div>
+      <div class="context-item" data-action="change-wallpaper">Change Background</div>
+      <div class="context-separator"></div>
+      <div class="context-item" data-action="display-settings">Display Settings</div>
+    </div>
+
+    <!-- Terminal Window -->
+    <div id="terminal-window" class="desktop-window">
+      <div id="terminal-wrapper">
+        <div id="title-bar">
+          <div id="title-text">user@ubuntu-server: ~</div>
+          <div class="title-buttons">
+            <span class="title-btn btn-min" title="Minimize">&#x2013;</span>
+            <span class="title-btn btn-max" title="Maximize">&#x25FB;</span>
+            <span class="title-btn btn-close" title="Close">&#x2715;</span>
+          </div>
+        </div>
+        <div id="terminal" tabindex="0">
+          <div id="output"></div>
+          <div id="input-line">
+            <span id="prompt"></span>
+            <div id="input-container">
+              <input id="input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              <div id="cursor-overlay"><span id="cursor-text"></span><span id="fake-cursor"></span></div>
+            </div>
+          </div>
+        </div>
       </div>
+      <!-- Nano/Vim editors inside window -->
+      <div id="nano-editor">
+        <div id="nano-header">GNU nano 6.2</div>
+        <textarea id="nano-content"></textarea>
+        <div id="nano-footer"><span>^X Exit</span><span>^S Save</span><span>^K Cut</span></div>
+      </div>
+      <div id="vim-editor">
+        <div id="vim-content" contenteditable="true"></div>
+        <div id="vim-status">-- NORMAL --</div>
+        <div id="vim-command"></div>
+      </div>
+      <!-- Resize handle -->
+      <div id="resize-handle"></div>
     </div>
+
   </div>
-</div>
-<div id="nano-editor">
-  <div id="nano-header">GNU nano 6.2</div>
-  <textarea id="nano-content"></textarea>
-  <div id="nano-footer"><span>^X Exit</span><span>^S Save</span><span>^K Cut</span></div>
-</div>
-<div id="vim-editor">
-  <div id="vim-content" contenteditable="true"></div>
-  <div id="vim-status">-- NORMAL --</div>
-  <div id="vim-command"></div>
 </div>
 
 <script src="script.js"></script>
+<script src="desktop.js"></script>
 </body>
 </html>
