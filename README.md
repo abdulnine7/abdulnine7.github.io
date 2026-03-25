@@ -57,13 +57,12 @@ abdulnine7.github.io/
 ├─ data/
 │  └─ profile.json
 ├─ js/
-│  ├─ cli.js
-│  ├─ loginInfo.js
 │  ├─ render.js
-│  ├─ shell.js
+│  ├─ terminal.js
 │  └─ windowManager.js
 ├─ styles/
 │  ├─ main.css
+│  ├─ terminal.css
 │  └─ prettyUI.css
 └─ windows/
    ├─ terminal.html
@@ -100,33 +99,97 @@ If you are adapting this template for your own portfolio, start by changing only
 - `index.html` defines dock and window containers (`data-window-id`, `data-window-src`)
 - `js/windowManager.js` loads window HTML files and manages window lifecycle
 - `js/render.js` loads `data/profile.json` and renders profile/about/resume content
-- `js/cli.js` maps terminal commands to output/actions
-- `js/shell.js` handles prompt, history, key events, and command execution
+- `js/terminal.js` is the complete terminal engine — handles prompt, input, history, filesystem, command parsing, pipe/redirect, and all command implementations
+- `styles/terminal.css` contains all terminal-specific styling (base, colors, themes, overlays)
 
 ## Terminal Commands
 
-Implemented user-facing commands:
+### Navigation & Files
 
-- `help` or `help <command>`
-- `whoami`
-- `stats`
-- `path`
+- `ls`, `ls -la`, `ls -l`, `ls -a` — colored output (dirs=blue, files=white, hidden=gray, executables=green)
+- `cd <dir>`, `cd ..`, `cd ~`, `cd /`
 - `pwd`
-- `ls`
-- `cd <directory>`
-- `cat <file>.txt`
-- `open <section>`
-- `gui`
-- `theme <default|amber|green|mono>`
-- `history`
-- `login`
-- `clear`
+- `mkdir <dir>` — creates in-memory directory
+- `touch <file>` — creates empty file
+- `rm <file>`, `rm -r <dir>`
+- `rmdir <dir>`
+- `cp <src> <dest>`, `mv <src> <dest>`
+- `cat <file>` — displays file contents (portfolio data files + in-memory filesystem)
+- `nano <file>` — in-terminal text editor (Ctrl+X to exit, Ctrl+S to save)
+- `echo "text"`, `echo "text" > file`, `echo "text" >> file`
+- `find . -name "*.txt"`
+- `tree` — ASCII tree of current directory
+- `grep <pattern> <file>`
 
-Behavior notes:
+### System Info
 
-- Terminal intro text is typed automatically.
-- `login` is auto-typed/executed after intro.
-- Closing terminal resets it to initial state for next open.
+- `whoami`, `hostname`, `uname -a`
+- `uptime` — fake uptime incrementing from page load
+- `date` — real current date/time
+- `cal` — calendar for current month
+- `df -h`, `free -h` — fake disk/memory stats
+- `top` / `htop` — animated process list (q to quit)
+- `ps aux` — fake process list
+- `lscpu`, `lsblk` — fake hardware info
+- `ifconfig` / `ip addr` — fake network interfaces
+- `neofetch` — system info with ASCII Ubuntu logo
+
+### Fun Commands
+
+- `sudo <anything>` — sassy rotating responses
+- `hack` — fake hacking animation
+- `matrix` / `cmatrix` — matrix rain animation
+- `sl` — ASCII steam locomotive
+- `cowsay <text>` — ASCII cow with speech bubble
+- `fortune` — random sarcastic quote
+- `figlet <text>` / `banner <text>` — large ASCII art text
+- `yes <text>` — spams text until Ctrl+C
+- `ping <host>` — fake ping with Ctrl+C to stop
+- `weather` / `curl wttr.in` — fake ASCII weather report
+- `telnet towel.blinkenlights.nl` — ASCII Star Wars crawl
+- `apt install <pkg>` — fake install with progress bar
+- `joke` — random programmer joke
+- `quote` — random motivational/sarcastic quote
+- `easter` / `easteregg` — hidden easter egg
+
+### Editors & REPLs
+
+- `vim` / `vi` — fake vim UI with `:q` escape hint
+- `nano <file>` — textarea-based editor overlay
+- `python3` — fake Python REPL (eval math, print(), exit())
+- `node` — fake Node.js REPL
+
+### Portfolio Integration
+
+- `open <section>` — open GUI section (about, education, skills, experience, projects, resume, contact)
+- `gui` — open the profile window
+- `login` — fetch login IP/location (opt-in)
+- `stats` — show profile highlights
+- `help` or `help <command>` — formatted command reference
+- `man <command>` — man page for supported commands
+- `theme <default|amber|green|mono>` — switch terminal theme
+
+### Pipe & Redirect
+
+- `|` between commands: `echo hello | lolcat`, `ls | grep txt`
+- `>` and `>>` for file redirection: `echo hello > file.txt`
+- `&&` for chaining: `mkdir test && cd test`
+
+### Keyboard Shortcuts
+
+- `Ctrl+C` — interrupt running command
+- `Ctrl+L` — clear screen
+- `Up/Down` — command history navigation
+- `Tab` — autocomplete filenames and commands
+- `Ctrl+A` / `Ctrl+E` — jump to start/end of line
+
+### Behavior Notes
+
+- Terminal intro text is typed automatically on first open
+- `login` is auto-typed/executed after intro
+- Closing terminal resets it to initial state for next open
+- In-memory filesystem persists during session (mkdir, touch, echo > file all work)
+- Files from `profile.json` are available as `.txt` files in the home directory
 
 ## Window System Behavior
 
@@ -191,7 +254,11 @@ Update content:
 
 Update terminal command behavior:
 
-- Edit `js/cli.js` and `js/shell.js`
+- Edit `js/terminal.js`
+
+Update terminal styling:
+
+- Edit `styles/terminal.css`
 
 Update window styling:
 
@@ -214,7 +281,7 @@ If profile/about content does not render:
 If terminal behaves oddly:
 
 - Clear browser storage and reload
-- Check command wiring in `js/cli.js`
+- Check command wiring in `js/terminal.js`
 
 ## License
 
