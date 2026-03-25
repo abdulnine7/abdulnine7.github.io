@@ -1,0 +1,152 @@
+:root {
+  --bg: #0d0d0d;
+  --fg: #00ff41;
+  --dim: #00aa2a;
+  --bright: #33ff66;
+  --prompt-user: #00ff41;
+  --prompt-host: #00ff41;
+  --prompt-path: #5555ff;
+  --dir-color: #5599ff;
+  --file-color: #cccccc;
+  --exec-color: #00ff41;
+  --hidden-color: #666666;
+  --error-color: #ff5555;
+  --warning-color: #ffaa00;
+  --info-color: #55aaff;
+  --title-bg: #2d2d2d;
+  --title-fg: #cccccc;
+  --scrollbar-bg: #1a1a1a;
+  --scrollbar-thumb: #444;
+}
+.theme-amber {
+  --fg: #ffb000;
+  --dim: #aa7700;
+  --bright: #ffcc44;
+  --prompt-user: #ffb000;
+  --prompt-host: #ffb000;
+  --exec-color: #ffb000;
+}
+.theme-blue {
+  --fg: #00aaff;
+  --dim: #0077bb;
+  --bright: #44ccff;
+  --prompt-user: #00aaff;
+  --prompt-host: #00aaff;
+  --exec-color: #00aaff;
+}
+.theme-light {
+  --bg: #fdf6e3;
+  --fg: #586e75;
+  --dim: #93a1a1;
+  --bright: #073642;
+  --prompt-user: #268bd2;
+  --prompt-host: #268bd2;
+  --prompt-path: #6c71c4;
+  --dir-color: #268bd2;
+  --file-color: #586e75;
+  --exec-color: #859900;
+  --hidden-color: #93a1a1;
+  --error-color: #dc322f;
+  --warning-color: #b58900;
+  --info-color: #2aa198;
+  --title-bg: #eee8d5;
+  --title-fg: #586e75;
+  --scrollbar-bg: #eee8d5;
+  --scrollbar-thumb: #93a1a1;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); }
+body { font-family: 'Ubuntu Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace; }
+#terminal-wrapper {
+  display: flex; flex-direction: column; height: 100vh; background: var(--bg);
+}
+#title-bar {
+  background: var(--title-bg); color: var(--title-fg); padding: 6px 14px;
+  font-size: 13px; display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid #444; user-select: none; flex-shrink: 0;
+}
+.title-buttons { display: flex; gap: 8px; }
+.title-btn { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.btn-close { background: #ff5f56; }
+.btn-min { background: #ffbd2e; }
+.btn-max { background: #27c93f; }
+#title-text { flex: 1; text-align: center; font-size: 13px; }
+#terminal {
+  flex: 1; overflow-y: auto; padding: 10px 14px; color: var(--fg);
+  font-size: 14px; line-height: 1.4; cursor: text; background: var(--bg);
+}
+#terminal::-webkit-scrollbar { width: 8px; }
+#terminal::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+#terminal::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+#output { white-space: pre-wrap; word-wrap: break-word; }
+#input-line {
+  display: flex; align-items: center; white-space: nowrap; min-height: 20px;
+}
+#prompt { color: var(--fg); white-space: pre; flex-shrink: 0; }
+.prompt-user { color: var(--prompt-user); font-weight: bold; }
+.prompt-host { color: var(--prompt-host); font-weight: bold; }
+.prompt-sep { color: var(--fg); }
+.prompt-path { color: var(--prompt-path); font-weight: bold; }
+.prompt-dollar { color: var(--fg); }
+#input-container { position: relative; flex: 1; min-width: 0; }
+#input {
+  background: transparent; border: none; color: var(--fg); font-family: inherit;
+  font-size: 14px; outline: none; width: 100%; caret-color: transparent;
+  line-height: 1.4;
+}
+#cursor-overlay {
+  position: absolute; top: 0; left: 0; pointer-events: none;
+  font-family: inherit; font-size: 14px; line-height: 1.4;
+  color: transparent; white-space: pre;
+}
+#fake-cursor {
+  display: inline-block; width: 8px; height: 16px; background: var(--fg);
+  animation: blink 1s step-end infinite; vertical-align: text-bottom;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.dir { color: var(--dir-color); font-weight: bold; }
+.file { color: var(--file-color); }
+.exec { color: var(--exec-color); font-weight: bold; }
+.hidden-f { color: var(--hidden-color); }
+.error { color: var(--error-color); }
+.warning { color: var(--warning-color); }
+.info { color: var(--info-color); }
+.bold { font-weight: bold; }
+.dim { color: var(--dim); }
+.bright { color: var(--bright); }
+.rainbow { animation: rainbow 2s linear infinite; }
+@keyframes rainbow {
+  0% { color: #ff0000; } 16% { color: #ff8800; } 33% { color: #ffff00; }
+  50% { color: #00ff00; } 66% { color: #0088ff; } 83% { color: #8800ff; }
+  100% { color: #ff0000; }
+}
+#nano-editor {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg); z-index: 100; flex-direction: column; padding: 0;
+}
+#nano-editor.active { display: flex; }
+#nano-header { background: #fff; color: #000; padding: 2px 10px; text-align: center; font-weight: bold; }
+#nano-content {
+  flex: 1; background: var(--bg); color: var(--fg); font-family: inherit;
+  font-size: 14px; border: none; outline: none; padding: 10px; resize: none;
+  line-height: 1.4;
+}
+#nano-footer { background: #fff; color: #000; padding: 2px 10px; font-size: 12px; }
+#nano-footer span { margin-right: 20px; }
+#vim-editor {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg); z-index: 100; flex-direction: column;
+}
+#vim-editor.active { display: flex; }
+#vim-content {
+  flex: 1; color: var(--fg); font-family: inherit; font-size: 14px;
+  padding: 10px; overflow-y: auto; white-space: pre-wrap; outline: none;
+}
+#vim-status { background: #222; color: #aaa; padding: 2px 10px; font-size: 13px; }
+#vim-command { background: #111; color: var(--fg); padding: 2px 10px; font-size: 13px; min-height: 20px; }
+.top-display { color: var(--fg); }
+@media (max-width: 600px) {
+  #terminal { font-size: 12px; padding: 6px 8px; }
+  #input { font-size: 12px; }
+  #title-bar { font-size: 11px; padding: 4px 8px; }
+}

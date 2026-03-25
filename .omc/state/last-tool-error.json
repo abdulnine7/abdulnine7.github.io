@@ -1,7 +1,0 @@
-{
-  "tool_name": "WebFetch",
-  "tool_input_preview": "{\"url\":\"https://askubuntu.com/questions/1557157/new-terminal-ptyxis-displays-directory-twice\",\"prompt\":\"Extract all image URLs (screenshots) from this page. List every src attribute of img tags, espec...",
-  "error": "Claude Code is unable to fetch from askubuntu.com",
-  "timestamp": "2026-03-24T04:15:24.658Z",
-  "retry_count": 1
-}

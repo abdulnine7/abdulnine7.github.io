@@ -1,5 +1,0 @@
-{"t":0,"agent":"system","event":"keyword_detected","keyword":"autopilot"}
-{"t":0,"agent":"system","event":"mode_change","mode_from":"none","mode_to":"autopilot"}
-{"t":0,"agent":"a0bb98a","agent_type":"unknown","event":"agent_stop","success":true}
-{"t":0,"agent":"a66d48f","agent_type":"unknown","event":"agent_stop","success":true}
-{"t":0,"agent":"a0f5fbd","agent_type":"document-specialist","event":"agent_start","parent_mode":"none"}
