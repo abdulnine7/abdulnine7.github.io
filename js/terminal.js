@@ -86,26 +86,35 @@
   }
 
   function fsInit() {
-    const dirs = [
-      '/home', '/home/user', '/home/user/Documents', '/home/user/Downloads',
-      '/home/user/Desktop', '/etc', '/var', '/var/log', '/usr', '/usr/bin',
+    var sysDirs = [
+      '/home', '/etc', '/var', '/var/log', '/usr', '/usr/bin',
       '/tmp', '/proc', '/dev', '/bin', '/sbin', '/opt', '/root',
     ];
-    dirs.forEach(function (p) { fsMkdir(p, true); });
-    // Fun files
-    var files = {
-      '/home/user/Documents/notes.txt': 'Buy milk. Fix prod. Don\'t rm -rf again.\nRemember to water the plant that\'s been dead for 3 months.',
-      '/home/user/Documents/secret.txt': 'If you\'re reading this... nice snooping \ud83d\udc40\n\nThe cake is a lie. The server is also a lie.',
-      '/home/user/Downloads/definitely_not_virus.sh': '#!/bin/bash\necho \'just kidding\'\necho \'did you really run a file called definitely_not_virus.sh?\'',
-      '/home/user/Desktop/TODO.md': '# TODO List\n\n- [x] Learn vim\n- [ ] Quit vim (day 347)\n- [ ] Touch grass\n- [ ] Stop saying "it works on my machine"',
-      '/home/user/.bashrc': '# ~/.bashrc\nalias ll=\'ls -la\'\nalias please=\'sudo\'\nexport PATH="$HOME/bin:$PATH"\nexport EDITOR=nano',
-      '/home/user/.secret': '\ud83c\udf1f You found the secret file! \ud83c\udf1f\n\nThe Wi-Fi password is "incorrect".\nWhen someone asks, you can truthfully say "the password is incorrect."',
-      '/etc/passwd': 'root:x:0:0:root:/root:/bin/bash\nuser:x:1000:1000:User:/home/user:/bin/bash',
+    sysDirs.forEach(function (p) { fsMkdir(p, true); });
+    // System files
+    var sysFiles = {
       '/etc/hostname': 'ubuntu-server',
       '/etc/os-release': 'PRETTY_NAME="Ubuntu 22.04.3 LTS"\nNAME="Ubuntu"\nVERSION_ID="22.04"\nVERSION="22.04.3 LTS (Jammy Jellyfish)"',
-      '/var/log/syslog': 'Mar 23 08:01:12 ubuntu-server systemd[1]: Started Daily apt upgrade.\nMar 23 08:02:30 ubuntu-server sshd[1337]: Accepted publickey for user\nMar 23 08:10:45 ubuntu-server systemd[1]: Started Coffee Brewing Service.\nMar 23 08:15:00 ubuntu-server existential-crisis[4242]: Why am I a log file?',
+      '/var/log/syslog': 'Mar 24 08:01:12 ubuntu-server systemd[1]: Started Daily apt upgrade.\nMar 24 08:02:30 ubuntu-server sshd[1337]: Accepted publickey for user\nMar 24 08:10:45 ubuntu-server systemd[1]: Started Coffee Brewing Service.\nMar 24 08:15:00 ubuntu-server existential-crisis[4242]: Why am I a log file?',
     };
-    for (var p in files) fsWriteFile(p, files[p], true);
+    for (var p in sysFiles) fsWriteFile(p, sysFiles[p], true);
+  }
+
+  function fsInitHome(user, home) {
+    var homeDirs = [
+      home, home + '/Desktop', home + '/Documents', home + '/Downloads', home + '/IMPORTANT', home + '/IMPORTANT/skills',
+    ];
+    homeDirs.forEach(function (p) { fsMkdir(p, true); });
+    var homeFiles = {};
+    homeFiles[home + '/Documents/notes.txt'] = 'Buy milk. Fix prod. Don\'t rm -rf again.\nRemember to water the plant that\'s been dead for 3 months.';
+    homeFiles[home + '/Documents/secret.txt'] = 'If you\'re reading this... nice snooping \ud83d\udc40\n\nThe cake is a lie. The server is also a lie.';
+    homeFiles[home + '/Downloads/definitely_not_virus.sh'] = '#!/bin/bash\necho \'just kidding\'\necho \'did you really run a file called definitely_not_virus.sh?\'';
+    homeFiles[home + '/Desktop/TODO.md'] = '# TODO List\n\n- [x] Learn vim\n- [ ] Quit vim (day 347)\n- [ ] Touch grass\n- [ ] Stop saying "it works on my machine"';
+    homeFiles[home + '/.bashrc'] = '# ~/.bashrc\nalias ll=\'ls -la\'\nalias please=\'sudo\'\nexport PATH="$HOME/bin:$PATH"\nexport EDITOR=nano';
+    homeFiles[home + '/.secret'] = '\ud83c\udf1f You found the secret file! \ud83c\udf1f\n\nThe Wi-Fi password is "incorrect".\nWhen someone asks, you can truthfully say "the password is incorrect."';
+    for (var p in homeFiles) fsWriteFile(p, homeFiles[p], true);
+    // Update /etc/passwd with correct user
+    fsWriteFile('/etc/passwd', 'root:x:0:0:root:/root:/bin/bash\n' + user + ':x:1000:1000:' + user + ':' + home + ':/bin/bash', true);
   }
 
   // ============================================================
@@ -1525,18 +1534,28 @@
       cursorTextEl.textContent = inputEl.value.slice(0, inputEl.selectionStart);
     });
 
-    inputEl.addEventListener('keydown', async function (e) {
-      // Ctrl+C
-      if (e.ctrlKey && e.key === 'c') {
+    var executing = false;
+
+    // Global Ctrl+C handler at document level so it works even when input is hidden
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.key === 'c' && runningProcess) {
         e.preventDefault();
-        if (runningProcess) interruptFlag = true;
-        print(buildPromptHTML() + esc(inputEl.value) + '^C');
+        interruptFlag = true;
         inputEl.value = '';
         cursorTextEl.textContent = '';
-        return;
       }
+    });
+
+    inputEl.addEventListener('keydown', async function (e) {
+      // Ctrl+C handled by parent
+      if (e.ctrlKey && e.key === 'c') { e.preventDefault(); return; }
       // Ctrl+L
       if (e.ctrlKey && e.key === 'l') { e.preventDefault(); clearOutput(); return; }
+      // Block all other keys while a command is executing (except Ctrl shortcuts)
+      if (executing || runningProcess) {
+        if (!e.ctrlKey) e.preventDefault();
+        return;
+      }
       // Ctrl+A
       if (e.ctrlKey && e.key === 'a') { e.preventDefault(); inputEl.setSelectionRange(0, 0); cursorTextEl.textContent = ''; return; }
       // Ctrl+E
@@ -1577,14 +1596,25 @@
         // REPL mode
         if (inputEl.dataset.replMode && inputEl._replHandler) { inputEl._replHandler(value); return; }
         addPromptLine(value);
+        executing = true;
+        var inputLine = document.getElementById('term-input-line');
+        if (inputLine) inputLine.style.display = 'none';
         await executeInput(value);
+        executing = false;
+        if (inputLine) inputLine.style.display = '';
         updatePrompt();
         scrollToBottom();
+        inputEl.focus();
         return;
       }
       // Update cursor on next tick
       setTimeout(function () { cursorTextEl.textContent = inputEl.value.slice(0, inputEl.selectionStart); }, 0);
     });
+
+    // Cursor blink on focus
+    var cursorSpan = document.getElementById('term-cursor');
+    inputEl.addEventListener('focus', function () { if (cursorSpan) cursorSpan.classList.add('active'); });
+    inputEl.addEventListener('blur', function () { if (cursorSpan) cursorSpan.classList.remove('active'); });
 
     // Click to focus
     termEl.addEventListener('click', function (e) {
@@ -1600,7 +1630,8 @@
   // ============================================================
   function populatePortfolioFiles(data) {
     systemData = typeof window.buildCliData === 'function' ? window.buildCliData(data) : {};
-    // Map portfolio structure into filesystem
+    // Map portfolio structure into IMPORTANT folder
+    var importantPath = homePath + '/IMPORTANT';
     var portfolioFiles = {
       'about.txt': systemData.about || '',
       'resume.txt': systemData.resume || '',
@@ -1608,14 +1639,13 @@
       'projects.txt': systemData.projects || '',
       'help.txt': systemData.help || '',
     };
-    var homeNode = fsGet(homePath);
-    if (homeNode) {
+    var importantNode = fsGet(importantPath);
+    if (importantNode) {
       for (var name in portfolioFiles) {
-        homeNode.children[name] = { type: 'file', content: portfolioFiles[name], perm: '-rw-r--r--', owner: promptUser, size: portfolioFiles[name].length, mtime: new Date() };
+        importantNode.children[name] = { type: 'file', content: portfolioFiles[name], perm: '-rw-r--r--', owner: promptUser, size: portfolioFiles[name].length, mtime: new Date() };
       }
-      // Skills directory
-      fsMkdir(homePath + '/skills');
-      var skillsNode = fsGet(homePath + '/skills');
+      // Skills directory inside IMPORTANT
+      var skillsNode = fsGet(importantPath + '/skills');
       if (skillsNode) {
         skillsNode.children['proficient.txt'] = { type: 'file', content: systemData.proficient || '', perm: '-rw-r--r--', owner: promptUser, size: (systemData.proficient || '').length, mtime: new Date() };
         skillsNode.children['familiar.txt'] = { type: 'file', content: systemData.familiar || '', perm: '-rw-r--r--', owner: promptUser, size: (systemData.familiar || '').length, mtime: new Date() };
@@ -1657,8 +1687,9 @@
         promptUser = data.site.promptUser || 'user';
         promptHost = data.site.promptHost || 'ubuntu-server';
         homePath = '/home/' + promptUser;
-        // Ensure home dir exists with correct name
-        fsMkdir(homePath);
+        envVars.HOME = homePath;
+        envVars.USER = promptUser;
+        fsInitHome(promptUser, homePath);
         cwd = homePath;
         populatePortfolioFiles(data);
       }
@@ -1673,6 +1704,8 @@
 
     // Show login banner immediately
     commands.login();
+    // Auto-focus input
+    if (inputEl) setTimeout(function () { inputEl.focus(); }, 100);
   };
 
   window.resetTerminal = function () {

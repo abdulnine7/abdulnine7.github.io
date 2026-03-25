@@ -92,8 +92,13 @@
   width: 0.55em;
   height: 1.15em;
   background: #EEEEEC;
-  animation: term-blink 1s step-end infinite;
   vertical-align: text-bottom;
+  opacity: 0;
+}
+
+#term-cursor.active {
+  animation: term-blink 1s step-end infinite;
+  opacity: 1;
 }
 
 @keyframes term-blink {
