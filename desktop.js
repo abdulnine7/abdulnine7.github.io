@@ -150,7 +150,7 @@
   });
 
   // Other dock icons: show a brief "not available" tooltip effect
-  document.querySelectorAll('.dock-icon:not([data-app="terminal"])').forEach(function(icon) {
+  document.querySelectorAll('.dock-icon:not([data-app="terminal"]):not([data-app="settings"])').forEach(function(icon) {
     icon.addEventListener('click', function() {
       var app = icon.getAttribute('data-app');
       // Briefly show the icon name isn't available
