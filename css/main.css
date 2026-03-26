@@ -1,0 +1,104 @@
+/* ============================================================
+   BASE STYLES & SHARED VARIABLES
+   ============================================================ */
+
+/* --- Reset --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  background: #2c001e;
+}
+
+/* --- Desktop Grid Layout --- */
+#ubuntu-desktop {
+  display: grid;
+  grid-template-rows: 28px 1fr;
+  grid-template-columns: 58px 1fr;
+  grid-template-areas:
+    "panel panel"
+    "dock  desktop";
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ============================================================
+   TERMINAL THEMING VARIABLES
+   ============================================================ */
+:root {
+  --bg: #0d0d0d;
+  --fg: #00ff41;
+  --dim: #00aa2a;
+  --bright: #33ff66;
+  --prompt-user: #00ff41;
+  --prompt-host: #00ff41;
+  --prompt-path: #5555ff;
+  --dir-color: #5599ff;
+  --file-color: #cccccc;
+  --exec-color: #00ff41;
+  --hidden-color: #666666;
+  --error-color: #ff5555;
+  --warning-color: #ffaa00;
+  --info-color: #55aaff;
+  --title-bg: #2d2d2d;
+  --title-fg: #cccccc;
+  --scrollbar-bg: #1a1a1a;
+  --scrollbar-thumb: #444;
+}
+.theme-amber {
+  --fg: #ffb000;
+  --dim: #aa7700;
+  --bright: #ffcc44;
+  --prompt-user: #ffb000;
+  --prompt-host: #ffb000;
+  --exec-color: #ffb000;
+}
+.theme-blue {
+  --fg: #00aaff;
+  --dim: #0077bb;
+  --bright: #44ccff;
+  --prompt-user: #00aaff;
+  --prompt-host: #00aaff;
+  --exec-color: #00aaff;
+}
+.theme-light {
+  --bg: #fdf6e3;
+  --fg: #586e75;
+  --dim: #93a1a1;
+  --bright: #073642;
+  --prompt-user: #268bd2;
+  --prompt-host: #268bd2;
+  --prompt-path: #6c71c4;
+  --dir-color: #268bd2;
+  --file-color: #586e75;
+  --exec-color: #859900;
+  --hidden-color: #93a1a1;
+  --error-color: #dc322f;
+  --warning-color: #b58900;
+  --info-color: #2aa198;
+  --title-bg: #eee8d5;
+  --title-fg: #586e75;
+  --scrollbar-bg: #eee8d5;
+  --scrollbar-thumb: #93a1a1;
+}
+
+/* ============================================================
+   SHARED TEXT CLASSES
+   ============================================================ */
+.dir { color: var(--dir-color); font-weight: bold; }
+.file { color: var(--file-color); }
+.exec { color: var(--exec-color); font-weight: bold; }
+.hidden-f { color: var(--hidden-color); }
+.error { color: var(--error-color); }
+.warning { color: var(--warning-color); }
+.info { color: var(--info-color); }
+.bold { font-weight: bold; }
+.dim { color: var(--dim); }
+.bright { color: var(--bright); }
+.rainbow { animation: rainbow 2s linear infinite; }
+@keyframes rainbow {
+  0% { color: #ff0000; } 16% { color: #ff8800; } 33% { color: #ffff00; }
+  50% { color: #00ff00; } 66% { color: #0088ff; } 83% { color: #8800ff; }
+  100% { color: #ff0000; }
+}

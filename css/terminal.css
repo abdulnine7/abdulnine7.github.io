@@ -1,0 +1,152 @@
+/* ============================================================
+   TERMINAL WRAPPER (inside window)
+   ============================================================ */
+#terminal-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--bg);
+  min-height: 0;
+}
+
+/* ============================================================
+   TITLE BAR (GNOME style)
+   ============================================================ */
+#title-bar {
+  background: var(--title-bg);
+  color: var(--title-fg);
+  padding: 0 8px;
+  height: 38px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  -webkit-user-select: none;
+  flex-shrink: 0;
+  cursor: grab;
+}
+#title-bar:active {
+  cursor: grabbing;
+}
+
+#title-text {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 8px;
+}
+
+/* ============================================================
+   TERMINAL CONTENT
+   ============================================================ */
+#terminal {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px;
+  color: var(--fg);
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: text;
+  background: var(--bg);
+  font-family: 'Ubuntu Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+}
+#terminal::-webkit-scrollbar { width: 8px; }
+#terminal::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+#terminal::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+
+#output { white-space: pre-wrap; word-wrap: break-word; }
+
+#input-line {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-height: 20px;
+}
+#prompt { color: var(--fg); white-space: pre; flex-shrink: 0; }
+.prompt-user { color: var(--prompt-user); font-weight: bold; }
+.prompt-host { color: var(--prompt-host); font-weight: bold; }
+.prompt-sep { color: var(--fg); }
+.prompt-path { color: var(--prompt-path); font-weight: bold; }
+.prompt-dollar { color: var(--fg); }
+
+#input-container { position: relative; flex: 1; min-width: 0; }
+#input {
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  font-family: 'Ubuntu Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
+  outline: none;
+  width: 100%;
+  caret-color: transparent;
+  line-height: 1.4;
+}
+
+#cursor-overlay {
+  position: absolute; top: 0; left: 0; pointer-events: none;
+  font-family: inherit; font-size: 14px; line-height: 1.4;
+  color: transparent; white-space: pre;
+}
+#fake-cursor {
+  display: inline-block; width: 8px; height: 16px; background: var(--fg);
+  animation: blink 1s step-end infinite; vertical-align: text-bottom;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ============================================================
+   NANO EDITOR (inside window)
+   ============================================================ */
+#nano-editor {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg);
+  z-index: 100;
+  flex-direction: column;
+  padding: 0;
+}
+#nano-editor.active { display: flex; }
+#nano-header {
+  background: #fff; color: #000; padding: 2px 10px;
+  text-align: center; font-weight: bold;
+  font-family: 'Ubuntu Mono', monospace;
+}
+#nano-content {
+  flex: 1; background: var(--bg); color: var(--fg);
+  font-family: 'Ubuntu Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  font-size: 14px; border: none; outline: none; padding: 10px; resize: none;
+  line-height: 1.4;
+}
+#nano-footer {
+  background: #fff; color: #000; padding: 2px 10px; font-size: 12px;
+  font-family: 'Ubuntu Mono', monospace;
+}
+#nano-footer span { margin-right: 20px; }
+
+/* ============================================================
+   VIM EDITOR (inside window)
+   ============================================================ */
+#vim-editor {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: var(--bg);
+  z-index: 100;
+  flex-direction: column;
+}
+#vim-editor.active { display: flex; }
+#vim-content {
+  flex: 1; color: var(--fg);
+  font-family: 'Ubuntu Mono', 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+  font-size: 14px; padding: 10px; overflow-y: auto; white-space: pre-wrap; outline: none;
+}
+#vim-status { background: #222; color: #aaa; padding: 2px 10px; font-size: 13px; }
+#vim-command { background: #111; color: var(--fg); padding: 2px 10px; font-size: 13px; min-height: 20px; }
+
+.top-display { color: var(--fg); }
