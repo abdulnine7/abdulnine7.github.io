@@ -31,12 +31,11 @@ function renderAbout() {
     html += '<p>' + h(p) + '</p>';
   });
   html += '</div></div>';
-  // Quick stats
+  // Quick stats (driven by PROFILE.quickStats)
   html += '<div class="settings-card">';
-  html += '<div class="settings-row"><span class="settings-row-label">Experience</span><span class="settings-row-value">5+ years</span></div>';
-  html += '<div class="settings-row"><span class="settings-row-label">Current</span><span class="settings-row-value">Software Engineer II @ AbbVie</span></div>';
-  html += '<div class="settings-row"><span class="settings-row-label">Education</span><span class="settings-row-value">M.S. Computer Science, San Diego State University</span></div>';
-  html += '<div class="settings-row"><span class="settings-row-label">Focus</span><span class="settings-row-value">Backend Engineering &bull; DevOps &bull; Cloud Infrastructure</span></div>';
+  PROFILE.quickStats.forEach(function(stat) {
+    html += '<div class="settings-row"><span class="settings-row-label">' + h(stat.label) + '</span><span class="settings-row-value">' + h(stat.value) + '</span></div>';
+  });
   html += '</div>';
   if (PROFILE.resume.pdf) {
     html += '<div class="settings-card" style="text-align:center;padding:14px">';

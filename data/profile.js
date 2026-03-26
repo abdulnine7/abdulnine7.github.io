@@ -1,14 +1,34 @@
 // ============================================================
 // PROFILE DATA
+// Edit this file to update all personal information across the
+// entire site — terminal, settings window, and desktop.
 // ============================================================
 
 var PROFILE = {
+
+  // ----------------------------------------------------------
+  // Site & Branding
+  // ----------------------------------------------------------
   site: {
     title: "Abdul's Shellfolio",
-    domain: "linuxy.us",
-    promptUser: "abdul",
-    promptHost: "linuxy.us"
+    domain: "linuxy.us"
   },
+
+  // ----------------------------------------------------------
+  // Terminal Settings
+  // These control the fake terminal prompt, hostname, and the
+  // title bar text.  Change promptUser / promptHost to update
+  // what the terminal prompt looks like.
+  // ----------------------------------------------------------
+  terminal: {
+    promptUser: "abdul",
+    promptHost: "linuxy.us",
+    hostname: "ubuntu-server"          // shown in neofetch, uname, syslog, exit, etc.
+  },
+
+  // ----------------------------------------------------------
+  // About / Bio
+  // ----------------------------------------------------------
   about: {
     name: "Abdul Noushad Sheikh",
     headline: "Welcome to my website!",
@@ -19,6 +39,21 @@ var PROFILE = {
       "I design resilient APIs, automate delivery with modern CI/CD, and turn complex infrastructure into dependable products."
     ]
   },
+
+  // ----------------------------------------------------------
+  // Quick Stats  (shown in the Settings "About Me" card)
+  // Each entry is a label + value pair.
+  // ----------------------------------------------------------
+  quickStats: [
+    { label: "Experience", value: "5+ years" },
+    { label: "Current",    value: "Software Engineer II @ AbbVie" },
+    { label: "Education",  value: "M.S. Computer Science, San Diego State University" },
+    { label: "Focus",      value: "Backend Engineering \u2022 DevOps \u2022 Cloud Infrastructure" }
+  ],
+
+  // ----------------------------------------------------------
+  // Education
+  // ----------------------------------------------------------
   education: [
     {
       school: "San Diego State University",
@@ -33,6 +68,10 @@ var PROFILE = {
       grade: "GPA: 3.66/4"
     }
   ],
+
+  // ----------------------------------------------------------
+  // Skills
+  // ----------------------------------------------------------
   skills: {
     summary: [
       "Backend and DevOps specialist focused on reliable, scalable systems and cloud automation.",
@@ -48,6 +87,10 @@ var PROFILE = {
       "Selenium", "JUnit", "Ansible", "Jenkins", "Helm"
     ]
   },
+
+  // ----------------------------------------------------------
+  // Experience
+  // ----------------------------------------------------------
   experience: [
     {
       company: "AbbVie",
@@ -100,6 +143,10 @@ var PROFILE = {
       ]
     }
   ],
+
+  // ----------------------------------------------------------
+  // Projects
+  // ----------------------------------------------------------
   projects: [
     {
       name: "SSH Parallel Login",
@@ -120,6 +167,10 @@ var PROFILE = {
       tech: "NodeJS, Amazon Web Services, JQuery, NGiNX"
     }
   ],
+
+  // ----------------------------------------------------------
+  // Contact & Social Links
+  // ----------------------------------------------------------
   contact: {
     github: "https://github.com/abdulnine7",
     linkedin: "https://www.linkedin.com/in/abdulnine7",
@@ -128,11 +179,19 @@ var PROFILE = {
     email: "abdulnine7@gmail.com",
     repo: "https://github.com/abdulnine7/abdulnine7.github.io"
   },
+
+  // ----------------------------------------------------------
+  // Resume
+  // ----------------------------------------------------------
   resume: {
     pdf: "assets/pdf/Abdul_Sheikh_Resume.pdf"
   },
+
+  // ----------------------------------------------------------
+  // About Desktop  (shown in Settings → About Desktop)
+  // ----------------------------------------------------------
   aboutDesktop: {
-    madeWith: "Made with Love, Coffee, and Codex (OpenAI)",
+    madeWith: "Made with Love and Agentic Engineering (Codex and Claude)",
     inspiredBy: "Inspired by Ubuntu GNOME",
     domain: "linuxy.us",
     copyright: "\u00a9 Abdul Noushad Sheikh 2026",

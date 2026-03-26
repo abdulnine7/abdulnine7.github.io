@@ -7,32 +7,34 @@ const FS = {
 
 function fsInit() {
   const dirs = [
-    '/home', '/home/user', '/home/user/Documents', '/home/user/Downloads',
-    '/home/user/Desktop', '/etc', '/var', '/var/log', '/usr', '/usr/bin', '/tmp',
+    '/home', '/home/' + username, '/home/' + username + '/Documents', '/home/' + username + '/Downloads',
+    '/home/' + username + '/Desktop', '/etc', '/var', '/var/log', '/usr', '/usr/bin', '/tmp',
     '/proc', '/dev', '/bin', '/sbin', '/opt', '/root',
   ];
   dirs.forEach(p => fsMkdir(p, true));
+  var home = '/home/' + username;
+  var shn = systemHostname;
   const files = {
-    '/home/user/Documents/notes.txt': 'Buy milk. Fix prod. Don\'t rm -rf again.\nRemember to water the plant that\'s been dead for 3 months.',
-    '/home/user/Documents/secret.txt': 'If you\'re reading this... nice snooping \ud83d\udc40\n\nThe cake is a lie. The server is also a lie.\nWe\'re all just processes waiting to be killed.',
-    '/home/user/Downloads/definitely_not_virus.sh': '#!/bin/bash\necho \'just kidding\'\necho \'did you really run a file called definitely_not_virus.sh?\'\necho \'bold move.\'',
-    '/home/user/Desktop/TODO.md': '# TODO List\n\n- [x] Learn vim\n- [ ] Quit vim (day 347)\n- [ ] Stop using sudo for everything\n- [ ] Back up the database (lol who am I kidding)\n- [ ] Figure out what that cron job from 2019 does\n- [ ] Touch grass\n- [ ] Stop saying "it works on my machine"\n- [ ] Actually read the error message before googling it',
-    '/home/user/.bashrc': '# ~/.bashrc: executed by bash for non-login shells\n\n# If not running interactively, don\'t do anything\ncase $- in\n    *i*) ;;\n      *) return;;\nesac\n\nHISTCONTROL=ignoreboth\nHISTSIZE=1000\nHISTFILESIZE=2000\n\nalias ll=\'ls -la\'\nalias la=\'ls -a\'\nalias l=\'ls -CF\'\nalias ..=\'cd ..\'\nalias please=\'sudo\'\nalias yeet=\'rm -rf\'\nalias ffs=\'sudo !!\'\n\n# The developer\'s prayer\n# "May my code compile, may my tests pass,\n# and may I never have to touch CSS again."\n\nexport PATH="$HOME/bin:$PATH"\nexport EDITOR=nano\nPS1=\'\\u@\\h:\\w\\$ \'',
-    '/home/user/.secret': '\ud83c\udf1f Congratulations, you found the secret file! \ud83c\udf1f\n\nHere\'s your reward: the Wi-Fi password is "incorrect".\nWhen someone asks, you can truthfully say\n"the password is incorrect."\n\nAlso, the meaning of life is 42, but you already knew that.',
-    '/etc/passwd': 'root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\nuser:x:1000:1000:User McUserface:/home/user:/bin/bash\ncat:x:1001:1001:Meow:/home/cat:/bin/bash\ncoffee:x:1002:1002:Essential Service:/dev/caffeine:/bin/brew',
-    '/etc/hostname': 'ubuntu-server',
+    [home + '/Documents/notes.txt']: 'Buy milk. Fix prod. Don\'t rm -rf again.\nRemember to water the plant that\'s been dead for 3 months.',
+    [home + '/Documents/secret.txt']: 'If you\'re reading this... nice snooping \ud83d\udc40\n\nThe cake is a lie. The server is also a lie.\nWe\'re all just processes waiting to be killed.',
+    [home + '/Downloads/definitely_not_virus.sh']: '#!/bin/bash\necho \'just kidding\'\necho \'did you really run a file called definitely_not_virus.sh?\'\necho \'bold move.\'',
+    [home + '/Desktop/TODO.md']: '# TODO List\n\n- [x] Learn vim\n- [ ] Quit vim (day 347)\n- [ ] Stop using sudo for everything\n- [ ] Back up the database (lol who am I kidding)\n- [ ] Figure out what that cron job from 2019 does\n- [ ] Touch grass\n- [ ] Stop saying "it works on my machine"\n- [ ] Actually read the error message before googling it',
+    [home + '/.bashrc']: '# ~/.bashrc: executed by bash for non-login shells\n\n# If not running interactively, don\'t do anything\ncase $- in\n    *i*) ;;\n      *) return;;\nesac\n\nHISTCONTROL=ignoreboth\nHISTSIZE=1000\nHISTFILESIZE=2000\n\nalias ll=\'ls -la\'\nalias la=\'ls -a\'\nalias l=\'ls -CF\'\nalias ..=\'cd ..\'\nalias please=\'sudo\'\nalias yeet=\'rm -rf\'\nalias ffs=\'sudo !!\'\n\n# The developer\'s prayer\n# "May my code compile, may my tests pass,\n# and may I never have to touch CSS again."\n\nexport PATH="$HOME/bin:$PATH"\nexport EDITOR=nano\nPS1=\'\\u@\\h:\\w\\$ \'',
+    [home + '/.secret']: '\ud83c\udf1f Congratulations, you found the secret file! \ud83c\udf1f\n\nHere\'s your reward: the Wi-Fi password is "incorrect".\nWhen someone asks, you can truthfully say\n"the password is incorrect."\n\nAlso, the meaning of life is 42, but you already knew that.',
+    '/etc/passwd': 'root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\n' + username + ':x:1000:1000:' + username + ':' + home + ':/bin/bash\ncat:x:1001:1001:Meow:/home/cat:/bin/bash\ncoffee:x:1002:1002:Essential Service:/dev/caffeine:/bin/brew',
+    '/etc/hostname': shn,
     '/etc/os-release': 'PRETTY_NAME="Ubuntu 22.04.3 LTS"\nNAME="Ubuntu"\nVERSION_ID="22.04"\nVERSION="22.04.3 LTS (Jammy Jellyfish)"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL="https://www.ubuntu.com/"\nSUPPORT_URL="https://help.ubuntu.com/"\nBUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"',
-    '/var/log/syslog': `Mar 23 08:01:12 ubuntu-server systemd[1]: Started Daily apt upgrade and clean activities.
-Mar 23 08:01:15 ubuntu-server kernel: [42069.123] CPU0: Temperature above threshold
-Mar 23 08:01:15 ubuntu-server kernel: [42069.124] Just kidding, everything is fine
-Mar 23 08:02:30 ubuntu-server sshd[1337]: Accepted publickey for user from 192.168.1.42
-Mar 23 08:03:01 ubuntu-server CRON[2048]: (root) CMD (echo "I'm still running" > /dev/null)
-Mar 23 08:05:22 ubuntu-server kernel: [42200.567] eth0: link up, 1000 Mbps
-Mar 23 08:10:45 ubuntu-server systemd[1]: Started Coffee Brewing Service.
-Mar 23 08:10:46 ubuntu-server coffee[3141]: Brewing espresso... done (0.003s)
-Mar 23 08:15:00 ubuntu-server existential-crisis[4242]: Why am I a log file?
-Mar 23 08:20:12 ubuntu-server nginx[5555]: GET /api/meaning-of-life 200 42ms
-Mar 23 08:25:30 ubuntu-server sudo[6666]: user tried sudo again. lol.`,
+    '/var/log/syslog': `Mar 23 08:01:12 ${shn} systemd[1]: Started Daily apt upgrade and clean activities.
+Mar 23 08:01:15 ${shn} kernel: [42069.123] CPU0: Temperature above threshold
+Mar 23 08:01:15 ${shn} kernel: [42069.124] Just kidding, everything is fine
+Mar 23 08:02:30 ${shn} sshd[1337]: Accepted publickey for ${username} from 192.168.1.42
+Mar 23 08:03:01 ${shn} CRON[2048]: (root) CMD (echo "I'm still running" > /dev/null)
+Mar 23 08:05:22 ${shn} kernel: [42200.567] eth0: link up, 1000 Mbps
+Mar 23 08:10:45 ${shn} systemd[1]: Started Coffee Brewing Service.
+Mar 23 08:10:46 ${shn} coffee[3141]: Brewing espresso... done (0.003s)
+Mar 23 08:15:00 ${shn} existential-crisis[4242]: Why am I a log file?
+Mar 23 08:20:12 ${shn} nginx[5555]: GET /api/meaning-of-life 200 42ms
+Mar 23 08:25:30 ${shn} sudo[6666]: ${username} tried sudo again. lol.`,
   };
   for (const [path, content] of Object.entries(files)) {
     fsWriteFile(path, content, true);
@@ -40,8 +42,8 @@ Mar 23 08:25:30 ubuntu-server sudo[6666]: user tried sudo again. lol.`,
 }
 
 function fsResolve(path, cwd) {
-  if (path === '~') path = '/home/' + (typeof username !== 'undefined' ? username : 'user');
-  else if (path.startsWith('~/')) path = '/home/' + (typeof username !== 'undefined' ? username : 'user') + path.slice(1);
+  if (path === '~') path = '/home/' + username;
+  else if (path.startsWith('~/')) path = '/home/' + username + path.slice(1);
   if (!path.startsWith('/')) path = cwd + (cwd.endsWith('/') ? '' : '/') + path;
   const parts = path.split('/').filter(Boolean);
   const resolved = [];
@@ -136,9 +138,10 @@ function fsCopy(src, dest) {
 // ============================================================
 // TERMINAL STATE
 // ============================================================
-let cwd = '/home/user';
-let username = 'user';
-let hostname = 'ubuntu-server';
+let username = (typeof PROFILE !== 'undefined' && PROFILE.terminal && PROFILE.terminal.promptUser) ? PROFILE.terminal.promptUser : 'user';
+let hostname = (typeof PROFILE !== 'undefined' && PROFILE.terminal && PROFILE.terminal.promptHost) ? PROFILE.terminal.promptHost : 'ubuntu-server';
+let systemHostname = (typeof PROFILE !== 'undefined' && PROFILE.terminal && PROFILE.terminal.hostname) ? PROFILE.terminal.hostname : 'ubuntu-server';
+let cwd = '/home/' + username;
 const startTime = Date.now();
 let commandHistory = [];
 let historyIndex = -1;
@@ -146,7 +149,7 @@ let interruptFlag = false;
 let runningProcess = null;
 let failedCommandCount = 0;
 const aliases = { ll: 'ls -la', la: 'ls -a', l: 'ls -CF', '..': 'cd ..', please: 'sudo', yeet: 'rm -rf' };
-let envVars = { HOME: '/home/user', USER: 'user', SHELL: '/bin/bash', PATH: '/usr/bin:/bin', TERM: 'xterm-256color', EDITOR: 'nano' };
+let envVars = { HOME: '/home/' + username, USER: username, SHELL: '/bin/bash', PATH: '/usr/bin:/bin', TERM: 'xterm-256color', EDITOR: 'nano' };
 const emptyQuips = [
   "I'm waiting...", "...", "Did you forget how to type?", "*crickets*",
   "The void stares back.", "I have all day. Not really, but still.",
@@ -862,7 +865,7 @@ commands.whoami = () => { const r = `${username} (but existentially, who is any 
 commands.hostname = () => { print(esc(hostname)); return hostname; };
 commands['uname'] = (args) => {
   const full = args.includes('-a');
-  const r = full ? 'Linux ubuntu-server 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux' : 'Linux';
+  const r = full ? 'Linux ' + systemHostname + ' 5.15.0-91-generic #101-Ubuntu SMP Tue Nov 14 13:30:08 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux' : 'Linux';
   print(esc(r)); return r;
 };
 commands.uptime = () => { const r = getUptime(); print(esc(r)); return r; };
@@ -1783,7 +1786,7 @@ commands.exit = () => {
   return new Promise(async (resolve) => {
     print(esc("Goodbye. Try not to break anything on your way out."), 'warning');
     await sleep(500);
-    print(esc('\nConnection to ubuntu-server closed.'));
+    print(esc('\nConnection to ' + systemHostname + ' closed.'));
     await sleep(300);
     inputEl.disabled = true;
     print('\n<span class="dim">Session ended. Refresh page to reconnect.</span>');
