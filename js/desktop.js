@@ -142,15 +142,20 @@
     if (terminalWindow.classList.contains('minimized')) {
       terminalWindow.classList.remove('minimized');
       dockTerminalIcon.classList.add('active');
+      bringWindowToFront('terminal-window');
       terminalInput.focus();
     } else {
-      // If visible, minimize it (toggle behavior)
       terminalWindow.classList.add('minimized');
     }
   });
 
+  // Bring terminal to front on click
+  terminalWindow.addEventListener('mousedown', function() {
+    bringWindowToFront('terminal-window');
+  });
+
   // Other dock icons: show a brief "not available" tooltip effect
-  document.querySelectorAll('.dock-icon:not([data-app="terminal"]):not([data-app="settings"])').forEach(function(icon) {
+  document.querySelectorAll('.dock-icon:not([data-app="terminal"]):not([data-app="settings"]):not([data-app="files"])').forEach(function(icon) {
     icon.addEventListener('click', function() {
       var app = icon.getAttribute('data-app');
       // Briefly show the icon name isn't available

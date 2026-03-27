@@ -328,9 +328,7 @@ dockSettingsIcon.addEventListener('click', function() {
   if (settingsWindow.classList.contains('minimized')) {
     settingsWindow.classList.remove('minimized');
     dockSettingsIcon.classList.add('active');
-    // Bring to front
-    settingsWindow.style.zIndex = 30;
-    document.getElementById('terminal-window').style.zIndex = 10;
+    bringWindowToFront('settings-window');
   } else {
     settingsWindow.classList.add('minimized');
   }
@@ -338,12 +336,7 @@ dockSettingsIcon.addEventListener('click', function() {
 
 // --- Bring to front on click ---
 settingsWindow.addEventListener('mousedown', function() {
-  settingsWindow.style.zIndex = 30;
-  document.getElementById('terminal-window').style.zIndex = 10;
-});
-document.getElementById('terminal-window').addEventListener('mousedown', function() {
-  document.getElementById('terminal-window').style.zIndex = 30;
-  settingsWindow.style.zIndex = 10;
+  bringWindowToFront('settings-window');
 });
 
 // --- Center settings window ---
