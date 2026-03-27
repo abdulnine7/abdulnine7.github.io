@@ -272,6 +272,8 @@ function bindContentEvents() {
       var path = el.getAttribute('data-path');
       if (type === 'dir') {
         navigate(path);
+      } else if (typeof window.notepadOpenFile === 'function') {
+        window.notepadOpenFile(path);
       } else {
         openPreview(path, el.getAttribute('data-name'));
       }
