@@ -162,6 +162,15 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
+// Dock "Show Apps" button
+var dockShowApps = document.getElementById('dock-show-apps');
+if (dockShowApps) {
+  dockShowApps.addEventListener('click', function(e) {
+    e.stopPropagation();
+    toggleOverlay();
+  });
+}
+
 // Init
 buildGrid();
 

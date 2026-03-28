@@ -103,6 +103,16 @@
   border-radius: 50%;
 }
 
+/* Hide non-pinned dock icons unless the app is open (active) */
+.dock-icon:not([data-pinned]):not(.active):not(#dock-show-apps) {
+  display: none;
+}
+
+/* Show Apps button stays at bottom */
+#dock-show-apps {
+  margin-top: auto;
+}
+
 .dock-separator {
   width: 32px;
   height: 1px;
