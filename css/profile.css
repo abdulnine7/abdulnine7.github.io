@@ -1,7 +1,7 @@
 /* ============================================================
-   SETTINGS WINDOW
+   PROFILE WINDOW
    ============================================================ */
-#settings-window {
+#profile-window {
   top: 20px;
   left: 80px;
   width: 820px;
@@ -14,8 +14,8 @@
   color: #eee;
 }
 
-/* --- Settings Header Bar --- */
-#settings-header {
+/* --- Profile Header Bar --- */
+#profile-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -28,9 +28,9 @@
   cursor: grab;
   border-bottom: 1px solid #3a3a3a;
 }
-#settings-header:active { cursor: grabbing; }
+#profile-header:active { cursor: grabbing; }
 
-#settings-title {
+#profile-title {
   flex: 1;
   text-align: center;
   font-size: 14px;
@@ -38,15 +38,15 @@
   color: #eee;
 }
 
-/* --- Settings Body (sidebar + content) --- */
-#settings-body {
+/* --- Profile Body (sidebar + content) --- */
+#profile-body {
   display: flex;
   flex: 1;
   min-height: 0;
 }
 
-/* --- Settings Sidebar --- */
-#settings-sidebar {
+/* --- Profile Sidebar --- */
+#profile-sidebar {
   width: 200px;
   flex-shrink: 0;
   background: #252525;
@@ -54,10 +54,10 @@
   overflow-y: auto;
   padding: 6px 0;
 }
-#settings-sidebar::-webkit-scrollbar { width: 4px; }
-#settings-sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+#profile-sidebar::-webkit-scrollbar { width: 4px; }
+#profile-sidebar::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
 
-.settings-nav-item {
+.profile-nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -69,64 +69,64 @@
   border-radius: 6px;
   margin: 2px 6px;
 }
-.settings-nav-item:hover {
+.profile-nav-item:hover {
   background: rgba(255,255,255,0.07);
   color: #fff;
 }
-.settings-nav-item.active {
+.profile-nav-item.active {
   background: #e95420;
   color: #fff;
 }
-.settings-nav-item svg {
+.profile-nav-item svg {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
   fill: currentColor;
 }
 
-/* --- Settings Content Area --- */
-#settings-content {
+/* --- Profile Content Area --- */
+#profile-content {
   flex: 1;
   overflow-y: auto;
   padding: 28px 32px;
   background: #1e1e1e;
   min-width: 0;
 }
-#settings-content::-webkit-scrollbar { width: 6px; }
-#settings-content::-webkit-scrollbar-track { background: transparent; }
-#settings-content::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+#profile-content::-webkit-scrollbar { width: 6px; }
+#profile-content::-webkit-scrollbar-track { background: transparent; }
+#profile-content::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
 
 /* --- Section Titles --- */
-.settings-section-title {
+.profile-section-title {
   font-size: 22px;
   font-weight: 700;
   color: #fff;
   margin-bottom: 4px;
 }
-.settings-section-subtitle {
+.profile-section-subtitle {
   font-size: 13px;
   color: #999;
   margin-bottom: 20px;
 }
 
 /* --- Card Container --- */
-.settings-card {
+.profile-card {
   background: #2a2a2a;
   border: 1px solid #3a3a3a;
   border-radius: 10px;
   padding: 18px 20px;
   margin-bottom: 14px;
 }
-.settings-card:last-child { margin-bottom: 0; }
+.profile-card:last-child { margin-bottom: 0; }
 
 /* --- About Profile --- */
-.settings-profile {
+.profile-profile {
   display: flex;
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
 }
-.settings-avatar {
+.profile-avatar {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -140,42 +140,42 @@
   flex-shrink: 0;
   overflow: hidden;
 }
-.settings-avatar img {
+.profile-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.settings-profile-info h2 {
+.profile-profile-info h2 {
   font-size: 20px;
   font-weight: 600;
   color: #fff;
   margin: 0 0 2px;
 }
-.settings-profile-info p {
+.profile-profile-info p {
   font-size: 13px;
   color: #aaa;
   margin: 0;
 }
 
 /* --- Bio --- */
-.settings-bio p {
+.profile-bio p {
   font-size: 13.5px;
   color: #ccc;
   line-height: 1.6;
   margin-bottom: 8px;
 }
-.settings-bio p:last-child { margin-bottom: 0; }
+.profile-bio p:last-child { margin-bottom: 0; }
 
 /* --- Key-Value Rows --- */
-.settings-row {
+.profile-row {
   display: flex;
   align-items: flex-start;
   padding: 10px 0;
   border-bottom: 1px solid #333;
   gap: 12px;
 }
-.settings-row:last-child { border-bottom: none; }
-.settings-row-label {
+.profile-row:last-child { border-bottom: none; }
+.profile-row-label {
   width: 110px;
   flex-shrink: 0;
   font-size: 12px;
@@ -185,7 +185,7 @@
   letter-spacing: 0.5px;
   padding-top: 2px;
 }
-.settings-row-value {
+.profile-row-value {
   flex: 1;
   font-size: 13.5px;
   color: #ddd;
@@ -193,13 +193,13 @@
 }
 
 /* --- Experience / Education Cards --- */
-.settings-exp-header {
+.profile-exp-header {
   display: flex;
   align-items: center;
   gap: 14px;
   margin-bottom: 10px;
 }
-.settings-exp-logo {
+.profile-exp-logo {
   width: 40px;
   height: 40px;
   border-radius: 8px;
@@ -213,44 +213,44 @@
   color: #e95420;
   overflow: hidden;
 }
-.settings-exp-logo img {
+.profile-exp-logo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-.settings-exp-title {
+.profile-exp-title {
   flex: 1;
 }
-.settings-exp-title h3 {
+.profile-exp-title h3 {
   font-size: 15px;
   font-weight: 600;
   color: #fff;
   margin: 0;
 }
-.settings-exp-title .settings-exp-sub {
+.profile-exp-title .profile-exp-sub {
   font-size: 12px;
   color: #999;
   margin: 2px 0 0;
 }
-.settings-exp-period {
+.profile-exp-period {
   font-size: 12px;
   color: #888;
   flex-shrink: 0;
   text-align: right;
 }
-.settings-exp-bullets {
+.profile-exp-bullets {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.settings-exp-bullets li {
+.profile-exp-bullets li {
   font-size: 13px;
   color: #bbb;
   line-height: 1.55;
   padding: 3px 0 3px 16px;
   position: relative;
 }
-.settings-exp-bullets li::before {
+.profile-exp-bullets li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -262,13 +262,13 @@
 }
 
 /* --- Skills Tags --- */
-.settings-tags {
+.profile-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 4px;
 }
-.settings-tag {
+.profile-tag {
   background: #333;
   border: 1px solid #444;
   border-radius: 6px;
@@ -277,45 +277,45 @@
   color: #ddd;
   transition: background 0.12s;
 }
-.settings-tag:hover {
+.profile-tag:hover {
   background: #3a3a3a;
 }
-.settings-tag.proficient {
+.profile-tag.proficient {
   border-color: #e95420;
   color: #f0a080;
 }
 
 /* --- Project Card --- */
-.settings-project-title {
+.profile-project-title {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.settings-project-title h3 {
+.profile-project-title h3 {
   font-size: 15px;
   font-weight: 600;
   color: #fff;
   margin: 0;
 }
-.settings-project-title a {
+.profile-project-title a {
   color: #e95420;
   font-size: 12px;
   text-decoration: none;
 }
-.settings-project-title a:hover { text-decoration: underline; }
-.settings-project-desc {
+.profile-project-title a:hover { text-decoration: underline; }
+.profile-project-desc {
   font-size: 13px;
   color: #bbb;
   line-height: 1.55;
   margin: 8px 0;
 }
-.settings-project-tech {
+.profile-project-tech {
   font-size: 12px;
   color: #888;
 }
 
 /* --- Contact Links --- */
-.settings-contact-link {
+.profile-contact-link {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -326,34 +326,34 @@
   color: #ddd;
   font-size: 13.5px;
 }
-.settings-contact-link:hover {
+.profile-contact-link:hover {
   background: rgba(255,255,255,0.06);
 }
-.settings-contact-link svg {
+.profile-contact-link svg {
   width: 20px;
   height: 20px;
   fill: currentColor;
   flex-shrink: 0;
   opacity: 0.7;
 }
-.settings-contact-label {
+.profile-contact-label {
   font-size: 11px;
   color: #888;
   min-width: 70px;
 }
-.settings-contact-value {
+.profile-contact-value {
   color: #e95420;
 }
 
 /* --- About Desktop Section --- */
-.settings-desktop-logo {
+.profile-desktop-logo {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 20px 0 10px;
 }
-.settings-desktop-logo .ubuntu-circle {
+.profile-desktop-logo .ubuntu-circle {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -363,18 +363,18 @@
   justify-content: center;
   margin-bottom: 14px;
 }
-.settings-desktop-logo .ubuntu-circle svg {
+.profile-desktop-logo .ubuntu-circle svg {
   width: 44px;
   height: 44px;
   fill: #fff;
 }
-.settings-desktop-logo h2 {
+.profile-desktop-logo h2 {
   font-size: 18px;
   font-weight: 600;
   color: #fff;
   margin: 0 0 4px;
 }
-.settings-desktop-logo p {
+.profile-desktop-logo p {
   font-size: 13px;
   color: #999;
   margin: 2px 0;

@@ -1,7 +1,7 @@
 // ============================================================
 // PROFILE DATA
 // Edit this file to update all personal information across the
-// entire site — terminal, settings window, and desktop.
+// entire site — terminal, profile window, and desktop.
 // ============================================================
 
 var PROFILE = {
@@ -15,7 +15,7 @@ var PROFILE = {
   },
 
   // ----------------------------------------------------------
-  // Terminal Settings
+  // Terminal
   // These control the fake terminal prompt, hostname, and the
   // title bar text.  Change promptUser / promptHost to update
   // what the terminal prompt looks like.
@@ -41,7 +41,7 @@ var PROFILE = {
   },
 
   // ----------------------------------------------------------
-  // Quick Stats  (shown in the Settings "About Me" card)
+  // Quick Stats  (shown in the Profile "About Me" card)
   // Each entry is a label + value pair.
   // ----------------------------------------------------------
   quickStats: [
@@ -188,7 +188,7 @@ var PROFILE = {
   },
 
   // ----------------------------------------------------------
-  // About Desktop  (shown in Settings → About Desktop)
+  // About Desktop  (shown in Profile → About Desktop)
   // ----------------------------------------------------------
   aboutDesktop: {
     madeWith: "Made with Love and Agentic Engineering (Codex and Claude)",

@@ -205,14 +205,14 @@
   color: #fff;
 }
 .btn-close:hover,
-.settings-btn-close:hover {
+.profile-btn-close:hover {
   background: #e95420;
   color: #fff;
 }
 
 /* --- Resize handles --- */
 #resize-handle,
-#settings-resize-handle {
+#profile-resize-handle {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -256,7 +256,7 @@
     height: 24px;
   }
   #terminal-window,
-  #settings-window {
+  #profile-window {
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;

@@ -195,7 +195,7 @@
     if (action === 'change-wallpaper') {
       cycleWallpaper();
     }
-    if (action === 'display-settings') {
+    if (action === 'display-profile') {
       terminalWindow.classList.remove('minimized');
       dockTerminalIcon.classList.add('active');
       terminalInput.focus();
