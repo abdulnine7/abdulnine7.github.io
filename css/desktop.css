@@ -70,9 +70,9 @@
 }
 
 .dock-icon {
-  width: 42px;
-  height: 42px;
-  padding: 6px;
+  width: 50px;
+  height: 50px;
+  padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   transition: transform 0.15s, background 0.15s;
@@ -86,8 +86,8 @@
   transform: scale(1.12);
 }
 .dock-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
 }
 
 /* Active indicator dot */
@@ -251,7 +251,7 @@
    ============================================================ */
 @media (max-width: 600px) {
   #ubuntu-desktop {
-    grid-template-columns: 48px 1fr;
+    grid-template-columns: 56px 1fr;
   }
   #dock {
     padding: 4px 0;

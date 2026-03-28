@@ -15,7 +15,7 @@ html, body {
 #ubuntu-desktop {
   display: grid;
   grid-template-rows: 28px 1fr;
-  grid-template-columns: 58px 1fr;
+  grid-template-columns: 68px 1fr;
   grid-template-areas:
     "panel panel"
     "dock  desktop";
