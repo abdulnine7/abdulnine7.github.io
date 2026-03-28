@@ -1,30 +1,34 @@
 // ============================================================
-// MUSIC PLAYER – Rhythmbox-style (Mock Data)
+// MUSIC PLAYER – Classical Music (Real Audio)
 // ============================================================
 (function() {
 
 // ============================================================
-// MOCK PLAYLIST DATA
+// PLAYLIST DATA (actual MP3 files)
 // ============================================================
 var playlist = [
-  { title: 'Sudo Make Me a Sandwich', artist: 'The Terminals',     album: 'Root Access',         duration: 222, gradient: 'linear-gradient(135deg, #e95420, #f7a541)' },
-  { title: '404 Love Not Found',      artist: 'Null Pointer',      album: 'Exception Handling',  duration: 255, gradient: 'linear-gradient(135deg, #3a86ff, #8338ec)' },
-  { title: 'Merge Conflict Blues',     artist: 'Git & The Branches',album: 'Version Control',     duration: 238, gradient: 'linear-gradient(135deg, #06d6a0, #118ab2)' },
-  { title: 'Infinite Loop',           artist: 'Stack Overflow',    album: 'Recursion',           duration: 301, gradient: 'linear-gradient(135deg, #ef476f, #ffd166)' },
-  { title: 'Hello World',             artist: 'The Compilers',     album: 'First Commit',        duration: 175, gradient: 'linear-gradient(135deg, #7209b7, #f72585)' },
-  { title: 'Segfault Serenade',       artist: 'Core Dump',         album: 'Memory Leaks',        duration: 273, gradient: 'linear-gradient(135deg, #fb5607, #ff006e)' },
-  { title: 'Binary Sunset',           artist: 'The Algorithms',    album: 'Big O Notation',      duration: 201, gradient: 'linear-gradient(135deg, #ffbe0b, #fb5607)' },
-  { title: 'Cache Me Outside',        artist: 'RAM Dynasty',       album: 'Volatile Storage',    duration: 227, gradient: 'linear-gradient(135deg, #00bbf9, #00f5d4)' },
-  { title: 'Async Await',             artist: 'Promise.all()',     album: 'Event Loop',          duration: 248, gradient: 'linear-gradient(135deg, #9b5de5, #00bbf9)' },
-  { title: 'Deploy on Friday',        artist: 'The Hotfixes',      album: 'Production Down',     duration: 194, gradient: 'linear-gradient(135deg, #f15bb5, #fee440)' }
+  { title: 'Für Elise',           artist: 'Ludwig van Beethoven',  album: 'Bagatelles',           src: 'assets/music/fur-elise.mp3',         gradient: 'linear-gradient(135deg, #e95420, #f7a541)' },
+  { title: 'Moonlight Sonata',    artist: 'Ludwig van Beethoven',  album: 'Piano Sonata No. 14',  src: 'assets/music/moonlight-sonata.mp3',  gradient: 'linear-gradient(135deg, #1a1a3e, #4a4a8a)' },
+  { title: 'Clair de Lune',       artist: 'Claude Debussy',        album: 'Suite Bergamasque',    src: 'assets/music/clair-de-lune.mp3',     gradient: 'linear-gradient(135deg, #3a86ff, #8338ec)' },
+  { title: 'Prelude in C Major',  artist: 'Johann Sebastian Bach', album: 'Well-Tempered Clavier',src: 'assets/music/prelude-in-c.mp3',      gradient: 'linear-gradient(135deg, #06d6a0, #118ab2)' },
+  { title: 'Nocturne No. 2',      artist: 'Frédéric Chopin',       album: 'Nocturnes, Op. 9',     src: 'assets/music/nocturne-no2.mp3',      gradient: 'linear-gradient(135deg, #7209b7, #f72585)' },
+  { title: 'Gymnopédie No. 1',    artist: 'Erik Satie',            album: 'Trois Gymnopédies',    src: 'assets/music/gymnopedie.mp3',        gradient: 'linear-gradient(135deg, #9b5de5, #00bbf9)' },
+  { title: 'Minute Waltz',        artist: 'Frédéric Chopin',       album: 'Waltzes, Op. 64',      src: 'assets/music/minute-waltz.mp3',      gradient: 'linear-gradient(135deg, #ef476f, #ffd166)' },
+  { title: 'Air on the G String', artist: 'Johann Sebastian Bach', album: 'Orchestral Suite No. 3',src: 'assets/music/air-on-g-string.mp3',  gradient: 'linear-gradient(135deg, #ffbe0b, #fb5607)' },
+  { title: 'Winter',              artist: 'Antonio Vivaldi',       album: 'The Four Seasons',     src: 'assets/music/winter.mp3',            gradient: 'linear-gradient(135deg, #00bbf9, #00f5d4)' },
+  { title: 'Ave Verum Corpus',    artist: 'Wolfgang A. Mozart',    album: 'K. 618',               src: 'assets/music/ave-verum-corpus.mp3',  gradient: 'linear-gradient(135deg, #f15bb5, #fee440)' }
 ];
 
 var currentIndex = 0;
 var isPlaying = false;
-var elapsed = 0;
-var playInterval = null;
 var shuffleOn = false;
 var repeatOn = false;
+
+// ============================================================
+// AUDIO ELEMENT
+// ============================================================
+var audio = new Audio();
+audio.preload = 'auto';
 
 // ============================================================
 // DOM REFERENCES
@@ -39,8 +43,10 @@ var dockIcon      = document.querySelector('.dock-icon[data-app="music"]');
 // HELPERS
 // ============================================================
 function formatTime(seconds) {
-  var m = Math.floor(seconds / 60);
-  var s = seconds % 60;
+  if (isNaN(seconds) || !isFinite(seconds)) return '0:00';
+  var s = Math.floor(seconds);
+  var m = Math.floor(s / 60);
+  s = s % 60;
   return m + ':' + (s < 10 ? '0' : '') + s;
 }
 
@@ -70,19 +76,45 @@ function renderNowPlaying() {
         '</div>' +
         '<div class="music-time">' +
           '<span id="music-time-elapsed">0:00</span>' +
-          '<span id="music-time-total">' + formatTime(track.duration) + '</span>' +
+          '<span id="music-time-total">' + formatTime(audio.duration) + '</span>' +
         '</div>' +
       '</div>' +
     '</div>';
 
-  // Attach progress bar click
+  // Attach progress bar click + drag (seek)
   var bar = document.getElementById('music-progress-bar');
   if (bar) {
-    bar.addEventListener('click', function(e) {
+    var seeking = false;
+
+    function seekTo(e) {
+      if (!audio.duration) return;
       var rect = bar.getBoundingClientRect();
-      var pct = (e.clientX - rect.left) / rect.width;
-      elapsed = Math.floor(pct * currentTrack().duration);
+      var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      var targetTime = pct * audio.duration;
+      // Only seek within buffered range to avoid restart
+      if (audio.buffered.length > 0) {
+        var buffEnd = audio.buffered.end(audio.buffered.length - 1);
+        targetTime = Math.min(targetTime, buffEnd - 0.1);
+      }
+      try { audio.currentTime = Math.max(0, targetTime); } catch(err) {}
       updateProgress();
+    }
+
+    bar.addEventListener('mousedown', function(e) {
+      seeking = true;
+      seekTo(e);
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (seeking) {
+        seekTo(e);
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('mouseup', function() {
+      seeking = false;
     });
   }
 }
@@ -144,7 +176,7 @@ function renderPlaylist() {
           '<div class="music-playlist-name">' + track.title + '</div>' +
           '<div class="music-playlist-artist">' + track.artist + '</div>' +
         '</div>' +
-        '<span class="music-playlist-duration">' + formatTime(track.duration) + '</span>' +
+        '<span class="music-playlist-duration"></span>' +
       '</div>';
   });
   pl.innerHTML = html;
@@ -156,56 +188,53 @@ function renderPlaylist() {
     var idx = parseInt(item.getAttribute('data-index'), 10);
     if (idx === currentIndex && isPlaying) return;
     currentIndex = idx;
-    elapsed = 0;
     loadTrack();
     if (!isPlaying) togglePlay();
   });
 }
 
 // ============================================================
-// PLAYBACK ENGINE
+// AUDIO PLAYBACK
 // ============================================================
 function updateProgress() {
-  var track = currentTrack();
   var fill = document.getElementById('music-progress-fill');
   var elapsedEl = document.getElementById('music-time-elapsed');
-  if (fill) fill.style.width = (elapsed / track.duration * 100) + '%';
-  if (elapsedEl) elapsedEl.textContent = formatTime(elapsed);
-}
-
-function tick() {
-  elapsed++;
-  if (elapsed >= currentTrack().duration) {
-    advanceTrack();
-    return;
+  var totalEl = document.getElementById('music-time-total');
+  if (fill && audio.duration) {
+    fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
   }
-  updateProgress();
+  if (elapsedEl) elapsedEl.textContent = formatTime(audio.currentTime);
+  if (totalEl && audio.duration) totalEl.textContent = formatTime(audio.duration);
 }
 
 function togglePlay() {
   if (isPlaying) {
+    audio.pause();
     isPlaying = false;
-    clearInterval(playInterval);
-    playInterval = null;
   } else {
+    // Load source if not set
+    if (!audio.src || audio.src === location.href) {
+      audio.src = currentTrack().src;
+    }
+    audio.play().catch(function() {});
     isPlaying = true;
-    playInterval = setInterval(tick, 1000);
   }
   renderControls();
 }
 
 function loadTrack() {
-  elapsed = 0;
+  var wasPlaying = isPlaying;
+  audio.src = currentTrack().src;
+  audio.load();
   renderNowPlaying();
   renderControls();
   renderPlaylist();
-  updateProgress();
+  if (wasPlaying) {
+    audio.play().catch(function() {});
+  }
 }
 
 function advanceTrack() {
-  clearInterval(playInterval);
-  playInterval = null;
-
   if (shuffleOn) {
     var next = Math.floor(Math.random() * playlist.length);
     if (next === currentIndex) next = (next + 1) % playlist.length;
@@ -218,26 +247,18 @@ function advanceTrack() {
       } else {
         currentIndex = playlist.length - 1;
         isPlaying = false;
-        loadTrack();
+        renderControls();
         return;
       }
     }
   }
-
-  elapsed = 0;
   loadTrack();
-  if (isPlaying) {
-    playInterval = setInterval(tick, 1000);
-  }
+  audio.play().catch(function() {});
+  isPlaying = true;
+  renderControls();
 }
 
 function nextTrack() {
-  var wasPlaying = isPlaying;
-  if (isPlaying) {
-    clearInterval(playInterval);
-    playInterval = null;
-  }
-
   if (shuffleOn) {
     var next = Math.floor(Math.random() * playlist.length);
     if (next === currentIndex) next = (next + 1) % playlist.length;
@@ -245,38 +266,32 @@ function nextTrack() {
   } else {
     currentIndex = (currentIndex + 1) % playlist.length;
   }
-
-  elapsed = 0;
   loadTrack();
-  if (wasPlaying) {
-    isPlaying = true;
-    playInterval = setInterval(tick, 1000);
-    renderControls();
+  if (isPlaying) {
+    audio.play().catch(function() {});
   }
 }
 
 function prevTrack() {
-  var wasPlaying = isPlaying;
-  if (isPlaying) {
-    clearInterval(playInterval);
-    playInterval = null;
-  }
-
-  if (elapsed > 3) {
+  if (audio.currentTime > 3) {
     // Restart current track if more than 3 seconds in
-    elapsed = 0;
+    audio.currentTime = 0;
   } else {
     currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
-    elapsed = 0;
-  }
-
-  loadTrack();
-  if (wasPlaying) {
-    isPlaying = true;
-    playInterval = setInterval(tick, 1000);
-    renderControls();
+    loadTrack();
+    if (isPlaying) {
+      audio.play().catch(function() {});
+    }
   }
 }
+
+// Audio events
+audio.addEventListener('timeupdate', updateProgress);
+audio.addEventListener('ended', advanceTrack);
+audio.addEventListener('loadedmetadata', function() {
+  var totalEl = document.getElementById('music-time-total');
+  if (totalEl) totalEl.textContent = formatTime(audio.duration);
+});
 
 // ============================================================
 // WINDOW MANAGEMENT (drag, resize, minimize/maximize/close, dock)
@@ -359,9 +374,8 @@ if (btnClose) {
     if (dockIcon) dockIcon.classList.remove('active');
     // Stop playback on close
     if (isPlaying) {
+      audio.pause();
       isPlaying = false;
-      clearInterval(playInterval);
-      playInterval = null;
     }
   });
 }
@@ -424,6 +438,7 @@ requestAnimationFrame(function() { requestAnimationFrame(centerMusic); });
 // ============================================================
 // INIT
 // ============================================================
+audio.src = currentTrack().src;
 renderNowPlaying();
 renderControls();
 renderPlaylist();
