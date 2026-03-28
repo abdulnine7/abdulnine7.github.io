@@ -1,0 +1,142 @@
+/* ============================================================
+   WEATHER WINDOW
+   ============================================================ */
+#weather-window {
+  top: 60px;
+  left: 120px;
+  width: 500px;
+  height: 420px;
+  min-width: 380px;
+  min-height: 320px;
+  z-index: 20;
+  background: #1e1e1e;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  color: #eee;
+}
+
+/* --- Weather Header Bar --- */
+#weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2d2d2d;
+  padding: 0 8px;
+  height: 38px;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  border-bottom: 1px solid #3a3a3a;
+}
+#weather-header:active { cursor: grabbing; }
+
+#weather-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #eee;
+}
+
+/* --- City Selector Bar --- */
+#weather-city-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: #252525;
+  padding: 6px 12px;
+  border-bottom: 1px solid #3a3a3a;
+  flex-shrink: 0;
+}
+
+.weather-city-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  background: #333;
+  color: #bbb;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  outline: none;
+}
+.weather-city-btn:hover {
+  background: #444;
+  color: #fff;
+}
+.weather-city-btn.active {
+  background: #e95420;
+  color: #fff;
+}
+
+/* --- Main Weather Display --- */
+#weather-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  flex-shrink: 0;
+}
+
+.weather-temp {
+  font-size: 64px;
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.weather-icon {
+  font-size: 60px;
+  text-align: center;
+  margin: 8px 0;
+  line-height: 1;
+}
+
+.weather-condition {
+  font-size: 16px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.weather-location {
+  font-size: 13px;
+  color: #888;
+  margin-top: 6px;
+}
+
+.weather-updated {
+  font-size: 11px;
+  color: #555;
+  margin-top: 8px;
+}
+
+/* --- Weather Details Grid --- */
+#weather-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+
+.weather-detail-card {
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+.weather-detail-label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.weather-detail-value {
+  font-size: 18px;
+  color: #ddd;
+  font-weight: 500;
+}

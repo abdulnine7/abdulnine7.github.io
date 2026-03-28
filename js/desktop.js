@@ -154,11 +154,9 @@
     bringWindowToFront('terminal-window');
   });
 
-  // Other dock icons: show a brief "not available" tooltip effect
-  document.querySelectorAll('.dock-icon:not([data-app="terminal"]):not([data-app="settings"]):not([data-app="files"]):not([data-app="text-editor"])').forEach(function(icon) {
+  // Trash icon — no real app, just a brief visual feedback
+  document.querySelectorAll('.dock-icon[data-app="trash"]').forEach(function(icon) {
     icon.addEventListener('click', function() {
-      var app = icon.getAttribute('data-app');
-      // Briefly show the icon name isn't available
       icon.style.opacity = '0.5';
       setTimeout(function() { icon.style.opacity = ''; }, 300);
     });

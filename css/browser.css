@@ -1,0 +1,289 @@
+/* ============================================================
+   BROWSER (FIREFOX) WINDOW
+   ============================================================ */
+#browser-window {
+  top: 60px;
+  left: 120px;
+  width: 900px;
+  height: 580px;
+  min-width: 600px;
+  min-height: 400px;
+  z-index: 10;
+  background: #1e1e1e;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  color: #eee;
+}
+
+/* --- Header Bar --- */
+#browser-header {
+  display: flex;
+  flex-direction: column;
+  background: #2d2d2d;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+#browser-header:active { cursor: grabbing; }
+
+/* --- Tab Bar --- */
+#browser-tabs {
+  display: flex;
+  background: #1e1e1e;
+  padding: 4px 8px 0;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+.browser-tab {
+  padding: 6px 14px;
+  background: #2a2a2a;
+  border-radius: 8px 8px 0 0;
+  font-size: 12px;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+.browser-tab.active {
+  background: #2d2d2d;
+  color: #fff;
+}
+
+.browser-tab-close {
+  font-size: 10px;
+  opacity: 0.5;
+  padding: 2px;
+  transition: opacity 0.12s;
+}
+.browser-tab-close:hover {
+  opacity: 1;
+}
+
+/* --- Tab bar title-buttons area --- */
+#browser-tabs .title-buttons {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* --- URL / Address Bar --- */
+#browser-urlbar {
+  display: flex;
+  background: #2d2d2d;
+  padding: 4px 8px;
+  gap: 6px;
+  align-items: center;
+}
+
+.browser-nav-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #aaa;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+  flex-shrink: 0;
+}
+.browser-nav-btn:hover {
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+.browser-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+#browser-url-input {
+  flex: 1;
+  background: #252525;
+  border: 1px solid #3a3a3a;
+  border-radius: 20px;
+  padding: 5px 14px;
+  color: #ddd;
+  font-size: 12.5px;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  outline: none;
+  transition: border-color 0.15s;
+}
+#browser-url-input:focus {
+  border-color: #e95420;
+}
+
+/* --- Bookmarks Bar --- */
+#browser-bookmarks {
+  display: flex;
+  background: #252525;
+  padding: 3px 12px;
+  gap: 4px;
+  border-bottom: 1px solid #3a3a3a;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.browser-bookmark {
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  color: #aaa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+}
+.browser-bookmark:hover {
+  background: rgba(255,255,255,0.08);
+  color: #ddd;
+}
+.browser-bookmark svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* --- Content Area --- */
+#browser-content {
+  flex: 1;
+  background: #fff;
+  position: relative;
+  min-height: 0;
+}
+
+#browser-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* --- Landing Page --- */
+#browser-landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #1e1e1e;
+  color: #aaa;
+  gap: 16px;
+}
+
+.browser-landing-title {
+  font-size: 22px;
+  font-weight: 300;
+  color: #ddd;
+  letter-spacing: 0.5px;
+}
+
+.browser-landing-subtitle {
+  font-size: 13px;
+  color: #666;
+}
+
+/* --- Shortcuts Grid --- */
+.browser-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.browser-shortcut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #2a2a2a;
+  cursor: pointer;
+  width: 90px;
+  transition: background 0.15s;
+}
+.browser-shortcut:hover {
+  background: #353535;
+}
+
+.browser-shortcut-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.browser-shortcut-label {
+  font-size: 11px;
+  color: #bbb;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+  white-space: nowrap;
+}
+
+/* --- Error / Blocked Message --- */
+#browser-error {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #1e1e1e;
+  color: #aaa;
+  gap: 12px;
+  text-align: center;
+  padding: 20px;
+}
+#browser-error.active {
+  display: flex;
+}
+#browser-error .browser-error-icon {
+  font-size: 48px;
+  opacity: 0.5;
+}
+#browser-error .browser-error-title {
+  font-size: 16px;
+  color: #ddd;
+  font-weight: 500;
+}
+#browser-error .browser-error-msg {
+  font-size: 13px;
+  color: #888;
+  max-width: 380px;
+  line-height: 1.5;
+}
+#browser-error .browser-error-link {
+  color: #e95420;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+  transition: color 0.12s;
+}
+#browser-error .browser-error-link:hover {
+  color: #ff7043;
+}
+
+/* --- Resize Handle --- */
+#browser-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  z-index: 20;
+}

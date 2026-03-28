@@ -1,0 +1,232 @@
+/* ============================================================
+   MUSIC PLAYER WINDOW (Rhythmbox-style)
+   ============================================================ */
+#music-window {
+  top: 60px;
+  left: 120px;
+  width: 580px;
+  height: 440px;
+  min-width: 420px;
+  min-height: 340px;
+  z-index: 20;
+  background: #1a1a1a;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  color: #eee;
+}
+
+/* --- Header Bar --- */
+#music-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #2d2d2d;
+  padding: 0 8px;
+  height: 38px;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  border-bottom: 1px solid #3a3a3a;
+}
+#music-header:active { cursor: grabbing; }
+
+#music-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #eee;
+}
+
+/* --- Now Playing Section --- */
+#music-now-playing {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  background: #1a1a1a;
+  border-bottom: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.music-album-art {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.music-track-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.music-track-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-track-artist {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-track-album {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Progress Bar --- */
+#music-progress-area {
+  padding: 0 20px;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+.music-progress-bar {
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.music-progress-fill {
+  height: 100%;
+  background: #e95420;
+  border-radius: 2px;
+  transition: width 0.3s;
+  width: 0%;
+}
+
+.music-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* --- Playback Controls --- */
+#music-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px;
+  flex-shrink: 0;
+}
+
+.music-ctrl-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  transition: color 0.15s, background 0.15s;
+}
+.music-ctrl-btn:hover {
+  color: #fff;
+}
+.music-ctrl-btn.active {
+  color: #e95420;
+}
+
+.music-ctrl-btn.play-btn {
+  width: 48px;
+  height: 48px;
+  background: #e95420;
+  color: #fff;
+}
+.music-ctrl-btn.play-btn:hover {
+  background: #f06a38;
+}
+
+.music-ctrl-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.music-ctrl-btn.play-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- Playlist --- */
+#music-playlist {
+  flex: 1;
+  overflow-y: auto;
+  border-top: 1px solid #2a2a2a;
+}
+
+.music-playlist-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #bbb;
+  transition: background 0.15s, color 0.15s;
+}
+.music-playlist-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.music-playlist-item.active {
+  color: #e95420;
+  background: rgba(233, 84, 32, 0.08);
+}
+
+.music-playlist-num {
+  width: 24px;
+  text-align: right;
+  font-size: 12px;
+  color: #666;
+}
+
+.music-playlist-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.music-playlist-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-playlist-artist {
+  font-size: 11px;
+  color: #666;
+}
+
+.music-playlist-duration {
+  font-size: 12px;
+  color: #666;
+}

@@ -1,0 +1,229 @@
+/* ============================================================
+   SYSTEM MONITOR WINDOW
+   ============================================================ */
+#monitor-window {
+  top: 80px;
+  left: 180px;
+  width: 700px;
+  height: 500px;
+  min-width: 500px;
+  min-height: 350px;
+  z-index: 10;
+  background: #1e1e1e;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  color: #eee;
+}
+
+/* --- Monitor Header Bar --- */
+#monitor-header {
+  display: flex;
+  align-items: center;
+  background: #2d2d2d;
+  padding: 0 8px;
+  height: 38px;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  border-bottom: 1px solid #3a3a3a;
+  gap: 6px;
+}
+#monitor-header:active { cursor: grabbing; }
+
+.monitor-tabs {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+#monitor-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ccc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 8px;
+}
+
+/* --- Tab Bar --- */
+#monitor-tabs {
+  display: flex;
+  background: #252525;
+  border-bottom: 1px solid #3a3a3a;
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+.monitor-tab {
+  padding: 8px 16px;
+  font-size: 12.5px;
+  color: #aaa;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-bottom-color 0.2s;
+  user-select: none;
+}
+.monitor-tab.active {
+  color: #fff;
+  border-bottom-color: #e95420;
+}
+.monitor-tab:hover {
+  color: #ddd;
+}
+
+/* --- Monitor Body --- */
+#monitor-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ============================================================
+   RESOURCES PANEL
+   ============================================================ */
+#monitor-resources {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+#monitor-resources::-webkit-scrollbar { width: 6px; }
+#monitor-resources::-webkit-scrollbar-track { background: transparent; }
+#monitor-resources::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+.resource-card {
+  background: #2a2a2a;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resource-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.resource-value {
+  font-size: 14px;
+  color: #e95420;
+  font-weight: 600;
+}
+
+.resource-bar-bg {
+  height: 8px;
+  background: #1e1e1e;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.resource-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.cpu-fill {
+  background: linear-gradient(90deg, #e95420, #ff7b47);
+}
+.mem-fill {
+  background: linear-gradient(90deg, #772953, #c44dff);
+}
+.disk-fill {
+  background: linear-gradient(90deg, #2196F3, #64B5F6);
+}
+
+.resource-detail {
+  font-size: 11px;
+  color: #888;
+  margin-top: 6px;
+}
+
+/* ============================================================
+   PROCESSES PANEL
+   ============================================================ */
+#monitor-processes {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+#monitor-processes.active {
+  display: flex;
+}
+#monitor-resources.active {
+  display: flex;
+}
+
+.process-table-header {
+  display: flex;
+  padding: 8px 16px;
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  background: #252525;
+  border-bottom: 1px solid #3a3a3a;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.process-list {
+  flex: 1;
+  overflow-y: auto;
+}
+.process-list::-webkit-scrollbar { width: 6px; }
+.process-list::-webkit-scrollbar-track { background: transparent; }
+.process-list::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+.process-row {
+  display: flex;
+  padding: 6px 16px;
+  font-size: 12.5px;
+  color: #ccc;
+  border-bottom: 1px solid #2a2a2a;
+  transition: background 0.1s;
+}
+.process-row:hover {
+  background: #2a2a2a;
+}
+
+.proc-name { flex: 2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.proc-pid { width: 80px; text-align: right; }
+.proc-cpu { width: 80px; text-align: right; }
+.proc-mem { width: 80px; text-align: right; }
+.proc-status { width: 80px; text-align: right; }
+
+.process-table-header .proc-name { font-weight: 600; }
+.process-table-header .proc-pid { font-weight: 600; }
+.process-table-header .proc-cpu { font-weight: 600; }
+.process-table-header .proc-mem { font-weight: 600; }
+.process-table-header .proc-status { font-weight: 600; }
+
+.status-running { color: #4caf50; }
+.status-sleeping { color: #888; }
+
+/* --- Resize Handle --- */
+#monitor-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  z-index: 5;
+}

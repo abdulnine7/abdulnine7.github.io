@@ -1,0 +1,165 @@
+/* ============================================================
+   SNAKE GAME WINDOW
+   ============================================================ */
+#snake-window {
+  top: 80px;
+  left: 200px;
+  width: 440px;
+  height: 540px;
+  min-width: 360px;
+  min-height: 460px;
+  z-index: 15;
+  background: #1e1e1e;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  color: #eee;
+}
+
+/* --- Snake Header Bar --- */
+#snake-header {
+  display: flex;
+  align-items: center;
+  background: #2d2d2d;
+  padding: 0 8px;
+  height: 38px;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  border-bottom: 1px solid #3a3a3a;
+  gap: 6px;
+}
+#snake-header:active { cursor: grabbing; }
+
+.snake-scores {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+#snake-title {
+  flex: 1;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ccc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 8px;
+}
+
+/* --- Score Bar --- */
+#snake-score-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: #252525;
+  border-bottom: 1px solid #3a3a3a;
+  font-size: 13px;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.snake-score-label {
+  color: #888;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.snake-score-value {
+  color: #e95420;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* --- Canvas Wrapper --- */
+#snake-canvas-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #1e1e1e;
+  position: relative;
+}
+
+#snake-canvas {
+  border-radius: 4px;
+  background: #0d0d0d;
+  display: block;
+}
+
+/* --- Game Over Overlay --- */
+#snake-gameover {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+  z-index: 10;
+}
+#snake-gameover.active {
+  display: flex;
+}
+
+.snake-gameover-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e95420;
+}
+
+.snake-gameover-score {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.snake-restart-btn {
+  padding: 10px 24px;
+  background: #e95420;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+  transition: background 0.12s;
+}
+.snake-restart-btn:hover {
+  background: #f26b3a;
+}
+.snake-restart-btn:active {
+  background: #d4441a;
+}
+
+/* --- Start Overlay --- */
+#snake-start {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  gap: 12px;
+  z-index: 10;
+}
+#snake-start.active {
+  display: flex;
+}
+
+/* --- Resize Handle --- */
+#snake-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  z-index: 20;
+}
