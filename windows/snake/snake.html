@@ -1,0 +1,27 @@
+<!-- Snake Game Window -->
+<div id="snake-window" class="desktop-window minimized">
+  <div id="snake-header">
+    <div id="snake-title">Snake</div>
+    <div class="snake-scores">
+      <span>Score: <span id="snake-score">0</span></span>
+      <span>Best: <span id="snake-highscore">0</span></span>
+    </div>
+    <div class="title-buttons">
+      <span class="title-btn snake-btn-min" title="Minimize">&#x2013;</span>
+      <span class="title-btn snake-btn-max" title="Maximize">&#x25FB;</span>
+      <span class="title-btn snake-btn-close" title="Close">&#x2715;</span>
+    </div>
+  </div>
+  <div id="snake-canvas-wrap">
+    <canvas id="snake-canvas" width="360" height="360"></canvas>
+    <div id="snake-start">
+      <div class="snake-overlay-text">Press <strong>Space</strong> or click to start</div>
+    </div>
+    <div id="snake-gameover">
+      <div class="snake-gameover-title">Game Over!</div>
+      <div class="snake-gameover-score">Score: <span id="snake-gameover-score">0</span></div>
+      <button class="snake-restart-btn" id="snake-restart-btn">Play Again</button>
+    </div>
+  </div>
+  <div id="snake-resize-handle"></div>
+</div>

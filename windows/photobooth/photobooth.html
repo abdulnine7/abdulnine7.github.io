@@ -1,0 +1,24 @@
+<!-- Photo Booth Window -->
+<div id="photobooth-window" class="desktop-window minimized">
+  <div id="photobooth-header">
+    <div id="photobooth-title">Photo Booth</div>
+    <div class="title-buttons">
+      <span class="title-btn pb-btn-min" title="Minimize">&#x2013;</span>
+      <span class="title-btn pb-btn-max" title="Maximize">&#x25FB;</span>
+      <span class="title-btn pb-btn-close" title="Close">&#x2715;</span>
+    </div>
+  </div>
+  <div id="photobooth-video-area">
+    <video id="photobooth-video" autoplay playsinline></video>
+    <canvas id="photobooth-canvas"></canvas>
+    <div id="photobooth-flash"></div>
+    <div id="photobooth-no-camera">
+      <svg viewBox="0 0 24 24" fill="rgba(255,255,255,0.3)" width="64" height="64"><path d="M18 10.48V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4.48l4 3.98v-11l-4 3.98zm-2-.79V18H4V6h12v3.69z"/></svg>
+      <div class="pb-no-camera-text">Camera not available</div>
+    </div>
+  </div>
+  <div id="photobooth-filters"></div>
+  <div id="photobooth-controls"></div>
+  <div id="photobooth-gallery"></div>
+  <div id="photobooth-resize-handle"></div>
+</div>

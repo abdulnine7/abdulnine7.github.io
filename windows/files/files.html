@@ -1,0 +1,67 @@
+<!-- Files Window -->
+<div id="files-window" class="desktop-window minimized">
+  <div id="files-header">
+    <div class="files-nav-btn" id="files-btn-back" title="Back">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    </div>
+    <div class="files-nav-btn" id="files-btn-forward" title="Forward">
+      <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+    </div>
+    <div class="files-nav-btn" id="files-btn-up" title="Go Up">
+      <svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8z"/></svg>
+    </div>
+    <div id="files-pathbar"></div>
+    <div class="files-view-btn active" id="files-view-grid" title="Grid View">
+      <svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zm0 10h8v8H3zm10-10h8v8h-8zm0 10h8v8h-8z"/></svg>
+    </div>
+    <div class="files-view-btn" id="files-view-list" title="List View">
+      <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+    </div>
+    <div class="title-buttons">
+      <span class="title-btn files-btn-min" title="Minimize">&#x2013;</span>
+      <span class="title-btn files-btn-max" title="Maximize">&#x25FB;</span>
+      <span class="title-btn files-btn-close btn-close" title="Close">&#x2715;</span>
+    </div>
+  </div>
+  <div id="files-body">
+    <div id="files-sidebar">
+      <div class="files-sidebar-label">Places</div>
+      <div class="files-place" data-path="/home/user">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        <span>Home</span>
+      </div>
+      <div class="files-place" data-path="/home/user/Desktop">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/></svg>
+        <span>Desktop</span>
+      </div>
+      <div class="files-place" data-path="/home/user/Documents">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+        <span>Documents</span>
+      </div>
+      <div class="files-place" data-path="/home/user/Downloads">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <span>Downloads</span>
+      </div>
+      <div class="files-sidebar-label">System</div>
+      <div class="files-place" data-path="/">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"/></svg>
+        <span>File System</span>
+      </div>
+      <div class="files-place" data-path="/tmp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+        <span>Trash</span>
+      </div>
+    </div>
+    <div id="files-content"></div>
+  </div>
+  <div id="files-statusbar"></div>
+  <!-- File preview overlay -->
+  <div id="files-preview">
+    <div id="files-preview-header">
+      <span class="files-preview-name"></span>
+      <div id="files-preview-close" title="Close">&#x2715;</div>
+    </div>
+    <div id="files-preview-body"></div>
+  </div>
+  <div id="files-resize-handle"></div>
+</div>

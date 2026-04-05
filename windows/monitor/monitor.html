@@ -1,0 +1,47 @@
+<!-- System Monitor Window -->
+<div id="monitor-window" class="desktop-window minimized">
+  <div id="monitor-header">
+    <div class="monitor-tabs">
+      <div class="monitor-tab active" data-tab="resources">Resources</div>
+      <div class="monitor-tab" data-tab="processes">Processes</div>
+    </div>
+    <div class="title-buttons">
+      <span class="title-btn monitor-btn-min" title="Minimize">&#x2013;</span>
+      <span class="title-btn monitor-btn-max" title="Maximize">&#x25FB;</span>
+      <span class="title-btn monitor-btn-close" title="Close">&#x2715;</span>
+    </div>
+  </div>
+  <div id="monitor-body">
+    <div id="monitor-resources">
+      <div class="monitor-resource">
+        <div class="monitor-resource-label">CPU</div>
+        <div class="monitor-bar"><div class="monitor-bar-fill cpu-fill" id="cpu-fill"></div></div>
+        <div class="monitor-resource-value" id="cpu-value">0%</div>
+        <div class="monitor-resource-detail" id="cpu-detail"></div>
+      </div>
+      <div class="monitor-resource">
+        <div class="monitor-resource-label">Memory</div>
+        <div class="monitor-bar"><div class="monitor-bar-fill mem-fill" id="mem-fill"></div></div>
+        <div class="monitor-resource-value" id="mem-value">0%</div>
+        <div class="monitor-resource-detail" id="mem-detail"></div>
+      </div>
+      <div class="monitor-resource">
+        <div class="monitor-resource-label">Disk</div>
+        <div class="monitor-bar"><div class="monitor-bar-fill disk-fill" id="disk-fill"></div></div>
+        <div class="monitor-resource-value" id="disk-value">0%</div>
+        <div class="monitor-resource-detail" id="disk-detail"></div>
+      </div>
+    </div>
+    <div id="monitor-processes" style="display:none;">
+      <div class="monitor-process-header">
+        <span class="proc-col-name">Process Name</span>
+        <span class="proc-col-cpu">CPU %</span>
+        <span class="proc-col-mem">Memory</span>
+        <span class="proc-col-pid">PID</span>
+        <span class="proc-col-status">Status</span>
+      </div>
+      <div id="process-list"></div>
+    </div>
+  </div>
+  <div id="monitor-resize-handle"></div>
+</div>

@@ -1,0 +1,36 @@
+<!-- Terminal Window -->
+<div id="terminal-window" class="desktop-window">
+  <div id="terminal-wrapper">
+    <div id="title-bar">
+      <div id="title-text"></div>
+      <div class="title-buttons">
+        <span class="title-btn btn-min" title="Minimize">&#x2013;</span>
+        <span class="title-btn btn-max" title="Maximize">&#x25FB;</span>
+        <span class="title-btn btn-close" title="Close">&#x2715;</span>
+      </div>
+    </div>
+    <div id="terminal" tabindex="0">
+      <div id="output"></div>
+      <div id="input-line">
+        <span id="prompt"></span>
+        <div id="input-container">
+          <input id="input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+          <div id="cursor-overlay"><span id="cursor-text"></span><span id="fake-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Nano/Vim editors inside window -->
+  <div id="nano-editor">
+    <div id="nano-header">GNU nano 6.2</div>
+    <textarea id="nano-content"></textarea>
+    <div id="nano-footer"><span>^X Exit</span><span>^S Save</span><span>^K Cut</span></div>
+  </div>
+  <div id="vim-editor">
+    <div id="vim-content" contenteditable="true"></div>
+    <div id="vim-status">-- NORMAL --</div>
+    <div id="vim-command"></div>
+  </div>
+  <!-- Resize handle -->
+  <div id="resize-handle"></div>
+</div>
