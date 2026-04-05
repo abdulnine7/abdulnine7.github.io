@@ -273,14 +273,8 @@ calendarWindow.addEventListener('mousedown', function() {
 });
 
 // Center on load
-function centerCalendar() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = calendarWindow.offsetWidth;
-  var h = calendarWindow.offsetHeight;
-  calendarWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  calendarWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerCalendar); });
+function positionCalendar() { randomPositionWindow(calendarWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionCalendar); });
 
 // ============================================================
 // INIT

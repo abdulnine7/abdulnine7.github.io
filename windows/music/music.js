@@ -426,14 +426,8 @@ musicWindow.addEventListener('mousedown', function() {
 });
 
 // --- Center on load ---
-function centerMusic() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = musicWindow.offsetWidth;
-  var h = musicWindow.offsetHeight;
-  musicWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  musicWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerMusic); });
+function positionMusic() { randomPositionWindow(musicWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionMusic); });
 
 // ============================================================
 // INIT

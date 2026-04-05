@@ -427,14 +427,8 @@ notepadWindow.addEventListener('mousedown', function() {
 });
 
 // Center on load
-function centerNotepad() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = notepadWindow.offsetWidth;
-  var h = notepadWindow.offsetHeight;
-  notepadWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  notepadWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerNotepad); });
+function positionNotepad() { randomPositionWindow(notepadWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionNotepad); });
 
 // ============================================================
 // INIT

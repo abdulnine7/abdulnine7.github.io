@@ -462,14 +462,8 @@ dockFilesIcon.addEventListener('click', function() {
 filesWindow.addEventListener('mousedown', function() { bringWindowToFront('files-window'); });
 
 // Center on load
-function centerFiles() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = filesWindow.offsetWidth;
-  var h = filesWindow.offsetHeight;
-  filesWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  filesWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerFiles); });
+function positionFiles() { randomPositionWindow(filesWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionFiles); });
 
 // ============================================================
 // INIT – fix sidebar paths to use dynamic username

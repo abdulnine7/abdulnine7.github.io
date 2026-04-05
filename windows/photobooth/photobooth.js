@@ -416,14 +416,8 @@ pbWindow.addEventListener('mousedown', function() {
 });
 
 // Center on load
-function centerWindow() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = pbWindow.offsetWidth;
-  var h = pbWindow.offsetHeight;
-  pbWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  pbWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerWindow); });
+function positionWindow() { randomPositionWindow(pbWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionWindow); });
 
 // ============================================================
 // INIT

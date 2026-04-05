@@ -380,14 +380,8 @@ calcWindow.addEventListener('mousedown', function() {
 });
 
 // Center on load
-function centerCalculator() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = calcWindow.offsetWidth;
-  var h = calcWindow.offsetHeight;
-  calcWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  calcWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerCalculator); });
+function positionCalculator() { randomPositionWindow(calcWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionCalculator); });
 
 // ============================================================
 // INIT

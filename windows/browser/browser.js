@@ -394,14 +394,8 @@ browserWindow.addEventListener('mousedown', function() {
 });
 
 // Center on load
-function centerBrowser() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = browserWindow.offsetWidth;
-  var h = browserWindow.offsetHeight;
-  browserWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  browserWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerBrowser); });
+function positionBrowser() { randomPositionWindow(browserWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionBrowser); });
 
 // ============================================================
 // INIT

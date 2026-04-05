@@ -250,14 +250,8 @@ pdfWindow.addEventListener('mousedown', function() {
 });
 
 // Center on load
-function centerPdfWindow() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = pdfWindow.offsetWidth;
-  var h = pdfWindow.offsetHeight;
-  pdfWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  pdfWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerPdfWindow); });
+function positionPdfWindow() { randomPositionWindow(pdfWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionPdfWindow); });
 
 // ============================================================
 // INIT

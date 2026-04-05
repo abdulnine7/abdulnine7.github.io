@@ -401,14 +401,8 @@ win.addEventListener('mousedown', function() {
 // ============================================================
 // CENTER ON LOAD
 // ============================================================
-function centerWindow() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = win.offsetWidth;
-  var h = win.offsetHeight;
-  win.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  win.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerWindow); });
+function positionWindow() { randomPositionWindow(win); }
+requestAnimationFrame(function() { requestAnimationFrame(positionWindow); });
 
 // ============================================================
 // PUBLIC API - open a specific image from other apps

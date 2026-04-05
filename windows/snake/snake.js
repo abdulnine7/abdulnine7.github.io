@@ -423,14 +423,8 @@ snakeWindow.addEventListener('mousedown', function() {
 // ============================================================
 // CENTER ON LOAD
 // ============================================================
-function centerSnake() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = snakeWindow.offsetWidth;
-  var h = snakeWindow.offsetHeight;
-  snakeWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  snakeWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerSnake); });
+function positionSnake() { randomPositionWindow(snakeWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionSnake); });
 
 // ============================================================
 // INIT

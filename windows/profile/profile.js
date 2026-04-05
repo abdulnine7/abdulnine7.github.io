@@ -340,13 +340,7 @@ profileWindow.addEventListener('mousedown', function() {
 });
 
 // --- Center profile window ---
-function centerProfile() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = profileWindow.offsetWidth;
-  var h = profileWindow.offsetHeight;
-  profileWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  profileWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerProfile); });
+function positionProfile() { randomPositionWindow(profileWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionProfile); });
 
 })();

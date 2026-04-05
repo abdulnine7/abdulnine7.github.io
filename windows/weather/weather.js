@@ -262,14 +262,8 @@ weatherWindow.addEventListener('mousedown', function() {
 });
 
 // --- Center on load ---
-function centerWeather() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = weatherWindow.offsetWidth;
-  var h = weatherWindow.offsetHeight;
-  weatherWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  weatherWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerWeather); });
+function positionWeather() { randomPositionWindow(weatherWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionWeather); });
 
 // ============================================================
 // INIT

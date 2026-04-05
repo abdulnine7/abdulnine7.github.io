@@ -271,13 +271,7 @@ monitorWindow.addEventListener('mousedown', function() {
 });
 
 // --- Center monitor window ---
-function centerMonitor() {
-  var rect = desktopArea.getBoundingClientRect();
-  var w = monitorWindow.offsetWidth;
-  var h = monitorWindow.offsetHeight;
-  monitorWindow.style.left = Math.max(0, (rect.width - w) / 2) + 'px';
-  monitorWindow.style.top = Math.max(0, (rect.height - h) / 2) + 'px';
-}
-requestAnimationFrame(function() { requestAnimationFrame(centerMonitor); });
+function positionMonitor() { randomPositionWindow(monitorWindow); }
+requestAnimationFrame(function() { requestAnimationFrame(positionMonitor); });
 
 })();

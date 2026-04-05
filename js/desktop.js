@@ -228,19 +228,11 @@
   // ============================================================
   // CENTER WINDOW ON LOAD
   // ============================================================
-  function centerWindow() {
-    var rect = desktopArea.getBoundingClientRect();
-    var winW = terminalWindow.offsetWidth;
-    var winH = terminalWindow.offsetHeight;
-    var x = Math.max(0, (rect.width - winW) / 2);
-    var y = Math.max(0, (rect.height - winH) / 2);
-    terminalWindow.style.left = x + 'px';
-    terminalWindow.style.top = y + 'px';
-  }
+  function positionTerminal() { randomPositionWindow(terminalWindow); }
 
-  // Wait a tick for layout to settle, then center
+  // Wait a tick for layout to settle, then position
   requestAnimationFrame(function() {
-    requestAnimationFrame(centerWindow);
+    requestAnimationFrame(positionTerminal);
   });
 
 })();
