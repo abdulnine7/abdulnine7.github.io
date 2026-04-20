@@ -18,7 +18,8 @@ var windows = [
   { html: 'windows/snake/snake.html',              js: 'windows/snake/snake.js' },
   { html: 'windows/imageviewer/imageviewer.html',  js: 'windows/imageviewer/imageviewer.js' },
   { html: 'windows/pdfviewer/pdfviewer.html',      js: 'windows/pdfviewer/pdfviewer.js' },
-  { html: 'windows/photobooth/photobooth.html',    js: 'windows/photobooth/photobooth.js' }
+  { html: 'windows/photobooth/photobooth.html',    js: 'windows/photobooth/photobooth.js' },
+  { html: 'windows/settings/settings.html',        js: 'windows/settings/settings.js' }
 ];
 
 // Additional scripts to load after all window JS

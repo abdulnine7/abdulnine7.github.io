@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd /Users/abdulnine7/aiprojects/html_shell && mv wall1.jpg assets/wallpapers/dark-abstract.jpg && mv wall2.jpg assets/wallpapers/gradient-blue.jpg && mv wall3.jpg assets/wallpapers/nebula....",
+  "error": "Exit code 1\nmv: rename wall1.jpg to assets/wallpapers/dark-abstract.jpg: No such file or directory",
+  "timestamp": "2026-04-05T22:58:01.175Z",
+  "retry_count": 1
+}

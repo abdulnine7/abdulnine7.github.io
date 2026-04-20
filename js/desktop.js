@@ -193,36 +193,25 @@
       terminalInput.focus();
     }
     if (action === 'change-wallpaper') {
-      cycleWallpaper();
+      if (window.shellSettings) {
+        window.shellSettings.openSettings('wallpaper');
+      } else {
+        cycleWallpaper();
+      }
     }
     if (action === 'display-profile') {
-      terminalWindow.classList.remove('minimized');
-      dockTerminalIcon.classList.add('active');
-      terminalInput.focus();
+      if (window.shellSettings) {
+        window.shellSettings.openSettings('appearance');
+      }
     }
     contextMenu.classList.add('hidden');
   });
 
-  // ============================================================
-  // WALLPAPER CYCLING
-  // ============================================================
-  var wallpapers = [
-    // Default Ubuntu
-    'radial-gradient(ellipse at 20% 50%, #e95420 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, #772953 0%, transparent 50%), radial-gradient(ellipse at 50% 100%, #2c001e 0%, transparent 60%), linear-gradient(160deg, #e95420 0%, #772953 40%, #2c001e 100%)',
-    // Midnight blue
-    'radial-gradient(ellipse at 30% 40%, #1a3a5c 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, #0a1628 0%, transparent 60%), linear-gradient(135deg, #0d1b2a 0%, #1b2838 40%, #0a1628 100%)',
-    // Forest green
-    'radial-gradient(ellipse at 40% 30%, #2d5016 0%, transparent 50%), radial-gradient(ellipse at 60% 70%, #1a3a0a 0%, transparent 60%), linear-gradient(150deg, #1a2f0a 0%, #2d5016 50%, #0a1f05 100%)',
-    // Sunset warm
-    'radial-gradient(ellipse at 20% 80%, #e95420 0%, transparent 40%), radial-gradient(ellipse at 80% 30%, #ffb347 0%, transparent 40%), linear-gradient(135deg, #2c001e 0%, #8b2252 30%, #e95420 60%, #ffb347 100%)',
-    // Dark minimal
-    'radial-gradient(ellipse at 50% 50%, #1e1e1e 0%, #0a0a0a 100%)',
-  ];
-  var currentWallpaper = 0;
-
+  // Wallpaper cycling delegated to Settings app
   function cycleWallpaper() {
-    currentWallpaper = (currentWallpaper + 1) % wallpapers.length;
-    desktopArea.style.background = wallpapers[currentWallpaper];
+    if (window.shellSettings) {
+      window.shellSettings.cycleWallpaper();
+    }
   }
 
   // ============================================================

@@ -277,3 +277,340 @@
   #input { font-size: 12px; }
   #title-bar { font-size: 11px; }
 }
+
+/* ============================================================
+   LIGHT THEME
+   ============================================================ */
+body.light-theme #top-panel {
+  background: #e8e8e8;
+  color: #333;
+}
+
+body.light-theme #activities-btn:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+body.light-theme .tray-icon {
+  fill: #333;
+}
+
+body.light-theme #dock {
+  background: rgba(240,240,240,0.92);
+}
+
+body.light-theme .dock-icon:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+body.light-theme .desktop-window {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+body.light-theme .context-menu {
+  background: #f5f5f5;
+  color: #333;
+  border-color: #ccc;
+}
+
+body.light-theme .context-item:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+/* Window headers — all apps */
+body.light-theme #title-bar,
+body.light-theme #settings-header,
+body.light-theme #files-header,
+body.light-theme #browser-header,
+body.light-theme #profile-header,
+body.light-theme #calculator-header,
+body.light-theme #calendar-header,
+body.light-theme #weather-header,
+body.light-theme #monitor-header,
+body.light-theme #music-header,
+body.light-theme #snake-header,
+body.light-theme #imageviewer-header,
+body.light-theme #pdf-header,
+body.light-theme #photobooth-header,
+body.light-theme #notepad-header {
+  background: #e0e0e0;
+  color: #333;
+}
+
+body.light-theme .title-btn {
+  color: #555;
+}
+
+/* Terminal */
+body.light-theme #terminal {
+  background: #f8f8f8;
+  color: #333;
+}
+
+body.light-theme #terminal-window {
+  --bg: #f8f8f8;
+  --fg: #333;
+}
+
+/* Files */
+body.light-theme #files-body {
+  background: #fafafa;
+}
+
+body.light-theme #files-sidebar {
+  background: #f0f0f0;
+  border-right-color: #ddd;
+}
+
+body.light-theme .files-place {
+  color: #444;
+}
+
+body.light-theme .files-place:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+body.light-theme #files-content {
+  background: #fff;
+  color: #333;
+}
+
+body.light-theme #files-statusbar {
+  background: #f0f0f0;
+  color: #555;
+}
+
+/* Browser */
+body.light-theme #browser-urlbar {
+  background: #f0f0f0;
+}
+
+body.light-theme #browser-url-input {
+  background: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+body.light-theme #browser-bookmarks {
+  background: #f5f5f5;
+  border-bottom-color: #ddd;
+}
+
+body.light-theme #browser-content {
+  background: #fff;
+}
+
+body.light-theme #browser-landing {
+  background: #fafafa;
+  color: #333;
+}
+
+/* Profile */
+body.light-theme #profile-body {
+  background: #fafafa;
+}
+
+body.light-theme #profile-sidebar {
+  background: #f0f0f0;
+  border-right-color: #ddd;
+}
+
+body.light-theme .profile-nav-item {
+  color: #555;
+}
+
+body.light-theme .profile-nav-item:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+body.light-theme #profile-content {
+  background: #fff;
+  color: #333;
+}
+
+body.light-theme .profile-card {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Calculator */
+body.light-theme #calc-display {
+  background: #f5f5f5;
+  color: #333;
+}
+
+body.light-theme #calc-buttons .calc-btn {
+  background: #e8e8e8;
+  color: #333;
+}
+
+body.light-theme #calculator-window {
+  background: #f0f0f0;
+}
+
+/* Calendar */
+body.light-theme #calendar-window {
+  background: #fff;
+  color: #333;
+}
+
+body.light-theme #cal-grid {
+  background: #fff;
+  color: #333;
+}
+
+body.light-theme .cal-day:hover {
+  background: rgba(0,0,0,0.06);
+}
+
+/* Weather */
+body.light-theme #weather-window {
+  background: #f5f5f5;
+  color: #333;
+}
+
+body.light-theme #weather-main {
+  color: #333;
+}
+
+/* Monitor */
+body.light-theme #monitor-body {
+  background: #fafafa;
+  color: #333;
+}
+
+body.light-theme .monitor-tab {
+  color: #555;
+}
+
+body.light-theme .monitor-tab.active {
+  color: #333;
+}
+
+body.light-theme .monitor-bar {
+  background: #ddd;
+}
+
+/* Music */
+body.light-theme #music-window {
+  background: #f5f5f5;
+  color: #333;
+}
+
+body.light-theme #music-playlist {
+  background: #fff;
+}
+
+body.light-theme .music-track {
+  color: #333;
+}
+
+body.light-theme .music-track:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Snake */
+body.light-theme #snake-window {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Notepad */
+body.light-theme #notepad-body {
+  background: #fff;
+  color: #333;
+}
+
+body.light-theme #notepad-textarea {
+  background: #fff;
+  color: #333;
+}
+
+/* Image Viewer */
+body.light-theme #imageviewer-toolbar {
+  background: #e8e8e8;
+}
+
+body.light-theme #imageviewer-display {
+  background: #f0f0f0;
+}
+
+body.light-theme .iv-tool-btn {
+  color: #444;
+}
+
+/* PDF Viewer */
+body.light-theme #pdf-toolbar {
+  background: #e8e8e8;
+}
+
+body.light-theme #pdf-content {
+  background: #f0f0f0;
+}
+
+/* Photo Booth */
+body.light-theme #photobooth-window {
+  background: #f0f0f0;
+}
+
+body.light-theme #photobooth-controls {
+  background: #e8e8e8;
+}
+
+/* Activities overlay */
+body.light-theme #activities-overlay {
+  background: rgba(240,240,240,0.95);
+}
+
+body.light-theme .activities-app-name {
+  color: #333;
+}
+
+body.light-theme #activities-search {
+  background: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+/* ============================================================
+   DOCK BOTTOM POSITION
+   ============================================================ */
+#ubuntu-desktop.dock-bottom {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "panel"
+    "desktop"
+    "dock";
+}
+
+#ubuntu-desktop.dock-bottom #dock {
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  padding: 4px 8px;
+  border-radius: 0;
+  justify-content: center;
+  gap: 4px;
+}
+
+#ubuntu-desktop.dock-bottom .dock-separator {
+  width: 1px;
+  height: 32px;
+  margin: 0 4px;
+}
+
+#ubuntu-desktop.dock-bottom #dock-show-apps {
+  margin-top: 0;
+  margin-left: auto;
+}
+
+/* ============================================================
+   DISABLE ANIMATIONS
+   ============================================================ */
+body.no-animations,
+body.no-animations *,
+body.no-animations *::before,
+body.no-animations *::after {
+  animation-duration: 0s !important;
+  transition-duration: 0s !important;
+}
