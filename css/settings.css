@@ -70,7 +70,7 @@
 }
 
 .settings-nav-item.active {
-  background: rgba(233,84,32,0.2);
+  background: color-mix(in srgb, var(--accent-color) 15%, transparent);
   color: var(--accent-color);
 }
 
@@ -458,7 +458,7 @@ body.light-theme .settings-nav-item:hover {
 }
 
 body.light-theme .settings-nav-item.active {
-  background: rgba(233,84,32,0.12);
+  background: color-mix(in srgb, var(--accent-color) 12%, transparent);
   color: var(--accent-color);
 }
 

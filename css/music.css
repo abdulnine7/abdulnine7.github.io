@@ -32,7 +32,6 @@
 
 #music-title {
   flex: 1;
-  text-align: center;
   font-size: 13px;
   font-weight: 500;
   color: #eee;
@@ -200,7 +199,7 @@
 }
 .music-playlist-item.active {
   color: var(--accent-color);
-  background: rgba(233, 84, 32, 0.08);
+  background: color-mix(in srgb, var(--accent-color) 8%, transparent);
 }
 
 .music-playlist-num {

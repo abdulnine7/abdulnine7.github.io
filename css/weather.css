@@ -32,7 +32,6 @@
 
 #weather-title {
   flex: 1;
-  text-align: center;
   font-size: 13px;
   font-weight: 500;
   color: #eee;
@@ -66,8 +65,8 @@
   color: #fff;
 }
 .weather-city-btn.active {
-  background: var(--accent-color);
-  color: #fff;
+  background: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  color: var(--accent-color);
 }
 
 /* --- Main Weather Display --- */
