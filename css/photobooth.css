@@ -85,7 +85,7 @@
 
 .pb-enable-btn {
   padding: 8px 20px;
-  background: #e95420;
+  background: var(--accent-color);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -125,7 +125,7 @@
   opacity: 1;
 }
 .pb-filter.active {
-  border-color: #e95420;
+  border-color: var(--accent-color);
   opacity: 1;
 }
 
@@ -163,7 +163,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #e95420;
+  background: var(--accent-color);
   cursor: pointer;
   border: 4px solid #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4);
@@ -200,7 +200,7 @@
   transition: border-color 0.15s;
 }
 .pb-gallery-thumb:hover {
-  border-color: #e95420;
+  border-color: var(--accent-color);
 }
 .pb-gallery-thumb img {
   width: 100%;

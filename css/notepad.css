@@ -41,7 +41,7 @@
   white-space: nowrap;
   padding: 0 8px;
 }
-#notepad-title .notepad-unsaved { color: #e95420; }
+#notepad-title .notepad-unsaved { color: var(--accent-color); }
 
 /* --- Toolbar --- */
 #notepad-toolbar {
@@ -106,7 +106,7 @@
   color: #ccc;
   transition: background 0.1s;
 }
-.notepad-file-option:hover { background: #e95420; color: #fff; }
+.notepad-file-option:hover { background: var(--accent-color); color: #fff; }
 .notepad-file-option svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 .notepad-file-option .notepad-file-path { color: #888; font-size: 11px; margin-left: auto; }
 .notepad-file-option:hover .notepad-file-path { color: rgba(255,255,255,0.7); }
@@ -209,7 +209,7 @@
   outline: none;
   margin-bottom: 14px;
 }
-#notepad-save-input:focus { border-color: #e95420; }
+#notepad-save-input:focus { border-color: var(--accent-color); }
 
 .notepad-dialog-btns {
   display: flex;
@@ -228,8 +228,8 @@
 }
 .notepad-dialog-btn:hover { background: #3a3a3a; }
 .notepad-dialog-btn.primary {
-  background: #e95420;
-  border-color: #e95420;
+  background: var(--accent-color);
+  border-color: var(--accent-color);
   color: #fff;
 }
 .notepad-dialog-btn.primary:hover { background: #d4441a; }

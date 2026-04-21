@@ -74,7 +74,7 @@
   color: #fff;
 }
 .profile-nav-item.active {
-  background: #e95420;
+  background: var(--accent-color);
   color: #fff;
 }
 .profile-nav-item svg {
@@ -130,7 +130,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #e95420;
+  background: var(--accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -210,7 +210,7 @@
   flex-shrink: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #e95420;
+  color: var(--accent-color);
   overflow: hidden;
 }
 .profile-exp-logo img {
@@ -258,7 +258,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #e95420;
+  background: var(--accent-color);
 }
 
 /* --- Skills Tags --- */
@@ -281,7 +281,7 @@
   background: #3a3a3a;
 }
 .profile-tag.proficient {
-  border-color: #e95420;
+  border-color: var(--accent-color);
   color: #f0a080;
 }
 
@@ -298,7 +298,7 @@
   margin: 0;
 }
 .profile-project-title a {
-  color: #e95420;
+  color: var(--accent-color);
   font-size: 12px;
   text-decoration: none;
 }
@@ -342,7 +342,7 @@
   min-width: 70px;
 }
 .profile-contact-value {
-  color: #e95420;
+  color: var(--accent-color);
 }
 
 /* --- About Desktop Section --- */

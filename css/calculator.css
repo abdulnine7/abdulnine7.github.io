@@ -112,7 +112,7 @@
 
 .calc-btn.operator {
   background: #444;
-  color: #e95420;
+  color: var(--accent-color);
 }
 .calc-btn.operator:hover {
   background: #525252;
@@ -122,7 +122,7 @@
 }
 
 .calc-btn.equals {
-  background: #e95420;
+  background: var(--accent-color);
   color: #fff;
 }
 .calc-btn.equals:hover {

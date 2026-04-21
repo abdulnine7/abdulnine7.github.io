@@ -70,7 +70,7 @@
 .pdf-open-external {
   padding: 5px 12px;
   border-radius: 6px;
-  background: #e95420;
+  background: var(--accent-color);
   color: #fff;
   font-size: 12px;
   cursor: pointer;

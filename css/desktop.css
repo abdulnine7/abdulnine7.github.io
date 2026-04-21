@@ -1,4 +1,11 @@
 /* ============================================================
+   ACCENT COLOR DEFAULT
+   ============================================================ */
+:root {
+  --accent-color: #e95420;
+}
+
+/* ============================================================
    TOP PANEL
    ============================================================ */
 #top-panel {
@@ -99,7 +106,7 @@
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background: #e95420;
+  background: var(--accent-color);
   border-radius: 50%;
 }
 
@@ -159,7 +166,7 @@
   transition: background 0.1s;
 }
 .context-item:hover {
-  background: #e95420;
+  background: var(--accent-color);
 }
 
 .context-separator {
@@ -216,7 +223,7 @@
 }
 .btn-close:hover,
 .profile-btn-close:hover {
-  background: #e95420;
+  background: var(--accent-color);
   color: #fff;
 }
 

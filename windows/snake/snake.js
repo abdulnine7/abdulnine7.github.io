@@ -164,7 +164,7 @@ function draw() {
   }
 
   // Draw food
-  ctx.fillStyle = '#e95420';
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim() || '#e95420';
   ctx.beginPath();
   ctx.arc(
     food.x * CELL_SIZE + CELL_SIZE / 2,

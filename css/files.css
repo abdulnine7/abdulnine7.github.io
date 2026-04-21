@@ -93,7 +93,7 @@
   flex-shrink: 0;
 }
 .files-view-btn:hover { background: rgba(255,255,255,0.10); color: #fff; }
-.files-view-btn.active { color: #e95420; }
+.files-view-btn.active { color: var(--accent-color); }
 .files-view-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
 /* --- Files Body (sidebar + content) --- */
@@ -137,7 +137,7 @@
   margin: 1px 6px;
 }
 .files-place:hover { background: rgba(255,255,255,0.07); color: #fff; }
-.files-place.active { background: #e95420; color: #fff; }
+.files-place.active { background: var(--accent-color); color: #fff; }
 .files-place svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
 /* --- Files Content Area --- */
@@ -272,7 +272,7 @@
   font-size: 15px;
   transition: background 0.12s, color 0.12s;
 }
-#files-preview-close:hover { background: #e95420; color: #fff; }
+#files-preview-close:hover { background: var(--accent-color); color: #fff; }
 
 #files-preview-body {
   flex: 1;

@@ -113,7 +113,7 @@
 
 .music-progress-fill {
   height: 100%;
-  background: #e95420;
+  background: var(--accent-color);
   border-radius: 2px;
   transition: width 0.3s;
   width: 0%;
@@ -154,13 +154,13 @@
   color: #fff;
 }
 .music-ctrl-btn.active {
-  color: #e95420;
+  color: var(--accent-color);
 }
 
 .music-ctrl-btn.play-btn {
   width: 48px;
   height: 48px;
-  background: #e95420;
+  background: var(--accent-color);
   color: #fff;
 }
 .music-ctrl-btn.play-btn:hover {
@@ -199,7 +199,7 @@
   background: rgba(255, 255, 255, 0.04);
 }
 .music-playlist-item.active {
-  color: #e95420;
+  color: var(--accent-color);
   background: rgba(233, 84, 32, 0.08);
 }
 

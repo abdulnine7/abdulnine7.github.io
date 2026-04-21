@@ -71,7 +71,7 @@
 
 .settings-nav-item.active {
   background: rgba(233,84,32,0.2);
-  color: #e95420;
+  color: var(--accent-color);
 }
 
 #settings-content {
@@ -152,7 +152,7 @@
 }
 
 .settings-toggle input:checked + .settings-toggle-slider {
-  background: #e95420;
+  background: var(--accent-color);
 }
 
 .settings-toggle input:checked + .settings-toggle-slider::before {
@@ -181,7 +181,7 @@
 }
 
 .settings-theme-card.active {
-  border-color: #e95420;
+  border-color: var(--accent-color);
 }
 
 .settings-theme-card.theme-dark {
@@ -280,7 +280,7 @@
 }
 
 .settings-wallpaper-item.active {
-  border-color: #e95420;
+  border-color: var(--accent-color);
 }
 
 .settings-wallpaper-item.active::after {
@@ -290,7 +290,7 @@
   right: 6px;
   width: 22px;
   height: 22px;
-  background: #e95420;
+  background: var(--accent-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -345,7 +345,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #e95420;
+  background: var(--accent-color);
   cursor: pointer;
 }
 
@@ -369,7 +369,7 @@
 }
 
 .settings-select:focus {
-  border-color: #e95420;
+  border-color: var(--accent-color);
 }
 
 /* About section */
@@ -459,7 +459,7 @@ body.light-theme .settings-nav-item:hover {
 
 body.light-theme .settings-nav-item.active {
   background: rgba(233,84,32,0.12);
-  color: #e95420;
+  color: var(--accent-color);
 }
 
 body.light-theme #settings-content {

@@ -70,7 +70,7 @@
   padding: 0;
 }
 .iv-tool-btn:hover { background: rgba(255,255,255,0.10); color: #fff; }
-.iv-tool-btn.active { color: #e95420; }
+.iv-tool-btn.active { color: var(--accent-color); }
 .iv-tool-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
 .iv-tool-sep {
@@ -147,7 +147,7 @@
   transition: opacity 0.15s, border-color 0.15s;
 }
 .iv-thumb:hover { opacity: 1; }
-.iv-thumb.active { border-color: #e95420; opacity: 1; }
+.iv-thumb.active { border-color: var(--accent-color); opacity: 1; }
 .iv-thumb img {
   width: 100%;
   height: 100%;

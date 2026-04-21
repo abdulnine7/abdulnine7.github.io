@@ -23,7 +23,7 @@ function renderAbout() {
   html += '  <div class="profile-profile-info">';
   html += '    <h2>' + h(PROFILE.about.name) + '</h2>';
   html += '    <p>' + h(PROFILE.about.headline) + '</p>';
-  html += '    <p style="color:#e95420;margin-top:2px">' + h(PROFILE.site.domain) + '</p>';
+  html += '    <p style="color:var(--accent-color);margin-top:2px">' + h(PROFILE.site.domain) + '</p>';
   html += '  </div>';
   html += '</div>';
   html += '<div class="profile-card"><div class="profile-bio">';
@@ -39,7 +39,7 @@ function renderAbout() {
   html += '</div>';
   if (PROFILE.resume.pdf) {
     html += '<div class="profile-card" style="text-align:center;padding:14px">';
-    html += '<a href="' + h(PROFILE.resume.pdf) + '" target="_blank" style="color:#e95420;text-decoration:none;font-size:14px;font-weight:500">';
+    html += '<a href="' + h(PROFILE.resume.pdf) + '" target="_blank" style="color:var(--accent-color);text-decoration:none;font-size:14px;font-weight:500">';
     html += '\u2913 Download Resume (PDF)</a></div>';
   }
   return html;

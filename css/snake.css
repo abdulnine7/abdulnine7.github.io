@@ -68,7 +68,7 @@
 }
 
 .snake-score-value {
-  color: #e95420;
+  color: var(--accent-color);
   font-size: 18px;
   font-weight: 700;
 }
@@ -110,7 +110,7 @@
 .snake-gameover-title {
   font-size: 28px;
   font-weight: 700;
-  color: #e95420;
+  color: var(--accent-color);
 }
 
 .snake-gameover-score {
@@ -120,7 +120,7 @@
 
 .snake-restart-btn {
   padding: 10px 24px;
-  background: #e95420;
+  background: var(--accent-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;

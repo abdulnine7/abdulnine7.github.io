@@ -116,7 +116,7 @@
   transition: border-color 0.15s;
 }
 #browser-url-input:focus {
-  border-color: #e95420;
+  border-color: var(--accent-color);
 }
 
 /* --- Bookmarks Bar --- */
@@ -267,7 +267,7 @@
   line-height: 1.5;
 }
 #browser-error .browser-error-link {
-  color: #e95420;
+  color: var(--accent-color);
   cursor: pointer;
   font-size: 13px;
   text-decoration: underline;
