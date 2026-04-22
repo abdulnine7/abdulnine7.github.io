@@ -6,6 +6,21 @@
 }
 
 /* ============================================================
+   FONT SIZE SCALING
+   ============================================================ */
+body.font-small .desktop-window,
+body.font-small #top-panel,
+body.font-small #dock,
+body.font-small .context-menu,
+body.font-small #activities-overlay { zoom: 0.88; }
+
+body.font-large .desktop-window,
+body.font-large #top-panel,
+body.font-large #dock,
+body.font-large .context-menu,
+body.font-large #activities-overlay { zoom: 1.15; }
+
+/* ============================================================
    TOP PANEL
    ============================================================ */
 #top-panel {

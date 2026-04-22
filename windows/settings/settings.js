@@ -18,7 +18,7 @@ var state = {
   wallpaper: localStorage.getItem('shell-wallpaper') || 'default',
   dockIconSize: parseInt(localStorage.getItem('shell-dock-icon-size')) || 50,
   dockPosition: localStorage.getItem('shell-dock-position') || 'left',
-  fontSize: parseInt(localStorage.getItem('shell-font-size')) || 14,
+  fontSize: localStorage.getItem('shell-font-size') || 'medium',
   animationsEnabled: localStorage.getItem('shell-animations') !== 'false'
 };
 
@@ -146,15 +146,22 @@ var sections = {
 
     // Font size
     html += '<div class="settings-section-subtitle">Interface Font Size</div>';
-    html += '<div class="settings-slider-row">';
-    html += '<label>Font Size</label>';
-    html += '<input type="range" min="11" max="20" value="' + state.fontSize + '" data-setting="font-size">';
-    html += '<span class="settings-slider-value">' + state.fontSize + 'px</span>';
+    html += '<div class="settings-font-sizes">';
+    var sizes = [
+      { id: 'small', label: 'Small' },
+      { id: 'medium', label: 'Medium' },
+      { id: 'large', label: 'Large' }
+    ];
+    sizes.forEach(function(s) {
+      html += '<div class="settings-font-size-option' + (state.fontSize === s.id ? ' active' : '') + '" data-size="' + s.id + '">';
+      html += '<span class="settings-font-size-label">' + s.label + '</span>';
+      html += '</div>';
+    });
     html += '</div>';
 
     // Preview
     html += '<div class="settings-section-subtitle">Preview</div>';
-    html += '<div style="background:#252525;border-radius:8px;padding:16px;font-size:' + state.fontSize + 'px;line-height:1.6;color:#ccc;">';
+    html += '<div class="settings-font-preview">';
     html += 'The quick brown fox jumps over the lazy dog.<br>';
     html += '<span style="color:#888;">Ubuntu Desktop — Shellfolio</span>';
     html += '</div>';
@@ -249,10 +256,15 @@ function bindSectionEvents() {
         state.dockIconSize = val;
         applyDockSize();
       }
-      if (setting === 'font-size') {
-        state.fontSize = val;
-        applyFontSize();
-      }
+    });
+  });
+
+  // Font size options
+  settingsContent.querySelectorAll('.settings-font-size-option').forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      state.fontSize = opt.getAttribute('data-size');
+      applyFontSize();
+      renderSection('fonts');
     });
   });
 
@@ -331,7 +343,8 @@ function applyDockPosition() {
 }
 
 function applyFontSize() {
-  document.documentElement.style.fontSize = state.fontSize + 'px';
+  document.body.classList.remove('font-small', 'font-medium', 'font-large');
+  document.body.classList.add('font-' + state.fontSize);
   localStorage.setItem('shell-font-size', state.fontSize);
 }
 

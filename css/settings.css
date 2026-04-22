@@ -316,6 +316,54 @@
   text-align: center;
 }
 
+/* Font size options */
+.settings-font-sizes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.settings-font-size-option {
+  flex: 1;
+  padding: 14px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  border: 2px solid transparent;
+  background: #2a2a2a;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.settings-font-size-option:hover {
+  transform: scale(1.03);
+}
+
+.settings-font-size-option.active {
+  border-color: var(--accent-color);
+}
+
+.settings-font-size-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.settings-font-size-option[data-size="small"] .settings-font-size-label { font-size: 12px; }
+.settings-font-size-option[data-size="medium"] .settings-font-size-label { font-size: 14px; }
+.settings-font-size-option[data-size="large"] .settings-font-size-label { font-size: 16px; }
+
+.settings-font-preview {
+  background: #252525;
+  border-radius: 8px;
+  padding: 16px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+body.light-theme .settings-font-size-option { background: #e8e8e8; }
+body.light-theme .settings-font-size-label { color: #333; }
+body.light-theme .settings-font-preview { background: #f0f0f0; color: #333; }
+
 /* Slider */
 .settings-slider-row {
   display: flex;
