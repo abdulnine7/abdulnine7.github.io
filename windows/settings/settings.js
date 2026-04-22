@@ -15,7 +15,7 @@ var desktopArea = document.getElementById('desktop-area');
 var state = {
   theme: localStorage.getItem('shell-theme') || 'dark',
   accent: localStorage.getItem('shell-accent') || '#e95420',
-  wallpaper: localStorage.getItem('shell-wallpaper') || 'default',
+  wallpaper: localStorage.getItem('shell-wallpaper') || 'noble-numbat',
   dockIconSize: parseInt(localStorage.getItem('shell-dock-icon-size')) || 50,
   dockPosition: localStorage.getItem('shell-dock-position') || 'left',
   fontSize: localStorage.getItem('shell-font-size') || 'medium',
@@ -24,32 +24,20 @@ var state = {
 
 // Wallpaper definitions
 var wallpapers = [
-  { id: 'default', name: 'Ubuntu Default', type: 'gradient',
-    value: 'radial-gradient(ellipse at 20% 50%, #e95420 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, #772953 0%, transparent 50%), radial-gradient(ellipse at 50% 100%, #2c001e 0%, transparent 60%), linear-gradient(160deg, #e95420 0%, #772953 40%, #2c001e 100%)' },
-  { id: 'midnight', name: 'Midnight Blue', type: 'gradient',
-    value: 'radial-gradient(ellipse at 30% 40%, #1a3a5c 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, #0a1628 0%, transparent 60%), linear-gradient(135deg, #0d1b2a 0%, #1b2838 40%, #0a1628 100%)' },
-  { id: 'forest', name: 'Forest Green', type: 'gradient',
-    value: 'radial-gradient(ellipse at 40% 30%, #2d5016 0%, transparent 50%), radial-gradient(ellipse at 60% 70%, #1a3a0a 0%, transparent 60%), linear-gradient(150deg, #1a2f0a 0%, #2d5016 50%, #0a1f05 100%)' },
-  { id: 'sunset', name: 'Sunset Warm', type: 'gradient',
-    value: 'radial-gradient(ellipse at 20% 80%, #e95420 0%, transparent 40%), radial-gradient(ellipse at 80% 30%, #ffb347 0%, transparent 40%), linear-gradient(135deg, #2c001e 0%, #8b2252 30%, #e95420 60%, #ffb347 100%)' },
-  { id: 'minimal', name: 'Dark Minimal', type: 'gradient',
-    value: 'radial-gradient(ellipse at 50% 50%, #1e1e1e 0%, #0a0a0a 100%)' },
-  { id: 'dark-abstract', name: 'Dark Abstract', type: 'image',
-    value: 'assets/wallpapers/dark-abstract.jpg' },
-  { id: 'gradient-blue', name: 'Blue Gradient', type: 'image',
-    value: 'assets/wallpapers/gradient-blue.jpg' },
-  { id: 'nebula', name: 'Nebula', type: 'image',
-    value: 'assets/wallpapers/nebula.jpg' },
-  { id: 'mountain-night', name: 'Mountain Night', type: 'image',
-    value: 'assets/wallpapers/mountain-night.jpg' },
-  { id: 'dark-ocean', name: 'Dark Ocean', type: 'image',
-    value: 'assets/wallpapers/dark-ocean.jpg' },
-  { id: 'dark-gradient', name: 'Dark Gradient', type: 'image',
-    value: 'assets/wallpapers/dark-gradient.jpg' },
-  { id: 'ocean-waves', name: 'Ocean Waves', type: 'image',
-    value: 'assets/wallpapers/ocean-waves.jpg' },
-  { id: 'earth-space', name: 'Earth from Space', type: 'image',
-    value: 'assets/wallpapers/earth-space.jpg' }
+  { id: 'focal-fossa', name: 'Focal Fossa', type: 'image',
+    value: 'assets/wallpapers/focal-fossa.jpg' },
+  { id: 'jammy-jellyfish', name: 'Jammy Jellyfish', type: 'image',
+    value: 'assets/wallpapers/jammy-jellyfish.jpg' },
+  { id: 'noble-numbat', name: 'Noble Numbat', type: 'image',
+    value: 'assets/wallpapers/noble-numbat.jpg' },
+  { id: 'oracular-oriole', name: 'Oracular Oriole', type: 'image',
+    value: 'assets/wallpapers/oracular-oriole.jpg' },
+  { id: 'oracular-oriole-light', name: 'Oracular Oriole Light', type: 'image',
+    value: 'assets/wallpapers/oracular-oriole-light.jpg' },
+  { id: 'plucky-puffin', name: 'Plucky Puffin', type: 'image',
+    value: 'assets/wallpapers/plucky-puffin.jpg' },
+  { id: 'plucky-puffin-light', name: 'Plucky Puffin Light', type: 'image',
+    value: 'assets/wallpapers/plucky-puffin-light.jpg' }
 ];
 
 var accentColors = [

@@ -149,12 +149,8 @@ body.font-large #activities-overlay { zoom: 1.15; }
   grid-area: desktop;
   position: relative;
   overflow: hidden;
-  /* Ubuntu default wallpaper gradient */
-  background:
-    radial-gradient(ellipse at 20% 50%, #e95420 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, #772953 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 100%, #2c001e 0%, transparent 60%),
-    linear-gradient(160deg, #e95420 0%, #772953 40%, #2c001e 100%);
+  /* Default wallpaper */
+  background: url('../assets/wallpapers/noble-numbat.jpg') center/cover no-repeat;
 }
 
 /* ============================================================
